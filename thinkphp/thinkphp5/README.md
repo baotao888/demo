@@ -1,4 +1,4 @@
-ThinkPHP yldagong Website
+ThinkPHP Website
 ===============
 
 ## 目录结构
