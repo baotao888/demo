@@ -1,0 +1,30 @@
+<div class="modal-header">
+    <h3 class="modal-title">选择员工</h3>
+</div>
+<div class="modal-body">
+    <tabset justified="true" class="tab-container">
+        <tab ng-repeat="item in list" heading="{{item.org_name}}">
+            <ul class="list-group">
+                <li ng-repeat="adviser in item.list" class="list-group-item" ng-click="selectEmployee(adviser)">
+                    <b>{{adviser.real_name}}</b><i class="m-l-md text-xs">{{adviser.nickname}}</i>
+                    <span class="badge">{{adviser.level}}</span>
+                </li>
+            </ul>
+        </tab>
+    </tabset>
+    <div class="well b bg-light lt wrapper-sm m-t"><span ng-if="employee.real_name==undefined">请选择……</span></span><span ng-if="employee.real_name!=undefined">已选择: <b class="ng-binding">{{employee.real_name}}</b></span></div>
+
+</div>
+<div class="modal-footer">
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="alert ng-isolate-scope alert-warning alert-dismissable m-b-none" role="alert" type="warning">
+                <span class="ng-binding ng-scope">{{error}}</span>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <button class="btn btn-default" ng-click="cancel()">Cancel</button>
+            <button class="btn btn-primary" ng-click="ok()" ng-disabled="submitting">OK</button>
+        </div>
+    </div>
+</div>

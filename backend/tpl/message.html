@@ -1,0 +1,100 @@
+<div class="hbox hbox-auto-xs hbox-auto-sm">
+  <!-- .col -->
+  <div class="col w-lg bg-light dk b-r bg-auto" id="aside">
+    <div class="wrapper bg b-b">
+      <button class="btn btn-sm btn-success pull-right" ui-toggle-class="timeline-center" target=".timeline">Center</button>
+      <h3 class="m-n font-thin">短消息</h3>
+    </div>
+    <div class="wrapper">
+      <form name="messageForm">
+        <div class="form-group">
+          <label>接收者</label>
+          <ui-select ng-model="vm.receiver" theme="bootstrap">
+            <ui-select-match placeholder="请选择...">{{$select.selected.name}}</ui-select-match>
+            <ui-select-choices repeat="item in vm.employees | filter: $select.search">
+              <div ng-bind-html="item.name"></div>
+              <small ng-bind-html="item.nickname"></small>
+            </ui-select-choices>
+          </ui-select>
+        </div>
+        <div class="form-group">
+          <label>内容</label>
+          <textarea class="form-control no-border" ng-model="vm.new_content" rows="3" placeholder="请输入短信内容" required></textarea>
+        </div>
+        <div class="m-t-md m-b-md"><button class="btn btn-sm btn-primary" ng-disabled="vm.submitting" ng-click="vm.sendMessge()">发送</button></div>
+      </form>
+    </div>
+    <div ng-if="vm.navi.message_btn.mass" class="wrapper bg b-b">
+      <h3 class="m-n font-thin">系统消息</h3>
+    </div>
+    <div ng-if="vm.navi.message_btn.mass" class="wrapper">
+      <form name="massForm">
+        <div class="form-group">
+          <label>内容</label>
+          <textarea class="form-control no-border" ng-model="vm.mass_content" rows="3" placeholder="请输入群发消息内容" required></textarea>
+        </div>
+        <div class="m-t-md m-b-md"><button class="btn btn-sm btn-primary" ng-disabled="vm.submitting" ng-click="vm.mass()">群发</button></div>
+      </form>
+    </div>
+  </div>
+  <!-- /.col -->
+  <!-- .col -->
+  <div class="col">
+    <div class="wrapper">
+      <ul class="timeline">
+        <li class="tl-header">
+          <div class="btn btn-info">Now</div>
+        </li>
+        <li class="tl-item tl-left" ng-repeat="msg in vm.message">
+          <div ng-if="msg.type=='sys'" class="tl-wrap b-success">
+            <span class="tl-date">{{msg.create_time}}</span>
+            <div class="tl-content panel bg-success padder">
+              <span class="arrow arrow-success left pull-up hidden-left"></span>
+              <span class="arrow arrow-success right pull-up visible-left"></span>
+              <div class="text-lt">{{msg.content}}</div>
+            </div>
+          </div>
+          <div ng-if="msg.type=='default'" class="tl-wrap b-primary">
+            <span class="tl-date">{{msg.create_time}}</span>
+            <div class="tl-content panel padder b-a block">
+              <span class="arrow left pull-up hidden-left"></span>
+              <span class="arrow right pull-up visible-left"></span>
+              <div class="text-lt m-b-sm">{{msg.sender_name}}</div>
+              <div class="panel">
+                <div class="panel-heading">{{msg.content}} 
+                  <button class="btn btn-default btn-xs pull-right" ng-init="isCollapsed = true" ng-click="isCollapsed = !isCollapsed">回复</button>
+                </div>
+                <div collapse="isCollapsed" class="panel-body pull-in">
+                  <div class="panel panel-default m-t-md m-b-n-sm pos-rlt">
+                    <span class="arrow top pull-left"></span>
+                      <textarea class="form-control no-border" rows="3" placeholder="Your comment..." ng-model="vm.reply[msg.id]"></textarea>
+                    <div class="panel-footer bg-light lter">
+                      <button class="btn btn-info pull-right btn-sm" ng-click="vm.replyMessage(msg.id, msg.sender)">确定</button>
+                      <ul class="nav nav-pills nav-sm">
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>          
+            </div>
+          </div>
+          <div ng-if="msg.type==null" class="tl-wrap">
+            <span class="tl-date">{{msg.create_time}}</span>
+            <div class="tl-content panel padder b-a">
+              <span class="arrow left pull-up"></span>
+              <div>{{msg.content}}</div>
+            </div>
+          </div>
+        </li>
+        <li ng-if="vm.more" class="tl-header">
+          <div class="btn btn-sm btn-default btn-rounded" ng-click="vm.loadMore()">查看更多</div>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <!-- /.col -->            
+</div>
+
+<script type="text/ng-template" id="modal.html">
+  <div ng-include="'tpl/modal.html'"></div>
+</script>

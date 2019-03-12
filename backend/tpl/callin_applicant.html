@@ -1,0 +1,55 @@
+<div class="bg-light lter b-b wrapper-md">
+    <h1 class="m-n font-thin h3">
+        <!-- 菜单 -->
+        <a ng-href="#/app/callin/applicant/signned" class="btn m-b-xs w-xs btn-success">名下人选</a>
+        <a ng-href="#/app/callin/applicant/unsignned" class="btn m-b-xs w-xs btn-danger">其他人选</a>
+        <a ng-href="#/app/callin/user/unsignned" class="btn btn-sm btn-icon btn-info m-l-xs pull-right" title="端口注册用户"><i class="fa fa-chevron-right"></i></a>
+        <a ng-href="#/app/customer/list/" class="btn btn-sm btn-icon btn-info pull-right" title="返回人选客户池"><i class="fa fa-chevron-left"></i></a>
+    </h1>
+</div>
+<div class="wrapper-md">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <ul class="breadcrumb m-b-none">
+                <li><a href="#/app/customer/list/"><i class="fa fa-home"></i> 人选客户池</a></li>
+                <li class="active ng-binding">端口报名用户</li>
+                <li class="active ng-binding">{{vm.type}}</li>
+            </ul>
+        </div>
+        <div class="panel-body">
+            <div class="row b-b">
+                <div class="col-lg-4 col-md-3 m-b-xs">
+                    <select class="input-sm form-control w-xs inline v-middle" ng-model="operate">
+                        <option value="0">请选择</option>
+                        <option ng-repeat="item in vm.operates" value="{{item.id}}">{{item.text}}</option>
+                    </select>
+                    <button class="btn btn-sm btn-default" ng-click="doOperate()">确定</button>
+                </div>
+                <div class="col-lg-8 col-md-9">
+                    <div class="input-group w-sm pull-right">
+                        <input type="text" class="input-sm form-control" ng-model="filterText" placeholder="Search">
+                        <span class="input-group-btn">
+                          <button class="btn btn-sm btn-default" type="button" ng-click="search()">Go!</button>
+                        </span>
+                    </div>
+                    <div class="input-group w-sm m-r-xs pull-right input-date">
+                        <input type="text" class="form-control" datepicker-popup="{{date_format}}" ng-model="vm.searchParam.reg_time_end" is-open="date_opens[1]" datepicker-options="dateOptions" close-text="Close" />
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="date_open($event, 1)"><i class="glyphicon glyphicon-calendar"></i></button>
+                        </span>
+                    </div>
+                    <div class="input-group w-sm m-r-xs pull-right input-date">
+                        <input type="text" class="form-control" datepicker-popup="{{date_format}}" ng-model="vm.searchParam.reg_time_start" is-open="date_opens[0]" datepicker-options="dateOptions" close-text="Close" />
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="date_open($event, 0)"><i class="glyphicon glyphicon-calendar"></i></button>
+                        </span>
+                    </div>
+                    <label class="control-label m-t-xs m-r-xs pull-right">报名时间:</label>
+                </div>
+            </div>
+            <div class="table-responsive">
+                <div ng-grid="gridOptions" style="min-height:630px"></div>
+            </div>
+        </div>
+    </div>
+</div>

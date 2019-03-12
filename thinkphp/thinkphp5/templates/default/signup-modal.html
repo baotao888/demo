@@ -1,0 +1,140 @@
+<div id="signupModal" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="token-bg">
+      <div class="modal-content token-content signup-content" id="signupContent" style="display:none">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">永乐打工网<strong>免费报名</strong></h4>
+        </div>
+        <div class="modal-body">
+          <form id="signupForm" class="form-content" method="post" action="/user/index/signup">
+            <div class="form-group">
+              <div class="input-group">
+                <span class="input-group-addon glyphicon glyphicon-time"></span>
+                <input type="text" class="form-control birthday" name="birthday" id="signupBirthday" aria-describedby="inputGroupSuccess1Status" placeholder="请选择出生日期">
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="input-group">
+                <span class="input-group-addon text-gender">性别</span>
+                <label class="radio-inline">
+                  <input type="radio" name="gender" value="1"> 男
+                </label>
+                <label class="radio-inline">
+                  <input type="radio" name="gender" value="2"> 女
+                </label>
+              </div>
+            </div>
+            <input type="hidden" name="job_id" value="" id="signupJob"/>
+            <button type="submit" class="btn btn-primary btn-lg btn-block bnt-login">免费报名</button>
+          </form>
+        </div>
+      </div>
+      <div class="modal-content token-content signup-content" id="loginSignupContent" style="display:none">
+        <div class="modal-header register-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">永乐打工网<strong>免费报名</strong></h4>
+        </div>
+        <div class="modal-body">
+          <form id="loginSignupForm" class="form-content" method="post" action="/user/index/signup">
+            <div class="form-group">
+              <div class="input-group">
+                <span class="input-group-addon glyphicon glyphicon-phone"></span>
+                <input type="text" class="form-control" name="mobile" id="registerMobile" aria-describedby="inputGroupSuccess1Status" placeholder="手机号码" maxlength="11">
+              </div>
+            </div>  
+            <div class="form-group">
+              <div class="input-group">
+                <span class="input-group-addon glyphicon glyphicon-user"></span>
+                <input type="text" class="form-control" name="realname" id="registerRealname" aria-describedby="inputGroupSuccess1Status" placeholder="姓名" maxlength="5">
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="input-group">
+                <span class="input-group-addon glyphicon glyphicon-time"></span>
+                <input type="text" class="form-control birthday" name="birthday" id="loginSignupBirthday" aria-describedby="inputGroupSuccess1Status" placeholder="请选择出生日期">
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="input-group">
+                <span class="input-group-addon text-gender">性别</span>
+                <label class="radio-inline">
+                  <input type="radio" name="gender" value="1"> 男
+                </label>
+                <label class="radio-inline">
+                  <input type="radio" name="gender" value="2"> 女
+                </label>
+              </div>
+            </div>
+            <div class="form-group form-checkbox">
+              <div class="input-group clearfix">
+                <div class="checkbox pull-left">
+                  <label>
+                    <input type="checkbox" name="userservice" id="checkboxSuccess" value="1" class="item" checked>
+                    <span class="item">接受<a href="/index/index/protocol" target="_blank">用户服务协议</a></span>
+                  </label>
+                </div>
+                <div class="pull-right user-other">已有账号？<a id="signup2LoginBtn">登录后报名</a></div>
+              </div>
+            </div>
+            <input type="hidden" name="job_id" value="" id="loginSignupJob"/>
+            <button type="submit" class="btn btn-primary btn-lg btn-block">免费报名</button>
+          </form>
+        </div>
+      </div>
+      <div class="modal-content token-content signup-content" id="signupMessage" style="display:none">
+        <div class="modal-header register-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">永乐打工网<strong>免费报名</strong></h4>
+        </div>
+        <div class="modal-body">
+          <div class="alert alert-success" role="alert">报名成功，您的求职顾问会在24小时内联系您</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="{$Think.config.js_domain}/bootstrap-plugin/datetimepicker/bootstrap-datetimepicker.min.js"></script>
+<link rel="stylesheet" href="{$Think.config.js_domain}/bootstrap-plugin/datetimepicker/bootstrap-datetimepicker.min.css" />
+<script src="{$Think.config.js_domain}/bootstrap-plugin/datetimepicker/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+<script type="text/javascript">
+$(function(){
+  //报名选择日期	
+  $('#signupBirthday').datetimepicker({
+      language: 'zh-CN',
+      autoclose: true,
+      minView: "month",
+      format: 'yyyy-mm-dd',
+      startDate: '1956-01-01',
+	  endDate: '2000-12-31',
+	  initialDate: '1995-01-01'
+  }).on('hide',function(e) {  
+	$('#signupForm').data('bootstrapValidator')  
+		.updateStatus('birthday', 'NOT_VALIDATED',null)  
+		.validateField('birthday');  
+  });
+  //绑定报名选择日期
+  $('#loginSignupBirthday').datetimepicker({
+      language: 'zh-CN',
+      autoclose: true,
+      minView: "month",
+      format: 'yyyy-mm-dd',
+      startDate: '1956-01-01',
+	  endDate: '2000-12-31',
+	  initialDate: '1995-01-01'
+  }).on('hide',function(e) {  
+	$('#loginSignupForm').data('bootstrapValidator')  
+		.updateStatus('birthday', 'NOT_VALIDATED',null)  
+		.validateField('birthday');  
+  });
+  //报名框
+  $("#signupModal").on('show.bs.modal', function(){		  
+    /*居中*/
+    var $this = $(this);
+    var $modal_dialog = $this.find('.modal-dialog');
+    // 关键代码，如没将modal设置为 block，则$modala_dialog.height() 为零
+    $this.css('display', 'block');
+    $modal_dialog.css({'margin-top': Math.max(0, ($(window).height() - $modal_dialog.height()) / 2) });
+  });
+});
+</script>

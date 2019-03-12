@@ -1,0 +1,75 @@
+<div class="bg-light lter b-b wrapper-md ng-scope">
+    <h1 class="m-n font-thin h3">
+        <a ng-href="#/app/candidate/contact" class="btn m-b-xs w-xs btn-default">今日</a>
+        <a ng-href="#/app/candidate/contacttable" class="btn m-b-xs w-xs btn-success">全部</a>
+        <a ng-href="#/app/candidate/contactstatistics" class="btn m-b-xs w-xs btn-danger btn-nav active">部门</a>
+    </h1>
+</div>
+<div class="wrapper-md">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+        <ul class="breadcrumb m-b-none">
+          <li><a href=""><i class="fa fa-phone-square"></i> 联系日志</a></li>
+          <li class="active ng-binding">部门联系日志</li>
+        </ul>
+      </div>
+    <div class="row" style="margin-top:12px;">
+      <div class="col-sm-offset-6 col-sm-6">
+         <div class="col-sm-2">
+          <!-- 组织搜索 -->
+          <div ng-if="vm.myButtons.search_btn.organization" class="btn-group" dropdown>
+              <button type="button" class="btn btn-default">{{vm.org_name}}</button>
+              <button type="button" class="btn btn-default dropdown-toggle" dropdown-toggle>
+                  <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu" role="menu">
+                  <li><a ng-click="vm.resetOrganization()">全部</a></li>
+                  <li ng-repeat="item in vm.orgs | orderBy:'order'"><a ng-click="vm.selectOrganization(item)">{{item.name}}</a></li>
+              </ul>
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <label class="control-label m-t-sm pull-left">查询开始时间:&nbsp;&nbsp;</label>
+          <div class="input-group w-md"  style="width:130px;">
+            <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="vm.startTime" is-open="vm.opens[0]" datepicker-options="dateOptions" close-text="Close"/>
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="open($event,0)"><i class="glyphicon glyphicon-calendar"></i></button>
+                        </span>
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <label class="control-label m-t-sm pull-left">查询结束时间:&nbsp;&nbsp;</label>
+          <div class="input-group w-md" style="width:130px;">
+            <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="vm.endTime" is-open="vm.opens[1]" datepicker-options="dateOptions" close-text="Close" />
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="open($event, 1)"><i class="glyphicon glyphicon-calendar"></i></button>
+                        </span>
+          </div>
+        </div>
+        <div class="col-sm-2">
+          <button class="btn btn-primary" ng-click="vm.contactSearch()">Go!</button>
+        </div>
+      </div>
+    </div>
+    <div class="panel-body text-center">
+      <table class="table table-striped b-t b-light">
+        <thead>
+        <tr>
+          <th>员工名称</th>
+          <th>电话总数</th>
+          <th>有效总数</th>
+          <th>意向总数</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr class="text-left" ng-repeat="record in vm.org">
+          <td><a href="">{{record.employee}}</a></td>
+          <td>{{record.total}}</td>
+          <td>{{record.effective}}</td>
+          <td>{{record.intention}}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

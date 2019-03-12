@@ -1,0 +1,28 @@
+<div class="hbox hbox-auto-xs hbox-auto-sm">
+    <!-- .col -->
+    <div class="col">
+        <div class="wrapper">
+            <ul class="timeline">
+                <li ng-repeat="log in vm.list" class="tl-item">
+                    <div class="tl-wrap b-primary">
+                        <span class="tl-date">{{log.action_time*1000 | date}}</span>
+                        <div class="tl-content panel padder b-a w-md w-auto-xs">
+                            <span class="arrow left pull-up"></span>
+                            <div class="text-lt m-b-sm">{{log.open_id}}</div>
+                            <div class="panel-body pull-in b-t b-light">
+                                <div class="clear">
+                                    <a href="" class="text-primary block m-b-xs">{{log.content}}</a>
+                                    <a href="" class="btn btn-addon btn-sm btn-primary m-t-xs">{{log.action_type}}</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li class="tl-header">
+                    <div ng-if="vm.more" class="btn btn-sm btn-default btn-rounded" ng-click="vm.loadMore()">more</div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!-- /.col -->
+</div>

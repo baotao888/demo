@@ -1,0 +1,198 @@
+<div class="bg-light lter b-b wrapper-md">
+  <h1 class="m-n font-thin h4">
+    <ul class="breadcrumb m-b-none">
+      <li><a href=""><i class="fa fa-home"></i> 职位</a></li>
+      <li class="active ng-binding">{{vm.operate}}</li>
+      <li class="text-primary ng-binding" ng-if="vm.edit"><a ng-href="#/app/job/{{vm.job.id}}/show" class="text-primary">{{vm.job.job_name}}</a></li>
+    </ul>
+  </h1>
+</div>
+<div class="wrapper-md">
+  <div class="row">
+    <div class="col-sm-12">
+      <form name="formInfo" class="form-horizontal form-validation">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <strong>基本信息</strong>
+          </div>
+          <div class="panel-body">
+            <div class="form-group">
+              <label class="col-sm-3 control-label"><span class="fa fa-star m-r-xs text-danger"></span>职位名称</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" placeholder="请输入" ng-model="vm.job.job_name" required minlength="5" >
+                <small class="help-block m-b-none">至少5个字</small>
+              </div>
+            </div>
+            <div class="line line-dashed b-b line-lg pull-in"></div>
+            <div class="form-group">
+              <label class="col-sm-3 control-label"><span class="fa fa-star m-r-xs text-danger"></span>企业</label>
+              <label class="col-sm-2 control-label">选择已有企业</label>
+              <div class="col-sm-2">
+                <select class="form-control" ng-model="vm.enterprise.id" ng-change="vm.selectEnterprise()">
+                  <option value="">请选择</option>
+                  <option  ng-repeat="ep in vm.enterpriseList" value="{{ep.id}}" ng-selected="ep.id == vm.enterprise.id">{{ep.enterprise_name}}</option>
+                </select>
+              </div>
+              <label ng-if="!vm.edit" class="col-sm-2 control-label">新增企业</label>
+              <div class="col-sm-3">
+                <input type="text" class="form-control" placeholder="请输入企业名称" ng-model="vm.enterprise.name" ngrequired="!vm.edit" ng-readonly="vm.edit">
+              </div>
+            </div>
+            <div class="line line-dashed b-b line-lg pull-in"></div>
+            <div class="form-group">
+              <label class="col-sm-3 control-label"><span class="fa fa-star m-r-xs text-danger"></span>底薪</label>
+              <div class="col-sm-3">
+                <input type="number" class="form-control" placeholder="请输入底薪" ng-model="vm.job.salary_floor" required data-min="1" >
+              </div>
+              <span class="col-sm-3 control-label"><span class="fa fa-star m-r-xs text-danger"></span>顶薪</span>
+              <div class="col-sm-3">
+                <input type="number" class="form-control" placeholder="请输入顶薪" ng-model="vm.job.salary_ceil" required data-min="2" >
+              </div>
+            </div>
+            <div class="line line-dashed b-b line-lg pull-in"></div>
+            <div class="form-group">
+              <label class="col-sm-3 control-label">工作类别/工种</label>
+              <div class="col-sm-3">
+                <select class="form-control" ng-model="vm.job.cat_id">
+                  <option value="">请选择</option>
+                  <option  ng-repeat="cat in vm.categories" value="{{cat.id}}">{{cat.name}}</option>
+                </select>
+              </div>
+              <label class="col-sm-3 control-label">职位类型</label>
+              <div class="col-sm-3">
+                <select class="form-control" ng-model="vm.job.type">
+                  <option value="">请选择</option>
+                  <option  ng-repeat="type in vm.types" value="{{type.id}}">{{type.name}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="line line-dashed b-b line-lg pull-in"></div>
+            <div class="form-group">
+              <label class="col-sm-3 control-label"><span class="fa fa-star m-r-xs text-danger"></span>城市/地区</label>
+              <div class="col-sm-3">
+                <select class="form-control" ng-model="vm.job.region.id" ng-init="vm.job.region = vm.regions[0]" required ng-options="region.id as region.name for region in vm.regions" >
+                </select>
+              </div>
+            </div>
+            <div class="line line-dashed b-b line-lg pull-in"></div>
+            <div class="form-group">
+              <label class="col-sm-3 control-label">岗位说明</label>
+              <div class="col-sm-9">
+                <textarea class="form-control" rows="3" placeholder="" ng-model="vm.job.condition_short"></textarea>
+              </div>
+            </div>
+            <div class="line line-dashed b-b line-lg pull-in"></div>
+            <div class="form-group">
+              <label class="col-sm-3 control-label">入职补贴</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" placeholder="例如：补贴1200元" ng-model="vm.job.cash_back">
+                <small class="help-block m-b-none">入职满一定天数后，来永乐打工网领取</small>
+              </div>
+            </div>
+            <div class="line line-dashed b-b line-lg pull-in"></div>
+            <div class="form-group">
+              <label class="col-sm-3 control-label">福利津贴</label>
+              <div class="col-sm-9">
+                <textarea class="form-control" rows="2" placeholder="" ng-model="vm.job.welfare"></textarea>
+                <small class="help-block m-b-none">企业为员工提供的激励</small>
+              </div>
+            </div>
+            <div class="line line-dashed b-b line-lg pull-in"></div>
+            <div class="form-group">
+              <label class="col-sm-3 control-label">是否认证</label>
+              <div class="col-sm-9">
+                <label class="i-switch bg-primary m-t-xs m-r">
+                  <input type="checkbox" ng-model="vm.job.is_vip" value="1" name='switch' checked>
+                  <i></i>
+                </label>
+              </div>
+            </div>
+            <div class="line line-dashed b-b line-lg pull-in"></div>
+            <div class="form-group">
+              <label class="col-sm-3 control-label">职位排序</label>
+              <div class="col-sm-2">
+                      <input class="form-control text-center" type="text" ng-model="vm.job.list_order">
+                      <i></i>
+              </div>
+          </div>
+            <div class="line line-dashed b-b line-lg pull-in"></div>
+            <div class="form-group">
+              <label class="col-sm-3 control-label">状态</label>
+              <div class="col-sm-9">
+                <div class="radio-inline" ng-repeat="st in vm.status_list">
+                  <label class="i-checks">
+                    <input type="radio" name="status" ng-value="st.id"  ng-model="vm.job.status">
+                    <i></i>
+                    {{st.name}}
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+          <footer class="panel-footer text-right bg-light lter">
+            <button type="submit" class="btn btn-success" ng-click="vm.submitInfo()" ng-disabled='formInfo.$invalid || vm.submitting'>Submit</button>
+          </footer>
+          <div class="alert alert-warning" role="alert">{{vm.error}}</div>
+        </div>
+      </form>
+    </div>
+    <div class="col-sm-12" ng-show="vm.edit">
+      <form name="forma" class="form-horizontal form-validation">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <strong>详情信息</strong>
+          </div>
+          <div class="panel-body">
+            <div class="form-group">
+              <label class="col-sm-2 control-label">工作时间</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" placeholder="请输入面试相关信息，例如：7月25-30日 9:00-12:00；7月31日 14:00-15:30" ng-model="vm.job_detail.view_time">
+              </div>
+            </div>
+            <div class="line line-dashed b-b line-lg pull-in"></div>
+            <div class="form-group">
+              <label class="col-sm-2 control-label">工作地点</label>
+              <div class="col-sm-10">
+                <textarea class="form-control" rows="2" placeholder="请输入地址信息，例如：工作地点在苏州昆山，随机分配到锦溪、巴城、城南、城北厂区" ng-model="vm.job_detail.address_short"></textarea>
+              </div>
+            </div>
+            <div class="line line-dashed b-b line-lg pull-in"></div>
+            <div class="form-group">
+              <label class="col-sm-2 control-label">百度地图坐标</label>
+              <span class="col-sm-1 control-label">经度</span>
+              <div class="col-sm-2">
+                <input type="text" class="form-control" ng-model="vm.job_detail.address_mark.lng" >
+              </div>
+              <span class="col-sm-1 control-label">维度</span>
+              <div class="col-sm-2">
+                <input type="text" class="form-control" ng-model="vm.job_detail.address_mark.lat" >
+              </div>
+              <span class="col-sm-1 control-label">缩放等级</span>
+              <div class="col-sm-2">
+                <input type="text" class="form-control" ng-model="vm.job_detail.address_mark.level" >
+              </div>
+            </div>
+            <div class="line line-dashed b-b line-lg pull-in"></div>
+            <div class="form-group">
+              <label class="col-sm-2 control-label">薪资说明</label>
+              <div class="col-sm-10" lazy-load="textAngular">
+                <div class="ueditor" config="config" ng-model="vm.job_detail.salary_detail"></div>
+              </div>
+            </div>
+            <div class="line line-dashed b-b line-lg pull-in"></div>
+            <div class="form-group">
+              <label class="col-sm-2 control-label">职位详情</label>
+              <div class="col-sm-10" lazy-load="textAngular">
+                <div class="ueditor" config="config" ng-model="vm.job_detail.content"></div>
+              </div>
+            </div>
+          </div>
+          <footer class="panel-footer text-right bg-light lter">
+            <button type="submit" class="btn btn-success" ng-click="vm.submitInfo()" ng-disabled='forma.$invalid || vm.submitting'>Submit</button>
+          </footer>
+          <div class="alert alert-warning" role="alert">{{vm.error}}</div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

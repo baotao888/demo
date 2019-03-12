@@ -1,0 +1,94 @@
+  <div class="bg-light lter b-b wrapper-md ng-scope">
+    <h1 class="m-n font-thin h3">
+      <a ng-href="#/app/candidate/contact" class="btn m-b-xs w-xs btn-default btn-nav active">今日</a>
+      <a ng-href="#/app/candidate/contacttable" class="btn m-b-xs w-xs btn-success">全部</a>
+      <a ng-if="vm.myButtons.search_btn.adviser" ng-href="#/app/candidate/contactstatistics" class="btn m-b-xs w-xs btn-danger">部门</a>
+    </h1>
+  </div>
+  <div class="wrapper-md">
+    <div class="row">
+      <div class="col-sm-6">
+        <div ng-if="vm.contactPercent" class="panel panel-default">
+          <div class="panel-heading">接通电话百分比</div>
+          <div class="panel-body text-center">
+            <div  class="panel-default">
+              <div ng-init="vm.contactPercent"  ui-jq="sparkline"
+                   ui-options="{{ vm.contactPercent }},
+                {type:'pie', height:154, sliceColors:['#27c24c','#f05050']}" class="sparkline inline">
+                <canvas width="154" height="154" style="display: inline-block; width: 154px; height: 154px; vertical-align: top;"></canvas>
+              </div>
+              <div class="line"></div>
+              <div class="text-xs">
+                <p class="fa fa-circle">拨打电话总数：<span>{{vm.contactdetail.total}}</span></p>
+                <p class="fa fa-circle m-l text-danger">未接通电话总数：<span>{{vm.contactdetail.total - vm.contactdetail.success}}</span></p>
+                <p class="fa fa-circle m-l text-success">接通电话总数：<span>{{vm.contactdetail.success}}</span></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div ng-if="vm.customerPercent" class="panel panel-default">
+          <div class="panel-heading">意向客户百分比</div>
+          <div class="panel-body text-center">
+            <div  class="panel-default">
+              <div ng-init="vm.customerPercent"  ui-jq="sparkline"
+                   ui-options="{{ vm.customerPercent }},
+                {type:'pie', height:154, sliceColors:['#23b7e5','#7266ba']}" class="sparkline inline">
+                <canvas width="154" height="154" style="display: inline-block; width: 154px; height: 154px; vertical-align: top;"></canvas>
+              </div>
+              <div class="line"></div>
+              <div class="text-xs">
+                <p class="fa fa-circle" tooltip="有效客户为电话接通的客户">有效客户总数：<span>{{vm.contactdetail.effective}}</span></p>
+                <p class="fa fa-circle m-l text-primary">非意向客户总数：<span>{{vm.contactdetail.effective - vm.contactdetail.intention}}</span></p>
+                <p class="fa fa-circle m-l text-info">意向客户总数：<span>{{vm.contactdetail.intention}}</span></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <ul class="breadcrumb m-b-none">
+          <li><a href=""><i class="fa fa-phone-square"></i> 联系日志</a></li>
+          <li class="active ng-binding">今日联系日志</li>
+        </ul>
+      </div>
+      <div>
+        <div class="panel panel-default">
+          <div class="panel-body text-center">
+             <table class="table table-striped b-t b-light">
+               <thead>
+                 <tr>
+                   <th>客户名称</th>
+                   <th>联系时间</th>
+                   <th>联系内容</th>
+                   <th>联系结果</th>
+                 </tr>
+               </thead>
+               <tbody>
+                 <tr class="text-left" ng-repeat="record in vm.contactList">
+                   <td><a href="#/app/customer/{{record.cp_id}}/detail">{{record.customer}}</a></td>
+                   <td>{{record.contact_time}}</td>
+                   <td><a class="break-word" title="{{record.content}}">{{record.content}}</a></td>
+                   <td>{{record.result}}</td>
+                 </tr>
+               </tbody>
+             </table>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+

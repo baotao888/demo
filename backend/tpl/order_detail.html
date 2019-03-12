@@ -1,0 +1,252 @@
+<div class="bg-light lter b-b wrapper-md">
+    <h1 class="m-n font-thin h3">
+        业绩详情
+    </h1>
+    <div class="wrapper-md wrapper-md-bt">
+      <div class="panel {{vm.orderstatus.is_invalid==1?'panel-danger':'panel-info'}} panel-removem">
+        <div class="panel-heading">
+          企业信息<span ng-if="vm.orderstatus.is_invalid==1" class="badge pull-right">已删除</span>
+        </div>
+        <div class="table-responsive">
+          <table class="table table-striped b-t b-light">
+            <thead>
+            <tr>
+              <th>企业名称</th>
+              <th>劳务公司</th>
+              <th>部门</th>
+              <th>顾问</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td>{{vm.orderlist.enterprise}}</td>
+              <td>{{vm.orderlist.labour}}</td>
+              <td>{{vm.orderlist.org_name}}</td>
+              <td>{{vm.orderlist.adviser_name}}</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="wrapper-md wrapper-md-bt">
+      <div class="panel panel-info panel-removem">
+        <div class="panel-heading">
+          人选信息
+        </div>
+        <div class="table-responsive">
+          <table class="table table-striped b-t b-light">
+            <thead>
+            <tr>
+              <th>姓名</th>
+              <th>性别</th>
+              <th>联系方式</th>
+              <th>身份证号</th>
+              <th>接站时间</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td>{{vm.ordercustomer.real_name}}</td>
+              <td>{{vm.ordercustomer.gender==1 ? '男': '女'}}</td>
+              <td>{{vm.ordercustomer.phone}}</td>
+              <td>{{vm.ordercustomer.idcard}}</td>
+              <td>{{vm.ordersale.go_to_time*1000 | date:'yyyy-MM-dd'}}</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="wrapper-md wrapper-md-bt">
+      <div class="panel panel-info panel-removem">
+        <div class="panel-heading ng-binding">
+          推荐信息
+        </div>
+        <div ng-if="vm.ordersale.inviter" class="table-responsive">
+          <table class="table table-striped b-t b-light">
+            <thead>
+            <tr>
+              <th>推荐人</th>
+              <th>联系电话</th>
+              <th>推荐费</th>
+              <th>是否为会员推荐</th>
+              <th>领取推荐费方式</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td>{{vm.ordersale.inviter}}</td>
+              <td>{{vm.ordersale.inviter_phone}}</td>
+              <td class="text-danger">{{vm.ordersale.invite_amount | currency : '¥' }}</td>
+              <td title="{{vm.ordersale.is_customer_invite==0 ? '否' : '是'}}" class="icon {{vm.ordersale.is_customer_invite==1?'icon-check text-success':'icon-close text-info'}}"></td>
+              <td>{{vm.ordertext}}</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+        <div ng-if="!vm.ordersale.inviter" class="panel-body">无</div>
+      </div>
+    </div>
+
+    <div class="wrapper-md wrapper-md-bt">
+      <div class="panel panel-info panel-removem">
+        <div class="panel-heading ng-binding">
+          利润信息<span class="badge pull-right">{{vm.ordertype}}</span>
+        </div>
+        <div class="table-responsive" ng-if="vm.ordersale.type==1">
+          <table class="table table-striped b-t b-light">
+            <thead>
+            <tr>
+              <th style="width: 33%;">在职类型</th>
+              <th style="width: 33%;">企业在职天数</th>
+              <th style="width: 33%;">人选在职天数</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td style="width: 33%;">{{vm.orderlist.onduty_type==1 ? '在职打卡' : '在职'}}</td>
+              <td style="width: 33%;">{{vm.orderlist.onduty_day}}</td>
+              <td style="width: 33%;">{{vm.orderlist.receive_day}}</td>
+            </tr>
+            </tbody>
+          </table>
+          <table class="table table-striped b-t b-light">
+            <thead>
+              <tr>
+                <th>企业到期时间</th>
+                <th>人选到期时间</th>
+                <th>返费金额</th>
+                <th>补贴金额</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="text-danger">{{vm.orderlist.deadline}}</td>
+                <td class="text-danger">{{vm.orderlist.receivetime}}</td>
+                <td class="text-danger">{{vm.orderlist.amount | currency : '¥' }}</td>
+                <td class="text-danger">{{vm.orderlist.allowance | currency : '¥'}}</td>
+              </tr>
+            </tbody>
+          </table>
+          <table class="table table-striped b-t b-light">
+            <thead>
+              <tr>
+                <th>是否入账</th>
+                <th>补贴领取方式</th>
+                <th>补贴是否为垫付</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td title="{{vm.orderstatus.adviser_sure==0?'否':'是'}}" class="icon {{vm.orderstatus.adviser_sure==1?'icon-check text-success':'icon-close text-info'}}"></td>
+                <td>{{vm.ordertextallow}}</td>
+                <td title="{{vm.orderstatus.is_borrow_allowance==0?'否':'是'}}" class="icon {{vm.orderstatus.is_borrow_allowance==1?'icon-check text-success':'icon-close text-info'}}"></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="table-responsive" ng-if="vm.ordersale.type==2">
+          <table class="table table-striped b-t b-light">
+            <thead>
+            <tr>
+              <th>是否在职</th>
+              <th>本月工时</th>
+              <th>企业单价</th>
+              <th>人选单价</th>
+              <th>调整差价</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td title="{{vm.orderlist.is_outduty==0?'在职':'离职'}}" class="icon {{vm.orderlist.is_outduty==0?'icon-check text-success':'icon-close text-info'}}"></td>
+              <td>{{vm.orderlist.worked_time}}</td>
+              <td class="text-danger">{{vm.orderlist.ent_wage | currency : '¥' }}</td>
+              <td class="text-danger">{{vm.orderlist.cp_wage | currency : '¥' }}</td>
+              <td class="text-danger">{{vm.orderlist.adjusted_price | currency : '¥' }}</td>
+            </tr>
+            </tbody>
+          </table>
+          <table class="table table-striped b-t b-light">
+            <thead>
+              <tr>
+                <th>返费金额</th>
+                <th>补贴金额</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="text-danger">{{vm.orderlist.amount | currency : '¥'}}</td>
+                <td class="text-danger">{{vm.orderlist.allowance | currency : '¥'}}</td>
+              </tr>
+            </tbody>
+          </table>
+          <table class="table table-striped b-t b-light">
+            <thead>
+              <tr>
+                <th>是否入账</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td title="{{vm.orderstatus.adviser_sure==0?'否':'是'}}" class="icon {{vm.orderstatus.adviser_sure==1?'icon-check text-success':'icon-close text-info'}}"></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="table-responsive" ng-if="vm.ordersale.type==3">
+          <table class="table table-striped b-t b-light">
+            <thead>
+            <tr>
+              <th style="width: 33.3%">在职类型</th>
+              <th style="width: 33.3%">企业在职天数</th>
+              <th style="width: 33.3%">人选在职天数</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td style="width: 33.3%">{{vm.orderlist.onduty_type==1?'在职打卡':'在职'}}</td>
+              <td style="width: 33.3%">{{vm.orderlist.receive_day}}</td>
+              <td style="width: 33.3%">{{vm.orderlist.onduty_day}}</td>
+            </tr>
+            </tbody>
+          </table>
+          <table class="table table-striped b-t b-light">
+            <thead>
+            <tr>
+              <th>企业到期时间</th>
+              <th>人选到期时间</th>
+              <th>企业返费</th>
+              <th>企业单价</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td class="text-danger">{{vm.orderlist.deadline}}</td>
+              <td class="text-danger">{{vm.orderlist.receivetime}}</td>
+              <td class="text-danger">{{vm.orderlist.amount | currency : '¥'}}</td>
+              <td>{{vm.orderlist.ent_wage | currency : '¥'}}</td>
+            </tr>
+            </tbody>
+          </table>
+          <table class="table table-striped b-t b-light">
+            <thead>
+              <tr>
+                <th>是否入账</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td title="{{vm.orderstatus.adviser_sure==0?'否':'是'}}" class="icon {{vm.orderstatus.adviser_sure==1?'icon-check text-success':'icon-close text-info'}}"></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-primary" ng-click="vm.ok()">OK</button>
+    </div>
+</div>

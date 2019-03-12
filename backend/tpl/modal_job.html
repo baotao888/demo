@@ -1,0 +1,48 @@
+<div class="modal-header">
+  <h3 class="modal-title">选择企业</h3>
+</div>
+<div class="modal-body">
+  <div class="row m-b-sm">
+    <div class="col-lg-offset-5 col-lg-2 col-md-3 text-right"><label class="control-label m-t-sm">一周以前的时间:</label></div>
+    <div class="col-lg-3 col-md-4">
+      <div class=" input-group w-sm">
+        <input type="text" class="form-control" ng-model="before" is-open="before_open" datepicker-options="dateOptions" datepicker-popup="{{format}}" close-text="Close" />
+        <span class="input-group-btn">
+          <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+        </span>
+      </div>
+    </div>
+    <div class="col-lg-1 col-md-2">
+      <button class="btn btn-info" type="button" ng-click="searchBefore()">搜索</button>
+    </div>
+  </div>
+  <tabset justified="true" class="tab-container">
+    <tab ng-repeat="item in validlist" heading="{{item}}" ng-click="loadCompany(item)">
+      <ul class="list-group">
+        <li ng-repeat="item in jobList" class="list-group-item" ng-click="selectJob(item)">
+          <b>{{item.enterprise_name}}<i>({{item.type}})</i></b>
+          <i class="m-l-md text-xs"><span class="icon icon-notebook m-r-sm" title="工资说明"></span>{{item.salary_intro}}</i>
+          <a ng-repeat="subsity in item.allowance track by $index" class="m-l-md text-xs text-info">{{subsity}}</a>
+          <span class="badge text-primary">{{item.region}}</span>
+        </li>
+      </ul>
+    </tab>
+  </tabset>
+  <div class="well b bg-light lt wrapper-sm m-t">
+    <div class="alert ng-isolate-scope alert-warning alert-dismissable m-b-none" role="alert" type="warning">
+      <span class="ng-binding ng-scope text-info">已选择职位：<b class="padder">{{job.enterprise_name}}</b></span>
+      <span class="ng-binding ng-scope">日期：<b class="padder">{{current}}</b></span>
+    </div>
+  </div>
+</div>
+<div class="modal-footer">
+  <div class="row">
+    <div class="col-sm-6"></div>
+    <div class="col-sm-6">
+      <div class="modal-footer" style="border: none!important">
+        <button class="btn btn-default" ng-click="cancel()">Cancel</button>
+        <button class="btn btn-primary" ng-click="ok()">OK</button>
+      </div>
+    </div>
+  </div>
+</div>

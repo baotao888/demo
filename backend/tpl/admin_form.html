@@ -1,0 +1,65 @@
+<div class="bg-light lter b-b wrapper-md">
+    <h1 class="m-n font-thin h3">
+        系统用户
+        <a ng-href="#/app/admin/list" class="btn btn-sm btn-icon btn-info pull-right"><i class="fa fa-chevron-left"></i></a>
+    </h1>
+</div>
+<div class="wrapper-md">
+    <div class="row">
+        <div class="col-sm-12">
+            <form name="form" class="form-validation">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <ul class="breadcrumb m-b-none">
+                            <li><a href=""><i class="fa fa-home"></i> 系统用户</a></li>
+                            <li class="active ng-binding">{{vm.operate}}</li>
+                            <li class="text-primary ng-binding" ng-show="vm.edit">{{vm.account.admin_name}}</li>
+                        </ul>
+                    </div>
+                    <div class="panel-body">
+                        <p class="text-muted">{{vm.error}}</p>
+                        <div class="form-group">
+                            <label>Username <em class="text-muted">(allow 'a-zA-Z0-9', 4-20 length)</em></label>
+                            <input type="text" class="form-control" ng-model="vm.account.admin_name" ng-pattern="/^[a-zA-Z0-9]{4,20}$/" required >
+                        </div>
+                        <div class="form-group pull-in clearfix">
+                            <div class="col-sm-6">
+                                <label>Enter password</label>
+                                <input type="password" class="form-control" name="password" ng-model="vm.account.admin_pwd" ng-required="! vm.edit" >
+                            </div>
+                            <div class="col-sm-6">
+                                <label>Confirm password</label>
+                                <input type="password" class="form-control" name="confirm_password"  ng-required="! vm.edit" ng-model="vm.confirm_password" ui-validate=" '$value==vm.account.admin_pwd' " ui-validate-watch=" 'password' ">
+                                <span ng-show='form.confirm_password.$error.validator'>Passwords do not match!</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Status</label>
+                            <div class="col-sm-10">
+                                <label class="i-switch i-switch-md bg-info m-t-xs m-r">
+                                    <input type="checkbox" ng-model="vm.account.status" value="1" name='switch' checked>
+                                    <i></i>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Admin</label>
+                            <div class="col-sm-10">
+                                <label class="i-switch i-switch-md bg-info m-t-xs m-r">
+                                    <input type="checkbox" ng-model="vm.account.is_admin" value="1" name='is_admin'>
+                                    <i></i>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <footer class="panel-footer text-right bg-light lter">
+                        <button type="submit" class="btn btn-success" ng-disabled="form.$invalid || vm.submitting" ng-click="vm.submitInfo()">Submit</button>
+                    </footer>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script type="text/ng-template" id="modal.html">
+        <div ng-include="'tpl/modal.html'"></div>
+    </script>
+</div>

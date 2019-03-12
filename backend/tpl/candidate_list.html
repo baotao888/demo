@@ -1,0 +1,284 @@
+<div class="bg-light lter b-b wrapper-md">
+    <h1 class="m-n font-thin h3">
+    	<a ng-href="#/app/candidate/list/all" class="btn m-b-xs w-xs btn-default btn-nav" ng-model="vm.navRadio" btn-radio="'all'">所有人选</a>
+        <a ng-href="#/app/candidate/list/onduty" class="btn m-b-xs w-xs btn-success btn-nav" ng-model="vm.navRadio" btn-radio="'onduty'">在职人选</a>
+        <a ng-href="#/app/candidate/list/outduty" class="btn m-b-xs w-xs btn-danger btn-nav" ng-model="vm.navRadio" btn-radio="'outduty'">离职人选</a>
+        <a ng-href="#/app/candidate/list/meet" class="btn m-b-xs w-xs btn-primary btn-nav" ng-model="vm.navRadio" btn-radio="'meet'">接站人选</a>
+        <a ng-href="#/app/candidate/list/signup" class="btn m-b-xs w-xs btn-info btn-nav" ng-model="vm.navRadio" btn-radio="'signup'">报名人选</a>
+        <a ng-href="#/app/candidate/list/intention" class="btn m-b-xs w-xs btn-dark btn-nav" ng-model="vm.navRadio" btn-radio="'intention'">意向人选</a>
+        <a ng-href="#/app/candidate/list/other" class="btn m-b-xs w-xs btn-warning btn-nav" ng-model="vm.navRadio" btn-radio="'other'">其他人选</a>
+        <label ng-if="vm.navi.search_btn.adviser" class="i-switch m-t-xs m-r" tooltip="点我可以切换显示团队和自己的人选哦">
+            <input type="checkbox" checked ng-model="vm.onlyMy" ng-change="vm.switchSearch()">
+            <i></i>
+        </label>
+        <a ng-if="vm.navi.candidate_btn.import" ng-href="#/app/candidate/import" class="btn m-b-xs btn-sm btn-danger m-r-xs pull-right">导入人选</a>
+        <a ng-href="#/app/my/signup/register" class="btn m-b-xs btn-sm btn-info m-r-xs pull-right">
+            端口人选<span ng-if="vm.callin>0" class="badge badge-sm bg-danger m-l-sm">{{vm.callin}}</span>
+        </a>
+        <a ng-href="#/app/customer//form" class="btn m-b-xs btn-sm btn-success m-r-xs pull-right">注册人选</a>
+    </h1>
+</div>
+<div class="wrapper-md">
+    <div class="panel panel-default">
+        <div class="panel-heading clearfix">
+            <ul class="breadcrumb m-b-none pull-left">
+                <li><a href=""><i class="fa fa-home"></i> 人选管理</a></li>
+                <li class="active">{{vm.type}}人选</li>
+            </ul>
+            <div class="col-sm-2 text-center pull-right">
+                <small class="text-muted inline m-t-sm m-b-sm">总共<b class="text-info">{{vm.pagingOptions.count}}</b>个人选</small>
+            </div>
+        </div>
+        <div class="panel-body no-padder">
+        <div class="row wrapper">
+            <div class="col-lg-2 col-md-3 m-b-xs">
+                <select class="input-sm form-control w-xs inline v-middle" ng-model="vm.operate">
+                	<option value="0">请选择</option>
+                    <option ng-repeat="item in vm.operates" value="{{item.id}}">{{item.text}}</option>
+                </select>
+                <button class="btn btn-sm btn-default" ng-click="vm.doOperate()">确定</button>
+            </div>
+            <div class="col-lg-2 text-center tablet">
+                <label class="showlength" ng-if="vm.showSort && vm.pagingOptions.count>0">
+                    <span>排序:</span>
+                    <select name="datalength" class="input-sm form-control inline"  ng-model="vm.sortactive" ng-change="vm.sortsearch()" style="width: auto;">
+                        <option ng-repeat="item in vm.sort" value="{{item.sorttime}}">{{item.text}}</option>
+                    </select>
+                </label>
+            </div>
+            <div class="col-lg-3 col-md-3">
+                <div ng-if="vm.pagingOptions.count>0">
+                    <label class="showlength">
+                        <span>显示</span>
+                        <select name="datalength" class="form-control input-sm inline" ng-model="vm.pagingOptions.pageSize" ng-change="vm.selectLength()" style="width: auto;">
+                           <option ng-repeat="showPages in vm.pagingOptions.pageShowLength" value="{{showPages}}" >{{showPages}}</option>
+                        </select>
+                        <span>条</span>
+                    </label>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-5">
+              <div class="row">
+                <div class="input-group pull-left w-xs">
+                  <select class="input-sm form-control"  ng-model="vm.searchactive">
+                    <option ng-repeat="item in vm.searchTypes" value="{{item.id}}">{{item.text}}</option>
+                  </select>
+                </div>
+                <div class="input-group">
+                    <input type="text" class="input-sm form-control w-sm" placeholder="输入客户名称或者手机号码" ng-model="vm.searchText">
+                    <span class="input-group-btn">
+                      <button class="btn btn-sm btn-default" type="button" ng-click="vm.search()" ng-disabled="!vm.searchText">Go!</button>
+                    </span>
+                </div>
+              </div>  
+            </div>
+            <div class="col-lg-1 col-md-1 text-center">
+                <span class="input-group-btn m-l-xs">
+                  <button class="btn btn-sm btn-default" ui-toggle-class="show" target="#detailParams" ng-click="vm.btnSearchDetail()" type="button" tooltip="点我可以搜索保留人选哦">高级搜索</button>
+                </span>
+            </div>
+        </div>
+        <div id="detailParams" class="row padder-v b-t animated fadeInDown hide">
+            <div class="col-lg-4 col-md-12 m-b-xs">
+                <div class="col-lg-3 col-md-3 text-right"><label class="control-label m-t-sm">报名时间:</label></div>
+                <div class="col-lg-5 col-md-3">
+                     <div class="input-group w-sm">
+                        <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="vm.searchSign" is-open="vm.opens[0]" datepicker-options="dateOptions" close-text="Close" />
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="open($event,0)"><i class="glyphicon glyphicon-calendar"></i></button>
+                        </span>
+                    </div>
+                 </div>
+                <div class="col-lg-4 col-md-3">
+                    <div class="input-group w-sm">
+                        <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="vm.searchSigned" is-open="vm.opens[1]" datepicker-options="dateOptions" close-text="Close" />
+                        <span class="input-group-btn">
+                              <button type="button" class="btn btn-default" ng-click="open($event, 1)"><i class="glyphicon glyphicon-calendar"></i></button>
+                          </span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-12 m-b-xs">
+                <div class="col-lg-3 col-md-3 text-right"><label class="control-label m-t-sm">联系时间:</label></div>
+                <div class="col-lg-5 col-md-3">
+                    <div class="input-group w-sm">
+                        <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="vm.searchContact" is-open="vm.opens[4]" datepicker-options="dateOptions" close-text="Close" />
+                          <span class="input-group-btn">
+                              <button type="button" class="btn btn-default" ng-click="open($event, 4)"><i class="glyphicon glyphicon-calendar"></i></button>
+                          </span>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-3">
+                    <div class="input-group w-sm">
+                        <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="vm.searchContacted" is-open="vm.opens[5]" datepicker-options="dateOptions" close-text="Close" />
+                        <span class="input-group-btn">
+                          <button type="button" class="btn btn-default" ng-click="open($event, 5)"><i class="glyphicon glyphicon-calendar"></i></button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-12 m-b-xs">
+                <div class="col-lg-3 col-md-3 text-right"><label class="control-label m-t-sm">分配时间:</label></div>
+                <div class="col-lg-5 col-md-3">
+                    <div class="input-group w-sm">
+                        <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="vm.searchDis"  is-open="vm.opens[2]" datepicker-options="dateOptions" close-text="Close" />
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="open($event, 2)"><i class="glyphicon glyphicon-calendar"></i></button>
+                        </span>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-3">
+                    <div class="input-group w-sm distritime">
+                        <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="vm.searchDised"  is-open="vm.opens[3]" datepicker-options="dateOptions" close-text="Close" />
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="open($event, 3)"><i class="glyphicon glyphicon-calendar"></i></button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-8 m-b-xs clearfix">
+                <label class="control-label m-t-sm pull-left m-r-md text-right m-l-lg">入职企业:</label>
+                <div class="w-md pull-left">
+                    <ui-select ng-model="vm.searchCon" theme="bootstrap">
+                        <ui-select-match placeholder="请选择职位...">{{$select.selected.job_name}}</ui-select-match>
+                        <ui-select-choices repeat="Compane in vm.job_list | filter: $select.search">
+                            <div ng-bind-html="Compane.job_name"></div>
+                            <small ng-bind-html="Compane.id"></small>
+                        </ui-select-choices>
+                    </ui-select>
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-4 m-b-xs">
+                <label class="control-label m-t-sm pull-left m-r-md">保留人选:</label>
+                <div class="m-t-sm">
+                    <input type="checkbox" ng-model="vm.searchRetain">
+                </div>
+            </div>
+            <div ng-if="vm.navi.search_btn.organization" class="col-lg-2 col-md-4 m-b-xs m-l-lg">
+                <label class="control-label m-t-sm pull-left m-r-md">部门:</label>
+                <div class="pull-left">
+                    <select class="form-control" ng-model="vm.detailSearchParam.org">
+                        <option value="">请选择</option>
+                        <option ng-repeat="orgitem in vm.orgs_options | orderBy:'order'" value="{{orgitem.id}}">{{orgitem.name}}</option>
+                    </select>
+                </div>
+            </div>
+            <div ng-if="vm.navi.search_btn.adviser" class="col-lg-2 col-md-3 m-b-xs m-l-lg">
+                <label class="control-label m-t-sm pull-left m-r-md">顾问:</label>
+                <div class="pull-left">
+                    <select class="form-control" ng-model="vm.detailSearchParam.employee">
+                        <option value="">请选择</option>
+                        <option ng-repeat="eplitem in vm.employees_options | filter:{org_id:vm.detailSearchParam.org} | filter:query | orderBy:'number'" value="{{eplitem.id}}">{{eplitem.real_name}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-lg-1 col-md-2 m-b-xs m-l-lg">
+               <button class="btn btn-info" type="button" ng-click="vm.searchDetail()">搜索</button>
+            </div>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-striped b-t b-light" style="margin-bottom: 0;">
+                <thead>
+                <tr>
+                    <th style="width:20px;">
+                        <label class="i-checks m-b-none">
+                            <input type="checkbox"  ng-model="vm.select_all" ng-change="vm.selectAll()"><i></i>
+                        </label>
+                    </th>
+                    <th>操作</th>
+                    <th ng-repeat="th in vm.header" title="{{th | thTitle:$stateParams.type}}" class="nowrap">{{th}}</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-if="vm.tipMessage" class="text-center text-lg">
+                    <td colspan="10"><b class=" text-info">人选搜索结果为空!</b><small class="m-l-xs">1:有可能搜索关键字未正确匹配;</small><small class="m-l-xs">2:有可能人选被丢弃或者释放</small><small class="m-l-xs">点击<a class="text-danger" href="#/app/customer/list/my">公海客户池</a> 搜索</small></td>
+                </tr>
+                <tr ng-if="vm.tipMess" class="text-center text-info text-lg">
+                    <td colspan="10">未搜索出人选!</td>
+                </tr>
+                <tr ng-repeat="(i, candidate) in vm.candidates">
+                    <td><label class="i-checks m-b-none"><input type="checkbox" ng-model="vm.checked[i]" ng-change="vm.selectCandidates()"><i></i></label></td>
+                    <td style="min-width: 180px;">
+                        <a ng-click="vm.newTask(candidate.cp_id)" class="btn m-b-xs btn-sm btn-primary fa fa-calendar" title="创建拨打计划"></a>
+                        <a class="btn m-b-xs btn-sm btn-primary fa fa-phone" title="创建联系记录" ng-click="vm.contactRecord(candidate.cp_id)"></a>
+                        <a ng-href="#/app/customer/{{candidate.cp_id}}/detail" class="btn m-b-xs btn-sm btn-primary fa icon-doc" title="查看详情"></a>
+                        <a ng-click="vm.customerDetail(candidate.cp_id)" class="btn m-b-xs btn-sm btn-primary fa icon-folder" title="预览"></a>
+                        <a ng-click="vm.setTag(candidate.id)" class="btn m-b-xs btn-sm btn-primary fa fa-tag" title="设置标签"></a>
+                        <a ng-if="vm.showTop(candidate)" ng-click="vm.topCandidate(candidate.id)" class="btn m-b-xs btn-sm btn-primary fa fa-thumbs-o-up" title="未置顶【点击置顶】"></a>
+                        <a ng-if="vm.showCancelTop(candidate)" ng-click="vm.cancelTop(candidate.id)" class="btn m-b-xs btn-sm btn-info fa fa-thumbs-o-up" title="已置顶【点击取消置顶】"></a>
+                        <a ng-if="vm.showAwardForm(candidate)" ng-href="#/app/candidate/{{candidate.id}}/awardform" class="btn m-b-xs btn-sm {{candidate.award | statusClass}} fa fa-rmb hidden" title="更新返费金额"></a>
+                        <a ng-if="vm.showRemain(candidate)" ng-click="vm.remainCandidate(candidate.id)" class="btn m-b-xs btn-sm btn-danger fa fa-clock-o" title="未保留【点击保留】"></a>
+                        <a ng-if="vm.showCandelRemain(candidate)" ng-click="vm.cancelRemain(candidate.id)" class="btn m-b-xs btn-sm btn-success fa fa-clock-o" title="已保留【点击取消保留】"></a>
+                    </td>
+                    <td ng-repeat="field in vm.fields" class="break-word">
+                        <span ng-if="field=='real_name'">{{candidate.real_name}}</span>
+                        <span ng-if="field=='phone'"><label class="btn btn-default ng-untouched ng-valid ng-dirty ng-valid-parse">{{candidate.phone}}</label></span>
+                        <a ng-if="field=='gender'" class="{{candidate.gender | genderClass}}" title="{{candidate.gender | genderClass:1}}"></a>
+                        <span ng-if="field=='show_time'" title="{{candidate.show_time}}">{{candidate.show_time | fromNow }}</span>
+                        <span class="nowrap" ng-if="field=='employee_name'">{{candidate.employee_name}}</span>
+                        <span ng-if="field=='status'">{{candidate.status}}</span>
+                        <span ng-if="field=='idcard'"><label class="btn btn-default ng-untouched ng-valid ng-dirty ng-valid-parse">{{candidate.idcard}}</label></span>
+                        <span ng-if="field=='job_name'">{{candidate.job_name}}</span>
+                        <span ng-if="field=='latest_contact_time'" title="{{candidate.latest_contact_time}}">{{candidate.latest_contact_time | fromNow}}</span>
+                        <span ng-if="field=='latest_contact_content'" class="list-lang-text"><a
+                            title="{{candidate.latest_contact_content}}">{{candidate.latest_contact_content}}</a></span>
+                    </td>
+                </tr>
+
+                </tbody>
+            </table>
+        </div>
+        </div>
+        <footer class="panel-footer">
+            <div class="row">
+                <div ng-if="vm.pagingOptions.count>0" class="col-lg-2 col-md-3 hidden-xs">
+                  <select class="input-sm form-control w-xs inline v-middle" ng-model="vm.operate">
+                    <option value="0">请选择</option>
+                    <option ng-repeat="item in vm.operates" value="{{item.id}}">{{item.text}}</option>
+                  </select>
+                  <button class="btn btn-sm btn-default" ng-click="vm.doOperate()">确定</button>
+                </div>
+                <div ng-if="vm.pagingOptions.count>0" class="col-lg-2 tablet">
+                    <label class="showlength">
+                        <span>显示</span>
+                        <select name="datalength" class="form-control input-sm inline" ng-model="vm.pagingOptions.pageSize" ng-change="vm.selectLength()" style="width: auto;">
+                            <option ng-repeat="showPages in vm.pagingOptions.pageShowLength" value="{{showPages}}" >{{showPages}}</option>
+                        </select>
+                        <span>条</span>
+                    </label>
+                </div>
+                <div ng-if="vm.pagingOptions.count>0" class="col-lg-5 col-md-7 text-right text-center-xs">
+                    <pagination
+                        boundary-link-numbers="true"
+                        boundary-links="true"
+                        max-size="vm.pagingOptions.pageMax"
+                        items-per-page="vm.pagingOptions.pageSize"
+                        total-items="vm.pagingOptions.count"
+                        ng-model="vm.pagingOptions.currentPage"
+                        ng-change="vm.getPagedDataAsync()"
+                        class="m-t-none m-b"
+                        previous-text="&lsaquo;"
+                        next-text="&rsaquo;"
+                        first-text="&laquo;"
+                        last-text="&raquo;"
+                    ></pagination>
+                </div>
+                <div ng-if="vm.pagingOptions.count>0" class="form-group col-lg-1 col-md-2 clearfix">
+                  <div class="input-group w-xs">
+                    <input type="text" class="input-sm form-control text-center" ng-model="vm.inputPage">
+                    <span class="input-group-btn">
+                      <button class="btn btn-sm btn-default" type="button" ng-click="vm.switchPage()">跳转</button>
+                    </span>
+                  </div>
+                </div>
+                <div class="col-lg-2 tablet">
+                    <small class="text-muted inline m-t-sm m-b-sm">{{vm.pagingOptions.currentPage}}/{{vm.pagingOptions.pages}}</small>
+                    <small class="text-muted inline m-t-sm m-b-sm">总共<b>{{vm.pagingOptions.count}}</b>条记录</small>
+                </div>
+            </div>
+        </footer>
+      <div class="list-loading">
+        <img ng-src="img/timg.gif" ng-show="vm.showLoading">
+      </div>
+    </div>
+</div>

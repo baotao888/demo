@@ -1,0 +1,12 @@
+<div class="banner">
+  <div class="container">
+    <ul class="bxslider">
+      {volist name='imgurl' id='ls' key='k'}
+        <li class="item">
+          <img src="{$ls.content}" title="{$ls.title}"/>
+        </li>
+      {/volist}
+    </ul>
+    <img src="{$Think.config.img_domain}/qrcode-banner.jpg" class="qrcode"/>
+  </div>
+</div>

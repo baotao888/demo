@@ -1,0 +1,25 @@
+<?php
+return [
+	'unknow_error' => '未知错误',	
+	'register_error_1' => '用户名不合法',
+	'register_error_2' => '包含敏感词',
+	'register_error_3' => '用户名已经存在',
+	'register_error_4' => 'Email 格式有误',
+	'register_error_5' => 'Email 不允许注册',
+	'register_error_6' => '该 Email 已经被注册',
+	'register_error_7' => '手机号格式有误',
+	'register_error_8' => '该手机号已经被注册',
+	'mobile_format_error' => '手机号码错误',
+	'realname_format_error' => '姓名格式错误',
+	'password_format_error' => '密码格式错误',
+	'register_failure' => '注册失败',
+	'already_login' => '已经登录',
+	'login_error' => '登录失败，账号或者密码错误',
+	'register_success' => '注册成功',
+	'login_success' => '登录成功',
+	'logout_success' => '已安全退出',
+	'signup_success' =>	'报名成功，您的求职顾问会在24小时内联系您',	
+	'invite_success' =>	'推荐成功!',
+	'invite_failure' => '推荐之前，请先登录',
+	'sms_code_error' => '验证码错误'	
+];

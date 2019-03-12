@@ -1,0 +1,263 @@
+<div class="hbox hbox-auto-xs hbox-auto-sm" ng-init="
+    app.settings.asideFolded = false; 
+    app.settings.asideDock = false;
+  ">
+  <!-- main -->
+  <div class="col">
+    <!-- main header -->
+    <div class="bg-light lter b-b wrapper-md">
+      <div class="row">
+        <div class="col-sm-6 col-xs-12">
+          <h1 class="m-n font-thin h3 text-black">工作面板</h1>
+          <small class="text-muted">欢迎使用江苏众鑫蓝企业管理有限公司CRM系统</small>
+        </div>
+      </div>
+    </div>
+    <!-- / main header -->
+    <div class="wrapper-md">
+      <ul ng-if="vm.candidate_statistics" class="nav nav-pills nav-xxs nav-rounded m-b isActiveul">
+        <li ng-click="vm.isActive=0" ng-class="{active:vm.isActive===0}"><a href ng-click="vm.statisticsTodayCandidate()">今日</a></li>
+        <li ng-click="vm.isActive=1" ng-class="{active:vm.isActive===1}"><a href ng-click="vm.statisticsWeekCandidate()">本周</a></li>
+        <li ng-click="vm.isActive=2" ng-class="{active:vm.isActive===2}"><a href ng-click="vm.statisticsMonthCandidate()">本月</a></li>
+        <li ng-click="vm.isActive=3" ng-class="{active:vm.isActive===3}"><a href ng-click="vm.statisticsQuarterCandidate()">本季度</a></li>
+      </ul>
+      <!-- stats -->
+      <div class="row">
+        <div ng-if="vm.candidate_statistics" class="col-md-5">
+          <div class="row row-sm text-center">
+            <div class="col-xs-6">
+              <div class="panel padder-v item">
+                <div class="h1 text-info font-thin h1">{{vm.candidate_statistics.new}}</div>
+                <span class="text-muted text-xs">新人次</span>
+                <span class="bottom text-right w-full">
+                  <i class="fa  fa-check-square-o text-muted m-r-sm"></i>
+                </span>
+              </div>
+            </div>
+            <div class="col-xs-6">
+              <div class="panel padder-v bg-primary item">
+                <div class="h1 text-white font-thin h1">{{vm.candidate_statistics.old}}</div>
+                <span class="text-muted text-xs">老人次</span>
+                <span class="bottom text-right w-full">
+                  <i class="fa  fa-check-square-o text-muted m-r-sm"></i>
+                </span>
+              </div>
+            </div>
+            <div class="col-xs-6">
+              <a href class="block panel padder-v bg-info item">
+                <span class="text-white font-thin h1 block">{{vm.candidate_statistics.signup}}</span>
+                <span class="text-muted text-xs">报名人次</span>
+              </a>
+            </div>
+            <div class="col-xs-6">
+              <div class="panel padder-v item">
+                <div class="font-thin h1">{{vm.candidate_statistics.meet}}</div>
+                <span class="text-muted text-xs">接站人次</span>
+              </div>
+            </div>
+            <div class="col-xs-6">
+              <a href class="block panel padder-v item">
+                <span class="text-success font-thin h1 block">{{vm.candidate_statistics.onduty}}</span>
+                <span class="text-muted text-xs">入职人次</span>
+              </a>
+            </div>
+            <div class="col-xs-6">
+              <div class="panel padder-v bg-danger item">
+                <div class="font-thin h1">{{vm.candidate_statistics.offduty}}</div>
+                <span class="text-muted text-xs">离职人次</span>
+              </div>
+            </div>
+            <div class="col-xs-12">
+              <div class="panel padder-v item">
+                <div class="font-thin h1 text-success">￥{{vm.candidate_statistics.award}}</div>
+                <span class="text-muted text-xs">返费总金额</span>
+                <span class="bottom text-right w-full">
+                  <i class="fa fa-cny text-muted m-r-sm"></i>
+                </span>
+              </div>
+            </div>
+            <div class="col-xs-12">
+              <div class="panel padder-v item">
+                <div class="font-thin h1 text-warning">￥{{vm.candidate_statistics.subsidy}}</div>
+                <span class="text-muted text-xs">补贴总金额</span>
+                <span class="bottom text-right w-full">
+                  <i class="fa fa-cny text-muted m-r-sm"></i>
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="row row-sm text-center">
+            <div class="col-md-6 col-lg-4">
+              <div class="panel panel-default">
+                <small class="text-muted">报名: {{vm.candidate_statistics.signup}}</small><small class="text-muted m-l-sm">接站: {{vm.candidate_statistics.meet}}</small>
+                <div class="inline">
+                  <div ui-jq="easyPieChart"  ui-options="{
+                    percent: vm.meet_data,
+                    lineWidth: 10,
+                    trackColor: '{{app.color.light}}',
+                    barColor: '{{app.color.info}}',
+                    scaleColor: '{{app.color.light}}',
+                    size: 150,
+                    lineCap: 'butt',
+                    animate: 1000
+                  }">
+                    <div>
+                      <span class="h2 m-l-sm step">{{vm.meet_data | number:0}}</span>%
+                      <div class="text text-sm">接站</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="panel panel-default">
+                <small class="text-muted">接站: {{vm.candidate_statistics.meet}}</small><small class="text-muted  m-l-sm">入职: {{vm.candidate_statistics.onduty}}</small>
+                <div class="inline">
+                  <div ui-jq="easyPieChart"  ui-options="{
+                    percent: vm.onduty_data,
+                    lineWidth: 10,
+                    trackColor: '{{app.color.light}}',
+                    barColor: '{{app.color.success}}',
+                    scaleColor: '{{app.color.light}}',
+                    size: 150,
+                    lineCap: 'butt',
+                    animate: 1000
+                  }">
+                    <div>
+                      <span class="h2 m-l-sm step">{{vm.onduty_data | number:0}}</span>%
+                      <div class="text text-sm">入职</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+              <div class="panel panel-default">
+                <small class="text-muted">入职: {{vm.candidate_statistics.onduty}}</small><small class="text-muted  m-l-sm">离职: {{vm.candidate_statistics.offduty}}</small>
+                <div class="inline">
+                  <div ui-jq="easyPieChart"  ui-options="{
+                    percent: vm.offduty_data,
+                    lineWidth: 10,
+                    trackColor: '{{app.color.light}}',
+                    barColor: '{{app.color.danger}}',
+                    scaleColor: '{{app.color.light}}',
+                    size: 150,
+                    lineCap: 'butt',
+                    animate: 1000
+                  }">
+                    <div>
+                      <span class="h2 m-l-sm step">{{vm.offduty_data | number:0}}</span>%
+                      <div class="text text-sm">离职</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-7">
+          <div ng-if="vm.my_onduty_data" class="panel wrapper">
+            <label class="i-switch bg-warning pull-right" ng-init="showSpline=true">
+              <input type="checkbox" ng-model="showSpline">
+              <i></i>
+            </label>
+            <h4 class="font-thin m-t-none m-b text-muted">本月入职人数</h4>
+            <div ui-jq="plot" ui-refresh="showSpline" ui-options="
+              [
+                { data: {{vm.my_onduty_data}}, label:'我的', points: { show: true, radius: 1}, splines: { show: showSpline, tension: 0.4, lineWidth: 1, fill: 0.8 } }
+              ], 
+              {
+                colors: ['{{app.color.info}}', '{{app.color.primary}}'],
+                series: { shadowSize: 3 },
+                xaxis:{ font: { color: '#a1a7ac' }, min: 1 },
+                yaxis:{ font: { color: '#a1a7ac' }, max:20 },
+                grid: { hoverable: true, clickable: true, borderWidth: 0, color: '#dce5ec' },
+                tooltip: true,
+                tooltipOpts: { content: '第%x天%y人',  defaultTheme: false}
+              }
+            " style="height:200px" >
+            </div>
+          </div>
+          <div ng-if="vm.ticks" class="panel panel-default">
+            <div class="panel-heading font-bold">本月各部门人选数据统计</div>
+            <div class="panel-body">
+              <div ui-jq="plot" ui-refresh="showSpline" ui-options="
+              [
+                { label: '报名', data: {{vm.group_signup_data}} },
+                { label: '接站', data: {{vm.group_meet_data}} },
+                { label: '入职', data: {{vm.group_onduty_data}} },
+                { label: '离职', data: {{vm.group_outduty_data}} }
+              ],
+              {
+                bars: { show: true, fill: true, lineWidth: 0.1, order: 1, fillColor: { colors: [{ opacity: 0.5 }, { opacity: 0.9}] } },
+                colors: ['{{app.color.info}}', '{{app.color.primary}}', '{{app.color.success}}', '{{app.color.danger}}'],
+                series: { shadowSize: 1 },
+                xaxis:{ font: { color: '#666' }, ticks: {{vm.ticks}} },
+                yaxis:{ font: { color: '#ccc' }, max:200 },
+                grid: { hoverable: true, borderWidth: 0, color: '#ccc' },
+                tooltip: true,
+                tooltipOpts: { content: '%s %y人'}
+              }
+            " style="height:405px"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- / stats -->
+
+      <!-- announcement -->
+      <div class="row">
+        <div ng-if="vm.organization" class="col-md-6">
+          <div class="panel no-border">
+            <div class="panel-heading wrapper b-b b-light">
+              <span class="text-xs text-muted pull-right">
+                <i class="fa fa-circle text-primary m-r-xs"></i> {{vm.organization.teacher}}
+                <i class="fa fa-circle text-info m-r-xs m-l-sm"></i> {{vm.organization.male}}
+                <i class="fa fa-circle text-warning m-r-xs m-l-sm"></i> {{vm.organization.female}}
+              </span>
+              <h4 class="font-thin m-t-none m-b-none text-muted">{{vm.organization.nickname}}</h4>
+            </div>
+            <ul class="list-group list-group-lg m-b-none">
+              <li class="list-group-item" ng-repeat="teacher in vm.organization.header">
+                <a class="thumb-sm m-r">
+                  <img ng-src="{{teacher.avatar}}" class="r r-2x">
+                </a>
+                <span class="pull-right label bg-primary inline m-t-sm">{{teacher.call}}</span>
+                <a>{{teacher.nickname}}</a>
+              </li>
+              <li class="list-group-item" ng-repeat="sibling in vm.organization.list">
+                <a class="thumb-sm m-r">
+                  <img ng-src="{{sibling.avatar}}" class="r r-2x">
+                </a>
+                <span class="pull-right label {{sibling.gender?'bg-info':'bg-warning'}} inline m-t-sm">{{sibling.call}}</span>
+                <a href>{{sibling.nickname}}</a>
+              </li>
+            </ul>
+            <div class="panel-footer">
+              <span class="pull-right badge badge-bg m-t-xs">{{vm.organization.total}}</span>
+              <a ng-href="#/app/my/organization" class="btn btn-primary btn-addon btn-sm"><i class="fa fa-users"></i>全部</a>
+            </div>
+          </div>
+        </div>
+        <div ng-if="vm.announcement" class="col-md-6">
+          <div class="wrapper bg-light dk">
+            <div class="m-b-sm text-md">公告</div>    
+            <div class="list-group list-group-lg list-group-sp">
+              <a class="list-group-item clearfix" ng-repeat="notice in vm.announcement">
+                <span class="pull-left thumb-sm avatar m-r">
+                  <img ng-src="{{notice.avatar}}" alt="{{notice.sender}}">
+                </span>
+                <span class="clear">
+                  <span>{{notice.sender}} <span class="text-danger">{{notice.create_time}}</span></span>
+                  <small class="text-muted clear text-ellipsis">{{notice.content}}</small>
+                </span>
+              </a>
+            </div>
+          </div>  
+        </div>
+      </div>
+      <!-- / announcement -->
+    </div>
+  </div>
+  <!-- / main -->
+</div>

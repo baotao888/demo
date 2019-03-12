@@ -1,0 +1,33 @@
+{volist name='com' id='user'}
+  <li class="list-group-item scrollitem job">
+    <div class="row">
+      <div class="col-sm-9 col-md-9">
+        <a href="/job/{$user.id}" class="image">
+          <div class="col-sm-4 col-md-3 col"><img class="thumb" src="{$user.cover}"/>{if true}<span class="seal"></span>{/if}</div>
+          <div class="col-sm-8 col-md-9 col1">
+            <h4 class="clearfix">
+              <span class="pull-left title">{$user.job_name}{if $user.cash_back!=''}<div class="tooltip right" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner">{$user.cash_back}</div></div>{/if}</span>
+              <span class="pull-right salary">
+                <strong>{$user.salary_floor} - {$user.salary_ceil}</strong>元/月
+              </span>
+            </h4>
+            <div class="desc"><span class="glyphicon glyphicon-user"></span>岗位说明：{$user.condition_short}</div>
+            <div class="tag">
+            {volist name='$user.welfare_tag' id='ls'}
+              <span class="label">{$ls}</span>
+            {/volist}
+            </div>
+          </div>
+        </a>
+      </div>
+      <div class="col-sm-3 col-md-3">
+        <div class="count"><b>{$user.renshu.deliveries}</b>人已报名</div>
+        {if $user.status==1}
+        <a href="javascript:signup({$user.id})" class="btn btn-default btn-signup" role="button"><span class="glyphicon glyphicon-list-alt"></span>免费报名</a>
+        {else if $user.status==99}
+        <a class="btn btn-default btn-signup" role="button"><span class="glyphicon glyphicon-list-alt"></span>暂停报名</a>
+        {/if}
+      </div>
+    </div>
+  </li>
+{/volist}

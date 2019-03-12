@@ -1,0 +1,89 @@
+  <div class="col">
+    <div class="wrapper-md">
+      <h1 class="m-n font-thin h3">
+        <a ng-href="#/app/performance/month" class="btn m-b-xs w-xs btn-default btn-nav" href="#/app/performance/month">本月</a>
+        <a ng-href="#/app/performance/search" class="btn m-b-xs w-xs btn-success" href="#/app/performance/search">全部</a>
+        <a ng-href="#/app/performance/statistics" class="btn m-b-xs w-xs btn-danger ng-scope" href="#/app/performance/statistics">统计</a>
+      </h1>
+       <h4 class="font-thin" style="margin-top: 20px;">
+        <a class="btn m-t-sm m-b-xs w-xs btn-default btn-nav">员工</a>
+        <a class="btn m-t-sm m-b-xs w-xs btn-default">企业</a>
+        <a class="btn m-t-sm m-b-xs w-xs btn-default">劳务公司</a>
+      </h4>
+      <div class="panel panel-default">
+        <div class="panel panel-default col-md-12" >
+          <div class="panel-heading">
+            <ul class="breadcrumb m-b-none">
+              <li><a href=""><i class="fa fa-phone-square"></i> 业绩管理</a></li>
+              <li class="active ng-binding">统计</li>
+            </ul>
+          </div>
+          <div class="wrap">
+             <div class="row animated fadeInDown">
+                <div class="col-sm-10">
+                  <div class="col-sm-12 m-b-xs">
+                    <div class="col-sm-1">
+                      <label class="control-label m-t-sm">入职时间:</label>
+                    </div>
+                    <div class="col-sm-2">
+                      <div class="input-group w-sm">
+                        <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="vm.searchDis"  is-open="vm.opens[2]" datepicker-options="dateOptions" close-text="Close" />
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="open($event, 2)"><i class="glyphicon glyphicon-calendar"></i></button>
+                        </span>
+                      </div>
+                    </div>
+                    <div class="col-sm-2">
+                      <div class="input-group w-sm distritime">
+                        <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="vm.searchDised"  is-open="vm.opens[3]" datepicker-options="dateOptions" close-text="Close" />
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="open($event, 3)"><i class="glyphicon glyphicon-calendar"></i></button>
+                        </span>
+                      </div>
+                    </div>
+                    <div class="col-sm-1">
+                      <button class="btn btn-success" ng-click="vm.timersearch()">搜索</button>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-2">
+                  <div class="row">
+                    <div class="input-group pull-left w-xs">
+                      <select class="input-sm form-control ng-pristine ng-untouched ng-valid" ng-model="vm.searchactive">
+                        <option>一组</option>
+                        <option>二组</option>
+                        <option>三组</option>
+                        <option>四组</option>
+                      </select>
+                    </div>
+                  </div>
+              </div>
+            </div>
+          </div>
+
+          <table class="table table-striped b-t b-light table-border">
+              <thead>
+                <tr>
+                  <th ng-repeat="item in vm.header" style="width:50px;">{{item}}</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="per in vm.performace">
+                  <td>{{per.branch}}</td>
+                  <td>{{per.staff}}</td>
+                  <td>{{per.job_persons}}</td>
+                  <td>{{per.subsidy_money}}</td>
+                  <td>{{per.personal_accom}}</td>
+                </tr>
+                <tr>
+                  <td colspan="3">合计：</td>
+                  <td>10000</td>
+                  <td>30000</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+

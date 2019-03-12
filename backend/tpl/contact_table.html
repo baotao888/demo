@@ -1,0 +1,79 @@
+<div class="bg-light lter b-b wrapper-md ng-scope">
+    <h1 class="m-n font-thin h3">
+        <a ng-href="#/app/candidate/contact" class="btn m-b-xs w-xs btn-default">今日</a>
+        <a ng-href="#/app/candidate/contacttable" class="btn m-b-xs w-xs btn-success btn-nav active">全部</a>
+        <a ng-if="vm.myButtons.search_btn.adviser" ng-href="#/app/candidate/contactstatistics" class="btn m-b-xs w-xs btn-danger">部门</a>
+    </h1>
+</div>
+<div class="wrapper-md">
+  <div class="panel panel-default">
+      <div class="panel-heading">
+        <ul class="breadcrumb m-b-none">
+        <li><a href=""><i class="fa fa-phone-square"></i> 联系日志</a></li>
+        <li class="active ng-binding">全部联系日志</li>
+       </ul>
+      </div>
+  <div>
+  <div class="panel panel-default">
+    <div class="m-t-sm clearfix">
+      <div class="m-r-sm pull-right">
+        <button class="btn btn-default" ng-click="vm.contactSearch()">Go!</button>
+      </div>
+      <div class="m-r-sm pull-right">
+        <label class="control-label m-t-sm pull-left">查询结束时间:&nbsp;&nbsp;</label>
+        <div class="input-group w-md" style="width: 130px;">
+          <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="vm.endTime" is-open="vm.opens[1]" datepicker-options="dateOptions" close-text="Close" />
+                <span class="input-group-btn">
+                    <button type="button" class="btn btn-default" ng-click="open($event, 1)"><i class="glyphicon glyphicon-calendar"></i></button>
+                </span>
+        </div>
+      </div>
+      <div class="m-r-sm pull-right">
+        <label class="control-label m-t-sm pull-left">查询开始时间:&nbsp;&nbsp;</label>
+        <div class="input-group w-md" style="width: 130px;">
+          <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="vm.startTime" is-open="vm.opens[0]" datepicker-options="dateOptions" close-text="Close"/>
+          <span class="input-group-btn">
+                  <button type="button" class="btn btn-default" ng-click="open($event,0)"><i class="glyphicon glyphicon-calendar"></i></button>
+              </span>
+        </div>
+      </div>
+    </div>
+    <div class="panel-body text-center">
+      <table class="table table-striped b-t b-light">
+        <thead>
+          <tr>
+          <th>人选</th>
+          <th>联系时间</th>
+          <th>联系内容</th>
+          <th>联系结果</th>
+        </tr>
+        </thead>
+        <tbody>
+          <tr class="text-left" ng-repeat="record in vm.contactdetail">
+          <td><a href="#/app/customer/{{record.cp_id}}/detail">{{record.customer}}</a></td>
+          <td>{{record.contact_time}}</td>
+          <td><a class="break-word" title="{{record.content}}">{{record.content}}</a></td>
+          <td>{{record.result}}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <footer class="panel-footer">
+      <div class="row">
+        <div class="col-sm-8"></div>
+        <div ng-if="vm.pagingOptions.count>0" class="col-sm-4 text-right text-center-xs">
+          <ul class="pagination pagination-sm m-t-none m-b-none">
+            <li><a ng-click="vm.firstPage()"><i class="fa fa-angle-double-left"></i></a></li>
+            <li><a ng-click="vm.prevPage()"><i class="fa fa-chevron-left"></i></a></li>
+            <li ng-repeat="page in vm.pagingOptions.pageSizes"><a ng-click="vm.switchPage(page)" class="{{page==vm.pagingOptions.currentPage?'avtive':''}}">{{page}}</a></li>
+            <li><a ng-click="vm.nextPage()"><i class="fa fa-chevron-right"></i></a></li>
+            <li><a ng-click="vm.lastPage()"><i class="fa fa-angle-double-right"></i></a></li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  </div>
+  </div>
+</div>

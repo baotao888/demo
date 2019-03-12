@@ -1,0 +1,32 @@
+<div class="bg-light lter b-b wrapper-md">
+    <h1 class="m-n font-thin h3">回收站</h1>
+</div>
+<div class="wrapper-md">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            客户列表
+        </div>
+        <div class="panel-body">
+            <div class="row b-b">
+                <div class="col-sm-4 m-b-xs">
+                    <select class="input-sm form-control w-sm inline v-middle" ng-model="operate">
+                        <option value="0">请选择</option>
+                        <option ng-repeat="item in operates" value="{{item.id}}">{{item.text}}</option>
+                    </select>
+                    <button class="btn btn-sm btn-default" ng-click="doOperate()">确定</button>
+                </div>
+                <div class="col-sm-offset-4 col-sm-4">
+                    <div class="input-group w-md pull-right">
+                        <input type="text" class="input-sm form-control" ng-model="filterText" placeholder="用户名或者手机号码">
+                        <span class="input-group-btn">
+                          <button class="btn btn-sm btn-default" type="button" ng-click="getPagedDataAsync()">Go!</button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="table-responsive">
+                <div ng-grid="gridOptions" style="min-height:710px"></div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,269 @@
+<div class="bg-light lter b-b wrapper-md">
+  <h1 class="m-n font-thin h3 performance">
+    <a ng-href="#/app/performance/salelist/1" class="btn m-b-xs w-xs btn-nav" ng-class="{'on':vm.type==1}"><i></i>正式工</a>
+    <a ng-href="#/app/performance/salelist/2" class="btn m-b-xs w-xs btn-nav" ng-class="{'on':vm.type==2}"><i></i>小时工</a>
+    <a ng-href="#/app/performance/salelist/3" class="btn m-b-xs w-xs btn-nav" ng-class="{'on':vm.type==3}"><i></i>其他</a>
+  </h1>
+</div>
+<ul class="breadcrumb" style="margin: 0;padding: 10px 0 10px 23px;">
+  <li><a href=""><i class="fa fa-hand-o-right"></i> 业绩管理</a></li>
+  <li class="active">正式工</li>
+</ul>
+<div class="wrapper-md" style="padding-top: 0;">
+  <div class="panel panel-default m-n">
+    <div class="panel-heading clearfix">
+      <div ng-if="vm.myButtons.search_btn.organization" class="col-lg-2 col-md-3">
+        <select class="input-sm form-control inline v-middle pull-left text-center" ng-model="vm.org">
+          <option value="">请选择部门</option>
+          <option ng-repeat="item in vm.orgs_options | orderBy:'order'" ng-value="item.id">{{item.name}}</option>
+        </select>
+      </div>
+      <div ng-if="vm.myButtons.search_btn.adviser" class="col-lg-2 col-md-3">
+        <select class="input-sm form-control inline v-middle pull-left"  ng-model="vm.adviser">
+          <option value="">请选择顾问</option>
+          <option ng-repeat="item in vm.employees_options | filter:{org_id:vm.org} | filter:query | orderBy:'number'" ng-value="item.id">{{item.real_name}}</option>
+        </select>
+      </div>
+      <div class="col-lg-4 col-md-12 m-t-xs">
+        <div class="col-lg-3 col-md-3 text-right"><label class="control-label m-t-xs">接站时间:</label></div>
+        <div class="col-lg-4 col-md-4">
+          <div class="input-group w-sm">
+            <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="vm.time_start" is-open="vm.opens[0]" datepicker-options="dateOptions" close-text="Close" />
+            <span class="input-group-btn">
+              <button type="button" class="btn btn-default" ng-click="open($event,0)"><i class="glyphicon glyphicon-calendar"></i></button>
+            </span>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-4">
+          <div class="input-group w-sm">
+            <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="vm.time_end" is-open="vm.opens[1]" datepicker-options="dateOptions" close-text="Close" />
+              <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="open($event, 1)"><i class="glyphicon glyphicon-calendar"></i></button>
+              </span>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-12 m-b-xs m-t-xs">
+        <div class="col-lg-3 col-md-3 text-right"><label class="control-label m-t-xs">到期时间:</label></div>
+        <div class="col-lg-4 col-md-4">
+          <div class="input-group w-sm">
+            <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="vm.receive_start" is-open="vm.opens[2]" datepicker-options="dateOptions" close-text="Close" />
+            <span class="input-group-btn">
+              <button type="button" class="btn btn-default" ng-click="open($event,2)"><i class="glyphicon glyphicon-calendar"></i></button>
+            </span>
+          </div>
+        </div>
+         <div class="col-lg-4 col-md-4">
+          <div class="input-group w-sm">
+            <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="vm.receive_end" is-open="vm.opens[3]" datepicker-options="dateOptions" close-text="Close" />
+              <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="open($event, 3)"><i class="glyphicon glyphicon-calendar"></i></button>
+              </span>
+          </div>
+        </div>
+      </div>
+
+        <div class="col-lg-2 col-md-3">
+          <label class="control-label m-t-xs">是否删除</label>
+          <div class="col-sm-4">
+            <label class="i-switch bg-primary m-t-xs m-r">
+              <input type="checkbox" ng-model="vm.is_invalid" value="1" name='switch' checked>
+              <i></i>
+            </label>
+          </div>
+        </div>
+        <div class="col-lg-2 col-md-3">
+          <label class="control-label m-t-xs">是否入账</label>
+          <div class="col-sm-4">
+            <label class="i-switch bg-primary m-t-xs m-r">
+              <input type="checkbox"  value="1" name='switch' checked ng-model="vm.is_sure">
+              <i></i>
+            </label>
+          </div>
+        </div>
+      <div class="col-lg-7 col-md-5">
+        <input type="text" class="input-sm form-control w-md pull-left" placeholder="输入客户名称或者手机号码" ng-model="vm.keyword">
+          <button class="btn btn-sm pull-left" type="button" ng-click="vm.ordiarySearch()" style="background: #000;color: #fff;">确定</button>
+      </div>
+      <div class="col-lg-1 col-md-1">
+        <button class="btn btn-sm btn-default" ui-toggle-class="show" target="#seniorSearch" ng-click="vm.searchMore()" type="button" style="margin-right: -30px;">高级搜索</button>
+      </div>
+
+      <div class="row m-t-md hide" id="seniorSearch">
+        <div class="searchdetail col-sm-12">
+          <div class="m-t-sm">
+            <div class="col-sm-2">
+              <ui-select ng-model="vm.ent" theme="bootstrap">
+                <ui-select-match placeholder="请选择企业...">{{$select.selected.enterprise_name}}</ui-select-match>
+                <ui-select-choices repeat="item in vm.enterpriseArr | filter: $select.search">
+                  <div ng-bind-html="item.enterprise_name"></div>
+                  <small ng-bind-html="item.id"></small>
+                </ui-select-choices>
+              </ui-select>
+            </div>
+            <div class="col-sm-2">
+              <ui-select ng-model="vm.larbours" theme="bootstrap" style="width: 150px;">
+                <ui-select-match placeholder="请选择劳务公司...">{{$select.selected.name}}</ui-select-match>
+                <ui-select-choices repeat="item in vm.labourlist | filter: $select.search">
+                  <div ng-bind-html="item.name"></div>
+                </ui-select-choices>
+              </ui-select>
+            </div>
+            <div class="col-sm-1">
+              <button class="btn" style="background: #000;color:#fff;" ng-click="vm.senior()">搜索</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="panel-body no-padder">
+      <div class="senior b-b m-t-sm" style="overflow: hidden;">
+      	<div class="col-lg-3 col-md-3">
+            <select class="input-sm form-control w-xs inline v-middle" ng-model="vm.operation">
+              <option value="">请选择</option>
+              <option ng-value="6">导出</option>
+            </select>
+            <button class="btn btn-sm btn-default" ng-click="vm.patchOperate()">确定</button>
+        </div>
+        <div class="col-lg-2 col-md-3">
+          <label class="showlength" style="margin-left: 13px;">
+            <span style="padding-left: 8px;"> 显示</span>
+            <select name="datalength" class="form-control input-sm inline" style="width: auto;" ng-change="vm.selectLength()" ng-model="vm.pagingOptions.pageSize">
+              <option ng-repeat="item in vm.pagingOptions.pageShowLength">{{item}}</option>
+            </select>
+            <span>条</span>
+          </label>
+        </div>
+        <div class="col-lg-2 center col-md-3">
+          <p style="padding-top: 8px;"><span>总共{{vm.sales.count}}条记录</span></p>
+        </div>
+        <div class="col-lg-5 col-md-12 text-right">
+            <div class="col-lg-2 col-md-2 text-right">
+              <p class="m-t-xs"><b>合计</b></p>
+            </div>
+            <div class="col-lg-3 col-md-3 text-right">
+              <p class="m-t-xs">返费: <b>{{vm.sales.amount | currency : '¥'}}</b></p>
+            </div>
+            <div class="col-lg-3 col-md-3 text-right">
+              <p class="m-t-xs">补贴: <b>{{vm.sales.allowance | currency : '¥'}}</b></p>
+            </div>
+            <div class="col-lg-3 col-md-3 text-right">
+              <p class="m-t-xs">推荐费: <b>{{vm.sales.invite_amount | currency : '¥'}}</b></p>
+            </div>
+        </div>
+      </div>
+    
+      <div class="table-responsive">
+        <table class="table table-striped b-light m-n" style="margin-bottom: 0;">
+          <thead>
+            <tr>
+              <th class="text-right" style="width: 20px;">
+                <label class="i-checks m-b-none">
+                  <input type="checkbox" ng-model="vm.isChecked" ng-change="vm.checkedAll()"><i></i>
+                </label>
+              </th>
+              <th>操作</th>
+              <th class="text-center nowrap" ng-repeat="item in vm.headers" title="{{item | thTitle:$stateParams.type}}">{{item}}</th>
+              <th>状态</th>
+           </tr>
+          </thead>
+          <tbody class="performancelist">
+            <tr ng-repeat="(i, item) in vm.saleslist">
+              <td class="text-right">
+                <label class="i-checks m-b-none">
+                  <input type="checkbox" ng-model="vm.checked[i]" ng-change="vm.checkalone(i)"><i></i>
+                </label>
+              </td>
+              <td style="min-width: 150px;">
+                <a class="btn m-b-xs btn-sm btn-primary fa icon-doc" title="查看详情" ng-click="vm.opendetail(item.id)"></a>
+                <a class="btn m-b-xs btn-sm btn-primary fa icon-notebook" ng-click="vm.doperation(1, item.id)" ng-if="vm.saleslist[i].is_invalid==0 && vm.saleslist[i].is_paid_allowance==0" title="入账"></a>
+                <a class="btn m-b-xs btn-sm btn-primary fa icon-wallet" ng-click="vm.doperation(4, item.id)" ng-if="vm.myButtons.performance_btn.paid_allowance && vm.saleslist[i].adviser_sure==1 && vm.saleslist[i].is_invalid==0 && vm.saleslist[i].is_paid_allowance==0" title="领补贴"></a>
+                <a class="btn m-b-xs btn-sm btn-primary fa icon-present"  ng-click="vm.doperation(5, item.id)" title="领推荐费" ng-if="vm.saleslist[i].adviser_sure==1 && vm.saleslist[i].is_inviter==1 && vm.saleslist[i].is_paid_invite==0 && vm.saleslist[i].is_invalid==0"></a>
+                <a class="btn m-b-xs btn-sm btn-primary fa icon-note"  ng-click="vm.doperation(7, item.id)" title="调整差价" ng-if="vm.myButtons.performance_btn.adjust_price && vm.saleslist[i].adviser_sure==1 && vm.saleslist[i].is_invalid==0"></a>
+                <a class="btn m-b-xs btn-sm btn-primary fa icon-control-end"  ng-click="vm.doperation(8, item.id)" title="继续在职" ng-if="vm.myButtons.performance_btn.on_duty && vm.saleslist[i].adviser_sure==1 && vm.saleslist[i].is_invalid==0 && vm.saleslist[i].is_outduty==0"></a>
+                <a class="btn m-b-xs btn-sm btn-primary fa icon-control-pause"  ng-click="vm.doperation(9, item.id)" title="离职" ng-if="vm.myButtons.performance_btn.out_duty && vm.saleslist[i].adviser_sure==1 && vm.saleslist[i].is_invalid==0 && vm.saleslist[i].is_outduty==0"></a>
+                <a class="btn m-b-xs btn-sm btn-primary fa icon-trash" ng-click="vm.doperation(2, item.id)" ng-if="vm.myButtons.performance_btn.delete && (!vm.saleslist[i].is_invalid==1 && !vm.saleslist[i].is_paid_invite==1 && !vm.saleslist[i].is_paid_allowance==1)" title="删除"></a>
+                <a class="btn m-b-xs btn-sm btn-primary fa icon-arrow-left" ng-click="vm.doperation(3, item.id)"  ng-if="vm.myButtons.performance_btn.restore && vm.saleslist[i].is_invalid==1" title="恢复"></a>
+              </td>
+              <td ng-repeat="field in vm.fileds" class="text-center">
+                <span ng-if="field=='enterprise'">{{item.enterprise}}</span>
+                <span ng-if="field=='labour_service'">{{item.labour_service}}</span>
+                <span ng-if="field=='real_name'">{{item.real_name}}</span>
+                <span ng-if="field=='receive_date'">{{item.receive_date}}</span>
+                <span ng-if="field=='go_to_time'">{{item.go_to_time}}</span>
+                <span ng-if="field=='onduty_day'">{{item.onduty_day}}</span>
+                <span ng-if="field=='amount'">{{item.amount | currency : '¥'}}</span>
+                <span ng-if="field=='worked_time'">{{item.worked_time}}</span>
+                <span ng-if="field=='ent_wage'">{{item.ent_wage | currency : '¥'}}</span>
+                <span ng-if="field=='cp_wage'">{{item.cp_wage | currency : '¥' }}</span>
+                <span ng-if="field=='allowance'">{{item.allowance | currency : '¥'}}</span>
+                <span ng-if="field=='adjusted_price'">{{item.adjusted_price | currency : '¥'}}</span>
+              </td>
+              <td style="min-width: 150px;">
+                <a class="btn m-b-xs btn-sm btn-primary fa icon-notebook" ng-class="{'btn-success': vm.saleslist[i].adviser_sure==1}" title="{{vm.saleslist[i].adviser_sure==1?'已入账': '未入账'}}"></a>
+                <a class="btn m-b-xs btn-sm btn-primary fa icon-wallet" ng-if="vm.myButtons.performance_btn.paid_allowance" ng-class="{'btn-success': vm.saleslist[i].is_paid_allowance==1}" title="{{vm.saleslist[i].is_paid_allowance?'已领补贴':'未领补贴'}}"></a>
+                <a class="btn m-b-xs btn-sm btn-primary fa icon-present" ng-if="vm.saleslist[i].is_inviter" ng-class="{'btn-success':vm.saleslist[i].is_paid_invite==1}" title="{{vm.saleslist[i].is_paid_invite==1 ? '已领推荐费' : '未领推荐费'}}"></a>
+                <a class="btn m-b-xs btn-sm btn-primary fa icon-trash" ng-class="{'btn-danger': vm.saleslist[i].is_invalid==1}" ng-if="vm.saleslist[i].is_invalid==1" title="{{vm.saleslist[i].is_invalid==1?'已删除':'未删除'}}"></a>
+                <a class="btn m-b-xs btn-sm btn-primary fa icon-emoticon-smile" title="{{vm.saleslist[i].is_outduty==1?'离职':'在职'}}" ng-class="{'btn-success': vm.saleslist[i].is_outduty==0}" ng-if="$stateParams.type==2"></a>
+                <a class="btn m-b-xs btn-sm btn-primary fa icon-loop"  ng-class="{'btn-success': vm.saleslist[i].is_adjusted==1}" ng-if="$stateParams.type==2" title="{{vm.saleslist[i].is_adjusted==1?'有调整差价':'无调整差价'}}"></a>
+                <a class="btn m-b-xs btn-sm btn-primary fa  icon-share" ng-class="{'btn-success': vm.saleslist[i].is_inviter==1}" title="{{vm.saleslist[i].is_inviter==1 ? '有推荐': ''}}" ng-if="vm.saleslist[i].is_inviter==1"></a>
+              <td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>  
+    <footer class="panel-footer">
+      <div class="row">
+        <div ng-if="vm.pagingOptions.count>0" class="col-lg-2 col-md-3 hidden-xs">
+          <select class="input-sm form-control w-xs inline v-middle">
+            <option value="0">请选择</option>
+            <option ng-value="6">导出</option>
+          </select>
+          <button class="btn btn-sm btn-default" ng-click="vm.patchOperate()">确定</button>
+        </div>
+        <div ng-if="vm.pagingOptions.count>0" class="col-lg-4 col-md-8 text-center-xs">
+          <pagination
+            boundary-link-numbers="true"
+            boundary-links="true"
+            max-size="vm.pagingOptions.pageMax"
+            items-per-page="vm.pagingOptions.pageSize"
+            total-items="vm.pagingOptions.count"
+            ng-model="vm.pagingOptions.currentPage"
+            ng-change="vm.getAchieventment()"
+            class="m-t-none m-b"
+            previous-text="&lsaquo;"
+            next-text="&rsaquo;"
+            first-text="&laquo;"
+            last-text="&raquo;">
+          </pagination>
+        </div>
+        <div ng-if="vm.pagingOptions.count>0" class="form-group col-lg-1 tablet clearfix">
+          <div class="input-group w-xs">
+            <input type="text" class="input-sm form-control text-center" ng-model="vm.inputPage">
+              <span class="input-group-btn">
+                <button class="btn btn-sm btn-default" type="button" ng-click="vm.switchPage()">跳转</button>
+              </span>
+          </div>
+        </div>
+        <div class="col-lg-5 col-md-12 text-right">
+            <div class="col-lg-2 col-md-2 text-right">
+              <p class="m-t-xs"><b>合计</b></p>
+            </div>
+            <div class="col-lg-3 col-md-3 text-right">
+              <p class="m-t-xs">返费: <b>{{vm.sales.amount | currency : '¥'}}</b></p>
+            </div>
+            <div class="col-lg-3 col-md-3 text-right">
+              <p class="m-t-xs">补贴: <b>{{vm.sales.allowance | currency : '¥'}}</b></p>
+            </div>
+            <div class="col-lg-3 col-md-3 text-right">
+              <p class="m-t-xs">推荐费: <b>{{vm.sales.invite_amount | currency : '¥'}}</b></p>
+            </div>
+        </div>
+      </div>
+    </footer>  
+    <div class="list-loading">
+      <img ng-src="img/timg.gif" ng-show="vm.showLoading">
+    </div>
+  </div>
+</div>

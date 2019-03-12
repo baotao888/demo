@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{$title|default="永乐打工网_求职_找工作_工厂招聘_技工_蓝领_小时工_兼职_暑假工"}</title>
+	<meta name="keywords" content="永乐打工网,求职,找工作,工厂招聘,技工,蓝领,小时工,兼职,暑假工" />
+	<meta name="description" content="永乐打工网致力于免费为基层打工者提供求职服务的平台，力图向您提供安全、纯净的打工环境，大力倡导新一代的打工朋友们努力工作，快乐生活。永乐打工网直接和工厂合作，无须通过中介劳务入职，所有企业100%实地考察，让你的工作无后顾之忧。" />
+    <script src="{$Think.config.js_domain}/service/device.js"></script>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="{$Think.config.css_domain}/default2.css" />
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="hidden"><img src="{$Think.config.img_domain}/baidu.jpg" /></div>
+    <div class="wrapper">
+      {block name="header"}
+        {include file="$header"}
+      {/block}
+      {block name="content"}
+        {include file="$content"}
+      {/block}
+      {block name="footer"}
+        {include file="$footer"}
+      {/block}
+    </div>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="{$Think.config.js_domain}/controller/common.js"></script>
+    <script src="{$Think.config.js_domain}/controller/web-loading.js"></script>
+    {block name="javascript"}{/block}
+    {block name="popup"}
+      {include file="$popup"}
+    {/block}
+  </body>
+</html>

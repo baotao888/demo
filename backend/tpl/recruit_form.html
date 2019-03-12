@@ -1,0 +1,190 @@
+<div class="bg-light lter b-b wrapper-md">
+  <h1 class="m-n font-thin h4">
+    <ul class="breadcrumb m-b-none">
+      <li><a href=""><i class="icon icon-users"></i> 招聘</a></li>
+      <li class="active ng-binding">{{vm.recruitopton}}</li>
+    </ul>
+  </h1>
+</div>
+<div class="wrapper-md">
+  <div class="row">
+    <div class="col-sm-12">
+      <form class="form-horizontal form-validation">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <strong>基本信息</strong>
+          </div>
+          <div class="panel-body">
+            <div class="form-group">
+              <label class="col-sm-3 control-label text-right"><span class="fa fa-star m-r-xs text-danger"></span>企业</label>
+              <label class="col-sm-1 control-label text-left">选择已有企业</label>
+              <div class="col-sm-2">
+                <ui-select ng-model="vm.recruit.enterprise" theme="bootstrap">
+                  <ui-select-match placeholder="请选择企业..." class="text-muted">{{$select.selected.enterprise_name}}</ui-select-match>
+                  <ui-select-choices repeat="item in vm.arr | filter: $select.search">
+                      <div ng-bind-html="item.enterprise_name"></div>
+                  </ui-select-choices>
+                </ui-select>
+              </div>
+              <label ng-if="!vm.edit" class="col-sm-1 control-label text-right">新增企业</label>
+              <div class="col-sm-3">
+                <input type="text" class="form-control"  placeholder="请输入企业名称..." ng-model="vm.recruit.enterprise.enterprise_name">
+              </div>
+            </div>
+            <div class="line line-dashed b-b line-lg pull-in"></div>
+              <div class="form-group">
+              <label class="col-sm-3 control-label text-right">劳务公司</label>
+              <div class="col-sm-3">
+                <ui-select ng-model="vm.recruit.labourlist" theme="bootstrap">
+                  <ui-select-match placeholder="请选择劳务公司...">{{$select.selected.name}}</ui-select-match>
+                  <ui-select-choices repeat="item in vm.labours | filter: $select.search">
+                    <div ng-bind-html="item.name"></div>
+                  </ui-select-choices>
+                </ui-select>
+              </div>
+            </div>
+            <div class="line line-dashed b-b line-lg pull-in"></div>
+            <div class="form-group">
+              <label class="col-sm-3 control-label text-right"><span class="fa fa-star m-r-xs text-danger"></span>职位类型</label>
+              <div class="col-sm-1" ng-repeat="item in vm.jobtype">
+                <label class="i-checks control-label">
+                  <input type="radio" ng-value="item.id" ng-model="vm.recruit.type">
+                  <i></i>
+                  {{item.name}}
+                </label>
+              </div>
+            </div>
+            <div class="line line-dashed b-b line-lg pull-in"></div>
+            <div class="form-group">
+              <label class="col-sm-3 control-label text-right">城市/地区</label>
+              <div class="col-sm-3">
+                <ui-select ng-model="vm.recruit.region" theme="bootstrap">
+                  <ui-select-match placeholder="请选择城市...">{{$select.selected}}</ui-select-match>
+                  <ui-select-choices repeat="item in vm.regions | filter: $select.search">
+                      <div ng-bind-html="item"></div>
+                  </ui-select-choices>
+                </ui-select>
+              </div>
+            </div>
+            <div class="line line-dashed b-b line-lg pull-in"></div>
+            <div class="form-group">
+              <label class="col-sm-3 control-label text-right">工资说明</label>
+              <div class="col-sm-9">
+                <textarea ng-model="vm.recruit.salary_intro" row="3" class="form-control"></textarea>
+              </div>
+            </div>
+            <div class="line line-dashed b-b line-lg pull-in"></div>
+            <div class="form-group">
+              <label class="col-sm-3 control-label text-right"><span class="fa fa-star m-r-xs text-danger"></span>有效日期</label>
+              <div class="col-sm-6">
+                <div class="m-r-sm pull-left">
+                <div class="input-group w-md" style="width: 130px;">
+                  <input type="text" class="form-control" datepicker-popup="{{format}}" is-open="vm.opens[0]" datepicker-options="dateOptions" close-text="Close" ng-model="vm.recruit.validity_period"/>
+                  <span class="input-group-btn">
+                    <button type="button" class="btn btn-default" ng-click="vm.open($event,0)"><i class="glyphicon glyphicon-calendar"></i></button>
+                  </span>
+                </div>
+              </div>
+             </div>
+            </div>
+            <div class="line line-dashed b-b line-lg pull-in"></div>
+            <div class="form-group">
+              <label class="col-sm-3 control-label text-right">职位排序</label>
+              <div class="col-sm-2">
+                <input class="form-control text-center w-xxs" type="number" ng-model="vm.recruit.list_order">
+                <i></i>
+              </div>
+          </div>
+          <div class="line line-dashed b-b line-lg pull-in"></div>
+          <div class="form-group">
+            <label class="col-sm-3 control-label text-right"><span class="fa fa-star m-r-xs text-danger"></span>返费类型</label>
+            <div class="col-sm-9">
+              <div class="radio-inline" ng-repeat="reward in vm.rewardtype">
+                <label class="i-checks">
+                  <input type="radio" name="type" ng-value="reward.id" ng-model="vm.recruit.allowance_type">
+                  <i></i>
+                  {{reward.name}}
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="line line-dashed b-b line-lg pull-in"></div>
+          <div class="form-group" ng-if="vm.recruit.allowance_type==1 || vm.recruit.allowance_type==3" style="position: relative;padding-bottom: 20px;">
+            <label class="col-sm-3 control-label text-right"><span class="fa fa-star m-r-xs text-danger"></span><span class="fa fa-plus m-r-xs text-primary" ng-click="vm.addIf(vm.recruit.wtype)"></span>返费条件</label>
+            <div class="col-sm-9">
+              <div class="list" ng-repeat="(i, item) in vm.writeModel" style="margin-bottom: 5px;">
+                <div class="col-sm-11" style="position: relative;">
+                  <div style="width: 140px;margin-bottom: 10px;" class="pull-left m-r-sm">
+                    <label class="control-label">条件</label>
+                    <select style="padding: 3px;" ng-model="vm.writeModel[i].conditions.field">
+                      <option ng-selected="vm.writeModel[i].conditions.field==''">请选择</option>
+                      <option ng-value="ite.value" ng-repeat="ite in vm.conditionfield.field" ng-selected="vm.writeModel[i].conditions.field==ite.value">{{ite.name}}</option>
+                    </select>
+                  </div>
+                  <div style="width: 140px; margin-bottom: 15px;" class="pull-left">
+                    <label class="control-label">关系</label>
+                    <select style="padding: 3px;" ng-model="vm.writeModel[i].conditions.operator">
+                      <option ng-selected="vm.writeModel[i].conditions.operator==''">请选择</option>
+                      <option ng-value="op.oid" ng-repeat="op in vm.conditionfield.operator" ng-selected="vm.writeModel[i].conditions.operator==op.oid">{{op.reship}}</option>
+                    </select>
+                  </div>
+                  <div style="width: 140px; margin-bottom: 15px;" class="pull-left" ng-show="vm.writeModel[i].conditions.field=='gender'">
+                    <label class="control-label pull-left m-r-xs">性别</label>
+                    <select style="padding: 3px;" ng-model="vm.writeModel[i].conditions.value">
+                      <option value="" ng-selected="vm.writeModel[i].conditions.value==''">请选择</option>
+                      <option ng-repeat="sex in vm.conditionfield.sex" ng-value="sex.vid" ng-selected="vm.writeModel[i].conditions.value==sex.vid">{{sex.name}}</option>
+                    </select>
+                  </div>
+                  <div style="width: 140px; margin-bottom: 15px;" class="pull-left" ng-show="vm.writeModel[i].conditions.field=='age'">
+                    <label class="control-label pull-left m-r-xs">值</label>
+                    <input type="text" class="text-center pull-left" style="width: 75px; padding: 3px;" ng-model="vm.writeModel[i].conditions.value">
+                  </div>
+                  <div style="width: 150px; margin-bottom: 15px;" class="pull-left">
+                    <label class="control-label pull-left m-r-xs">在职类型</label>
+                    <select style="padding: 3px;" ng-model="vm.writeModel[i].onduty_type">
+                      <option ng-selected="vm.writeModel[i].onduty_type==''">请选择</option>
+                      <option ng-repeat="duty in vm.conditionfield.onduty" ng-value="duty.onid" ng-selected="vm.writeModel[i].onduty_type==duty.onid">{{duty.name}}</option>
+                    </select>
+                  </div>
+                  <div style="width: 140px; margin-bottom: 15px;" class="pull-left">
+                    <label class="control-label pull-left m-r-xs">返费天数</label>
+                    <input type="number" class="text-center pull-left" style="width: 75px; padding: 3px;" ng-model="vm.writeModel[i].term">
+                  </div>
+                  <div style="width: 140px; margin-bottom: 15px;" class="pull-left">
+                    <label class="control-label pull-left m-r-xs">企业返费</label>
+                    <input type="number" class="text-center pull-left" style="width: 75px; padding: 3px;" ng-model="vm.writeModel[i].amount">
+                  </div>
+                  <div style="width: 140px; margin-bottom: 15px;" class="pull-left">
+                    <label class="control-label pull-left m-r-xs">补贴金额</label>
+                    <input type="number"  class="text-center pull-left" style="width: 75px; padding: 3px;" ng-model="vm.writeModel[i].allowance" >
+                  </div>
+                </div>
+                <div class="col-sm-1">
+                  <em class="glyphicon glyphicon-remove" style="margin-top: 8px;" ng-click="vm.closeIf(i)"></em>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group" ng-if="vm.recruit.allowance_type==2 || vm.recruit.allowance_type==3">
+              <label class="col-sm-3 control-label text-right">薪资</label>
+              <div class="col-sm-9">
+                <div class="col-sm-7">
+                  <div style="width: 255px;" class="pull-left m-r-sm col-sm-4">
+                    <label class="control-label pull-left m-r-xs">企业每小时薪资:</label>
+                    <input type="text" class="text-center pull-left" style="width: 80px;padding: 5px;" ng-model="vm.recruit.ent_wage">
+                  </div>
+                  <div style="width: 255px;" class="pull-left m-r-sm col-sm-4">
+                    <label class="control-label pull-left m-r-xs">人选每小时薪资:</label>
+                    <input type="text" class="text-center pull-left" style="width: 80px;padding: 5px;" ng-model="vm.recruit.cp_wage">
+                  </div>
+                </div>
+              </div>
+          </div>
+          <footer class="panel-footer text-right bg-light lter">
+            <button type="button" class="btn btn-success" ng-click="vm.recruitform()">Submit</button>
+          </footer>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

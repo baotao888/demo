@@ -1,0 +1,46 @@
+<div class="aside-wrap">
+  <div class="navi-wrap">
+    <!-- user -->
+    <div class="clearfix hidden-xs text-center hide" id="aside-user">
+      <div class="dropdown wrapper" dropdown>
+        <a ui-sref="app.my.profile">
+          <span class="thumb-lg w-auto-folded avatar m-t-sm">
+            <img ng-src="{{user.profile.avatar}}" class="img-full" alt="{{user.profile.nickname}}">
+          </span>
+        </a>
+        <a href class="dropdown-toggle hidden-folded" dropdown-toggle>
+          <span class="clear">
+            <span class="block m-t-sm">
+              <strong class="font-bold text-lt">{{user.profile.real_name}}</strong>
+              <b class="caret"></b>
+            </span>
+            <span class="text-muted text-xs block">{{user.profile.pos_name}}<a class="text-info">{{user.profile.pos_level}}</a></span>
+          </span>
+        </a>
+        <!-- dropdown -->
+        <ul class="dropdown-menu animated fadeInRight w hidden-folded">
+          <li class="wrapper b-b bg-info m-t-n-xs">
+            <span class="arrow top hidden-folded arrow-info"></span>
+            <div>{{user.profile.nickname}}</div>
+          </li>
+          <li ng-if="user.profile.employee_id>0">
+            <a ng-href="#/app/organization/{{user.profile.employee_id}}/employeeavatar">更换头像</a>
+          </li>
+          <li>
+            <a ui-sref="app.user.profile">个人资料</a>
+          </li>
+          <li ng-if="user.profile.employee_id>0">
+            <a ng-href="#/app/my/{{user.profile.employee_id}}/admin">修改密码</a>
+          </li>
+        </ul>
+        <!-- / dropdown -->
+      </div>
+      <div class="line dk hidden-folded"></div>
+    </div>
+    <!-- / user -->
+
+    <!-- nav -->
+    <nav ui-nav class="navi" ng-include="'tpl/blocks/nav.html'"></nav>
+    <!-- nav -->
+  </div>
+</div>

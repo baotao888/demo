@@ -1,0 +1,24 @@
+<div class="bg-light lter b-b wrapper-md">
+    <h1 class="m-n font-thin h4">
+        <ul class="breadcrumb m-b-none">
+            <li><a href=""><i class="fa fa-home"></i> 控制面板</a></li>
+            <li class="active ng-binding">补丁</li>
+        </ul>
+    </h1>
+</div>
+<div class="wrapper-md" ng-controller="PatchController">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            数据更新
+        </div>
+        <div class="panel-body">
+            <button class="btn m-b-xs btn-default" tooltip="网站用户表新增字段adviser_id，循环数据表，根据手机号码获取已分配用户对应的顾问，更新此字段" ng-click="updateUserOfAddAdviser()">更新端口用户的分配顾问</button>
+            <button class="btn m-b-xs btn-default" tooltip="清理重复的人选，只保留最先认领的人选和已联系的人选" ng-click="clearRepeatCandidate()">更新端口用户的分配顾问</button>
+            <button class="btn m-b-xs btn-default" tooltip="去除客户手机号码前面的空格" ng-click="trimCustomerPhone()">去除客户手机号码前面的空格</button>
+            <button class="btn m-b-xs btn-default" tooltip="导入端口用户到CRM系统呼入用户" ng-click="importUserToCallin()">导入呼入用户</button>
+            <button class="btn m-b-xs btn-default" tooltip="导入端口用户报名申请到CRM系统呼入用户动态" ng-click="importUserJobProcessToCallinTrace()">导入呼入用户动态</button>
+            <button class="btn m-b-xs btn-default" tooltip="官网职位导入CRM招聘模块" ng-click="job2recruit()">导入招聘职位</button>
+            <button class="btn m-b-xs btn-default" tooltip="入职人选生成销售订单" ng-click="candidate2salesorder()">生成订单</button>
+        </div>
+    </div>
+</div>

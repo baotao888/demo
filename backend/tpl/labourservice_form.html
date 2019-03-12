@@ -1,0 +1,38 @@
+<div class="bg-light lter b-b wrapper-md">
+  <h1 class="m-n font-thin h4">
+    <ul class="breadcrumb m-b-none">
+      <li><a href=""><i class="icon icon-call-out"></i> 劳务公司</a></li>
+      <li class="active ng-binding">{{vm.labouroption}}</li>
+    </ul>
+  </h1>
+</div>
+<div class="wrapper-md">
+  <div class="row">
+    <div class="col-sm-12">
+      <form class="form-horizontal form-validation">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <strong>基本信息</strong>
+          </div>
+          <div class="panel-body">
+            <div class="line line-dashed b-b line-lg pull-in"></div>
+            <div class="form-group row">
+              <label class="col-sm-3 control-label text-right">劳务公司名称：</label>
+              <div class="col-sm-5">
+                <input class="form-control text-center" type="text" ng-model="vm.labourlist.name">
+                <i></i>
+              </div>
+            </div>
+          </div>
+          <footer class="panel-footer bg-light lter">
+            <div class="row">
+              <div class="col-sm-8 text-right">
+                <button type="button" class="btn btn-success" ng-click="vm.recruitform()">Submit</button>
+              </div>
+            </div>
+          </footer>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

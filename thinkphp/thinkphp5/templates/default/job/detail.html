@@ -1,0 +1,165 @@
+{extend name="$base" /}
+{block name="banner"}
+{/block}
+{block name="content"}
+<div class="job-content">
+  <div class="container">
+    <div class="row block info">
+      <div class="row">
+        <div class="col-sm-4">
+          {include file="$thumbs"}
+        </div>
+        <div class="col-sm-8 text">
+          <h3 class="clearfix"><span class="pull-left">{$com.job_name}</span><span class="pull-right salary"><strong>{$com.salary_floor}-{$com.salary_ceil}</strong> {$Think.lang.salary_unit}</span></h3>
+          <div class="sub-title clearfix">
+            <div class="marker pull-left"><span class="glyphicon glyphicon-map-marker"></span>{$Think.lang.work_address}{$Think.lang.colon}{$com.jobdata.address_short}</div>
+            <div class="auth pull-right"><span class="glyphicon glyphicon-map-marker"></span>{$Think.lang.job_auth_1}</div>
+          </div>
+          <div class="condition">{$Think.lang.job_condition}{$Think.lang.colon}{$com.condition_short}</div>
+          <div class="condition">{$Think.lang.view_time}{$Think.lang.colon}{$com.jobdata.view_time}</div>
+          <div class="tag">{$Think.lang.job_welfare}{$Think.lang.colon}
+              {volist name='$com.welfare_tag' id='ls'}
+                <span class="label">{$ls}</span>
+              {/volist} 
+          </div>
+          <div class="condition">{$Think.lang.award_address}{$Think.lang.colon}{$Think.lang.company_address}</div>
+        </div>
+      </div>
+      <div class="row attention">
+        <div class="col-sm-7 message">
+          <span class="glyphicon glyphicon-info-sign pull-left"></span><b>{$Think.lang.tip_1}{$Think.lang.colon}</b>{$Think.lang.tip_info_1}
+        </div>
+        <div class="col-sm-5 signup">
+          <a class="btn-signup" href="javascript:signup({$com.id})">{$Think.lang.signup_now}</a>
+          <div class="number">{$com.renshu.deliveries}{$Think.lang.signup_unit}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12 col-md-8 block detail">
+        <div class="panel panel-default panel-instruct">
+          <div class="panel-heading clearfix">
+            <span class="pull-left field">{$Think.lang.salary_detail}</span>
+            <span class="pull-right auth"><span class="glyphicon glyphicon-ok"></span>{$Think.lang.salary_auth}</span>
+          </div>
+          <div class="panel-body">
+            {$com.jobdata.salary_detail}
+          </div>
+        </div>
+        <div class="panel panel-default panel-instruct">
+          <div class="panel-heading clearfix">
+            <span class="pull-left field">{$Think.lang.job_detail}</span>
+            <span class="pull-right auth"><span class="glyphicon glyphicon-ok"></span>{$Think.lang.job_auth_2}</span>
+          </div>
+          <div class="panel-body">
+            {$com.jobdata.content}
+          </div>
+        </div>
+        <div class="panel panel-default panel-instruct">
+          <div class="panel-heading clearfix">
+            <span class="pull-left field">{$Think.lang.signup_process}</span>
+            <span class="pull-right auth"><span class="glyphicon glyphicon-ok"></span>{$Think.lang.signup_auth}</span>
+          </div>
+          <div class="panel-body">
+            <ul class="list">
+              <li>
+                <h5>{$Think.lang.signup_path}</h5>
+                <ul class="list-unstyled">
+                  <li>{$Think.lang.signup_path_1}</li>
+                  <li>{$Think.lang.signup_path_2}</li>
+                  <li>{$Think.lang.signup_path_3}</li>
+                </ul>
+              </li>
+              <li>
+                <h5>{$Think.lang.signup_view}</h5>
+                <ul class="list-unstyled">
+                  <li>{$Think.lang.signup_view_time}</li>
+                  <li>{$Think.lang.signup_view_place}</li>
+                  <li>{$Think.lang.signup_view_road}</li>
+                </ul>
+              </li>
+              <li>
+                <h5>{$Think.lang.other_contact}</h5>
+                <ul class="list-inline contact row">
+                  <li class="col-sm-3"><span class="glyphicon glyphicon-user"></span>{$Think.lang.other_contact_man}</li>
+                  <li class="col-sm-3"><span class="glyphicon glyphicon-phone"></span>{$Think.lang.other_contact_mobile}</li>
+                  <li class="col-sm-3"><span class="glyphicon glyphicon-phone"></span>{$Think.lang.other_contact_wechat}</li>
+                  <li class="col-sm-3"><span class="glyphicon glyphicon-phone"></span>{$Think.lang.other_contact_qq}</li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-12 col-md-4 side">
+        <div class="block enterprise">
+          <div class="panel panel-default panel-instruct">
+            <div class="panel-heading">
+              <span>{$com.job_name}</span>
+              <span class="auth-tag">{$Think.lang.auth_job}</span>
+            </div>
+            <div class="panel-body">
+              <div class="btn-group btn-group-justified btn-field" role="group" aria-label="...">
+                <div class="btn-group" role="group">
+                  <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-list-alt"></span>{$com.company.industry}</button>
+                </div>
+                <div class="btn-group" role="group">
+                  <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-user"></span>{$com.company.scale}</button>
+                </div>
+              </div>
+              <dl class="desc">
+                <dt>{$Think.lang.description}{$Think.lang.colon}</dt>
+                <dd>{$com.company.description}
+                </dd>
+              </dl>
+              <div class="row statistics">
+                <dl class="col-sm-6">
+                  <dt>{$com.renshu.hits}</dt>
+                  <dd>{$Think.lang.hits}</dd>
+                </dl>
+                <div class="col-sm-1 delimiter"></div>
+                <dl class="col-sm-5">
+                  <dt>{$com.renshu.deliveries}</dt>
+                  <dd>{$Think.lang.deliveries}</dd>
+                </dl>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="block hotjob">
+          <div class="panel panel-default panel-instruct">
+            <div class="panel-heading">
+              <span>{$Think.lang.other_hot_jobs}</span>
+                <a href="/index/index/search">
+                  <span class="more">{$Think.lang.more} <span class="glyphicon glyphicon-chevron-right"></span></span>
+                </a>
+            </div>
+            <div class="panel-body">
+			  <ul class="list-unstyled">
+            {volist name='list' id='dl'}
+                <li>
+                  <h5><a href="/job/{$dl.id}">{$dl.job_name}</a></h5>
+                  <span class="salary"><strong>{$dl.salary_floor}-{$dl.salary_ceil}</strong> 元/月</span>
+                  <div class="tag">
+                    {volist name='dl.welfare_tag' id='ls'}
+                      <span class="label">{$ls}</span>
+                    {/volist}
+                  </div>
+                </li>
+            {/volist}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="/job/index/hit?id={$com.id}"></script>
+{/block}
+{block name="popup"}
+  {__block__}
+  {include file="$signupmodal"}
+{/block}

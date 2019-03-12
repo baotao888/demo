@@ -1,0 +1,62 @@
+<div class="app-content-body fade-in-up ng-scope">
+  <div class="fade-in-down ng-scope">
+    <div class="bg-light lter b-b wrapper-md ng-scope">
+      <h1 class="m-n font-thin h3"><i class="icon-magnifier i-sm m-r-sm"></i> Search</h1>
+    </div>
+    <div class="wrapper-md">
+      <form action="#" class="m-b-md ng-pristine ng-valid">
+        <div class="input-group">
+          <input type="text" class="form-control input-lg" placeholder="输入标签查询..." ng-model="vm.searchTag">
+          <span class="input-group-btn">
+            <button class="btn btn-lg btn-default" type="button" ng-click="vm.selectTag()">GO!</button>
+          </span>
+        </div>
+      </form>
+      <p class="m-b-md"><strong>{{vm.taglen}}</strong> 条搜索记录</p>
+      <div class="tab-container">
+        <ul class="nav nav-tabs">
+          <li class="ng-isolate-scope active">
+            <a>查询消息列表</a>
+          </li>
+        </ul>
+        <div class="tab-content">
+          <div class="tab-pane ng-scope active">
+            <ul class="list-group no-borders pull-in m-b-none ng-scope">
+              <li class="list-group-item" ng-repeat="tag in vm.tagList">
+                <div class="row">
+                  <div class="col-xs-3">
+                    <a class="h4 text-primary m-b-sm m-t-sm block" href="#/app/customer/{{tag.cp_id}}/detail"><i class="icon {{tag.gender==1?'icon-user-female':'icon-user'}} m-r-sm"></i>{{tag.real_name}}</a>
+                  </div>
+                  <div class="col-xs-3">
+                    <span class="h4 text-primary m-b-sm m-t-sm block"><i class="fa fa-phone m-r-sm"></i></i><button class="ng-untouched ng-valid ng-dirty ng-valid-parse">{{tag.phone}}</button></span>
+                  </div>
+                  <div class="col-xs-3">
+                    <a ng-click="vm.setTag(tag.cp_id)" class="btn m-b-xs btn-sm btn-primary fa fa-tag" title="设置标签"></a>
+                    <a ng-click="vm.newTask(tag.cp_id)" class="btn m-b-xs btn-sm btn-primary fa fa-calendar" title="创建拨打计划"></a>
+                    <a class="btn m-b-xs btn-sm btn-primary fa fa-phone" title="创建联系记录" ng-click="vm.contactRecord(tag.cp_id)"></a>
+                    <a ng-click="vm.customerDetail(tag.cp_id)" class="btn m-b-xs btn-sm btn-primary fa icon-folder" title="预览"></a>
+                  </div>
+                </div>
+                <p>
+                  <span class="label bg-info pos-rlt m-r inline wrapper-xs"><i class="arrow right arrow-info"></i>标签:</span>
+                  <a class="m-b-sm m-t-sm m-r-sm font-bold"  ng-repeat="tag in tag.tags">{{tag}}</a>
+                </p>
+              </li>
+
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/ng-template" id="modalTag.html">
+  <div ng-include="'tpl/modal_tag.html'"></div>
+</script>
+<script type="text/ng-template" id="modalCall.html">
+  <div ng-include="'tpl/modal_call.html'"></div>
+</script>
+
+
+
+

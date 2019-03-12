@@ -1,0 +1,78 @@
+<div class="modal-header">
+  <h3 class="modal-title">新建联系记录</h3>
+</div>
+<div class="modal-body wrapper-lg">
+   <!--toaster directive -->
+  <toaster-container toaster-options="{'position-class': 'toast-center-full-width', 'close-button':true}"></toaster-container>
+   <!--/ toaster directive -->
+    <div class="row">
+        <div class="col-sm-12">
+          <div class="row">
+            <div class="col-sm-9">
+              <div class="panel panel-default">
+                <div class="panel-heading">联系人</div>
+                <div class="panel-body clearfix">
+                  <a href class="pull-left thumb-md avatar b-3x m-r">
+                    <img ng-src="img/a{{customer.gender | genderClass:2}}.jpg" tooltip="请称呼我【{{customer.gender | genderClass:3}}】哦" alt="{{customer.real_name}}">
+                  </a>
+                  <div class="clear">
+                    <div class="h3 m-t-xs m-b-xs text-primary">
+                      {{customer.real_name}}
+                      <i class="text-success pull-right text-xs m-t-sm" title="上次联系内容">{{customer.latest_contact_content}}</i>
+                    </div>
+                    <i class="fa fa-phone m-r-xs" title="电话"></i><strong class="text-dark-dker text-2x m-r-xs">{{customer.phone}}</strong>
+                    <i class="fa icon-eye m-r-xs" title="年龄"></i><small class="text-muted m-r-xs">{{customer.age}}岁</small>
+                    <i class="fa icon-home m-r-xs" title="籍贯"></i><small class="text-muted m-r-xs">{{customer.hometown}}</small>
+                    <i class="fa icon-call-end m-r-xs" title="备用联系方式"></i><small class="text-muted text-2x m-r-xs">{{customer.mobile_1}}</small>
+                  </div>
+                </div>
+              </div>
+
+              <div class="panel panel-primary">
+                <div class="panel-heading">联系内容</div>
+                <div class="panel-body">
+                  <ul class="list-inline">
+                    <li ng-repeat="cs in contents" class="clearfix">
+                      <label class="i-checks i-checks pull-left">
+                        <input type="radio" value="{{cs.value}}" name="cp_status" ng-model="cp_status" ng-click="setContent(cs)"><i></i>
+                        {{cs.html}}
+                      </label>
+                      <span ng-repeat="pv in cs.popover" class="m-t-n-xs pull-right"><a title="{{pv[0]}}&#10;{{pv[1]}}" class="fa fa-comment"></a></span>
+                    </li>
+                  </ul>
+                  <textarea class="form-control ng-pristine ng-untouched ng-valid" placeholder="请输入联系内容" rows="5" ng-model="toaster.content"></textarea>
+                </div>
+              </div>
+              <button class="btn btn-info" ng-disabled="!toaster.content" ng-click="pop()" type="submit">确定</button>
+            </div>
+            <div class="col-sm-3">
+              <div class="panel panel-default">
+                <div class="panel-heading">联系结果</div>
+                <div class="panel-body">
+                  <div class="radio" ng-repeat="(rv, rt) in results">
+                    <label class="i-checks">
+                      <input type="radio" name="result" ng-model="toaster.result" value="{{rv}}">
+                      <i></i>
+                      {{rt}}
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="alert ng-isolate-scope alert-warning alert-dismissable m-b-none" role="alert" type="warning">
+        <span class="ng-binding ng-scope">用户信息与系统已录入信息不符？录入信息不完善？<a ng-click="editCustomer(customer.id)">点击完善</a></span>
+      </div>
+    </div>
+    <div class="col-sm-6">
+      <button class="btn btn-success m-t-sm" ng-click="contactList()">查看联系日志</button>
+      <button class="btn btn-info m-t-sm" ng-click="ok()">继续拨打</button>
+    </div>
+  </div>
+</div>

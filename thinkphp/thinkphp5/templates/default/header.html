@@ -1,0 +1,42 @@
+<div class="main-top" id="top">
+  <div class="container" id="topInfoContainer">
+    <div class="pull-left city" id="topCityList"><a>[ <span id="currentCityContainer">昆山</span> ]</a><a class="caret"></a></div>    
+    <div class="user"><a id="userEntranceAjax" data-toggle="modal" data-target="#loginModal">注册/登录</a></div>
+    <div class="user client-shortcut">
+      <a href="javascript:void(0);" onclick="show_qrcode()">微信端</a>
+      <div id="towCode">
+        <img src="{$Think.config.img_domain}/wechat-qrcode.jpg">
+      </div>
+    </div>
+  </div>
+</div>
+<div class="top-city-list">
+  <ul class="container list-inline" id="switchCity">
+    <li><a>昆山</a></li>
+    <li><a>上海</a></li>
+    <li><a>郑州</a></li>
+    <li><a>常熟</a></li>
+  </ul>
+</div>
+<div class="container">
+  <div class="row main-header">
+    <div class="col-xs-3 col-sm-3 brand">
+      <a class="navbar-brand" href="/"><img class="logo" src="{$Think.config.img_domain}/index_logo.png"/></a>
+    </div>
+    <div class="col-sm-4 position">
+      {include file="$navigation" /}
+    </div>
+    <div class="col-sm-5">
+      <div class="search">
+        <form action="/index/index/search">
+        <div class="input-group">
+          <input type="text" class="form-control" name="key" placeholder="请输入关键字，如：仁宝">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search"></span>搜索</button>
+          </span>
+        </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

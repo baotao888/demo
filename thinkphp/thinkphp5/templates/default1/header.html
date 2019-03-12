@@ -1,0 +1,38 @@
+<header>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-3 col">
+        <div class="clearfix">
+          <a class="pull-left logo" href="/" name="top"><img src="{$Think.config.img_domain}/logo-1.png"/></a>
+          <span class="pull-left delimiter"></span>
+          <span class="pull-left switch-city">
+            <span class="city" id="currentCityContainer">昆山</span>
+            <a id="topCityList"><span class="caret"></span></a>
+          </span>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        {include file="$navigation"}
+      </div>
+      <div class="col-sm-3">
+        <div class="clearfix" id="topInfoContainer">
+          <span class="pull-right btn-token token-entrance" id="userEntranceAjax">
+            <a id="btnLoginModal">登录</a>
+            <span class="delimiter"></span>
+            <a id="btnRegisterModal">注册</a>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+<div class="top-city-list">
+  <div class="container">
+    <ul class="list-unstyled" id="switchCity">
+      <li><a>昆山站</a></li>
+      <li><a>上海站</a></li>
+      <li><a>郑州站</a></li>
+      <li><a>常熟站</a></li>
+    </ul>
+  </div>
+</div>

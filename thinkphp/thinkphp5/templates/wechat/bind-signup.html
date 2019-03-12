@@ -1,0 +1,70 @@
+{extend name="$base" /}
+{block name="header"}
+  {include file="$weixin_header"}
+{/block}
+{block name="content"}
+<div class="wechat-content form-page">
+  <form class="form-content" method="post">
+    <div class="list-group">
+      <div class="form-group">
+        <div class="input-group">
+          <span class="input-group-addon glyphicon glyphicon-user"></span>
+          <input type="text" class="form-control form-simple" name="realname" id="inputRealname" aria-describedby="inputGroupSuccess1Status" placeholder="请输入姓名">
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="input-group">
+          <span class="input-group-addon glyphicon glyphicon-phone"></span>
+          <input type="mobile" name="mobile" class="form-control form-simple" id="inputMobile" placeholder="请输入手机号">
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="input-group">
+          <span class="input-group-addon glyphicon glyphicon-eye-open"></span>
+          <input type="text" name="sms_code" class="form-control form-simple" id="inputSmsCode" placeholder="请输入验证码" maxlength="11">
+          <input type="button" class="btn-sms-code" value="获取验证码" onClick="sendSms(this, 'inputMobile')"/>
+          <div class="tooltip top sms-tooltip" role="tooltip">
+            <div class="tooltip-arrow"></div>
+            <div class="tooltip-inner">
+              验证码已发出，请注意查收
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="input-group">
+          <span class="input-group-addon glyphicon glyphicon-time"></span>
+          <input type="text" class="form-control form-simple" name="birthday" id="signupBirthday" aria-describedby="inputGroupSuccess1Status" placeholder="请选择出生日期">
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="input-group">
+          <span class="input-group-addon glyphicon glyphicon-user"></span>
+          <label class="radio-inline">
+            <input type="radio" name="gender" value="1"> 男
+          </label>
+          <label class="radio-inline">
+            <input type="radio" name="gender" value="2"> 女
+          </label>
+        </div>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-lg btn-block btn-wechat">提交</button>
+  </form>
+  <div class="bottom"></div>
+</div>
+{/block}
+{block name="javascript"}
+<script src="{$Think.config.js_domain}/bootstrap-plugin/bootstrapValidator/bootstrapValidator.js"></script>
+<link rel="stylesheet" href="{$Think.config.js_domain}/bootstrap-plugin/bootstrapValidator/bootstrapValidator.css" />
+<script src="{$Think.config.js_domain}/controller/form-wechat-bindsignup.js"></script>
+<script src="{$Think.config.js_domain}/bootstrap-plugin/datetimepicker/bootstrap-datetimepicker.min.js"></script>
+<link rel="stylesheet" href="{$Think.config.js_domain}/bootstrap-plugin/datetimepicker/bootstrap-datetimepicker.min.css" />
+<script src="{$Think.config.js_domain}/bootstrap-plugin/datetimepicker/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+<script>
+/*短信验证码倒计时*/
+var countdown=30;
+</script>
+{/block}
+{block name="footer"}
+{/block}

@@ -1,0 +1,24 @@
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+  <style type="text/css">
+    #allmap {width: 214px;height: 214px;overflow: hidden;margin:0;font-family:"微软雅黑";}
+  </style>
+  <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=2b2q5YLwuaneegFG439WtxmyVqZwKCC3"></script>
+</head>
+<body>
+<h4><span class="glyphicon glyphicon-map-marker"></span>{$com.jobdata.address_short}</h4>
+<div class="maps-container" id="allmap"></div>
+</body>
+<script type="text/javascript">
+  // 百度地图API功能
+  var map = new BMap.Map("allmap");
+  var point = new BMap.Point({$map.0.address_mark});
+  map.centerAndZoom(point, 13);
+  var marker = new BMap.Marker(point);  // 创建标注
+  map.addOverlay(marker);              // 将标注添加到地图中
+  map.enableScrollWheelZoom(true);
+  marker.setAnimation(BMAP_ANIMATION_BOUNCE); //跳动的动画
+  var label = new BMap.Label({offset:new BMap.Size(20,-10)});
+</script>
+	

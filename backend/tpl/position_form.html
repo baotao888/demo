@@ -1,0 +1,73 @@
+<div class="bg-light lter b-b wrapper-md">
+    <h1 class="m-n font-thin h3">
+        职位
+        <a ng-href="#/app/organization/position" class="btn btn-sm btn-icon btn-info pull-right"><i class="fa fa-chevron-left"></i></a>
+    </h1>
+</div>
+<div class="wrapper-md" ng-controller="PositionFormController">
+    <div class="row">
+        <div class="col-sm-12">
+            <form name="form" class="form-validation">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <ul class="breadcrumb m-b-none">
+                            <li><a href=""><i class="fa fa-home"></i> 组织机构</a></li>
+                            <li class="ng-binding">职位</li>
+                            <li class="active ng-binding">{{vm.operate}}</li>
+                            <li class="text-primary ng-binding">{{vm.position.pos_name}}</li>
+                        </ul>
+                    </div>
+                    <div class="panel-body">
+                        <p class="text-muted">{{vm.error}}</p>
+                        <div class="form-group">
+                            <label class="col-sm-2">职位名称</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" ng-model="vm.position.pos_name" required >
+                            </div>
+                        </div>
+                        <div class="line line-dashed b-b line-lg pull-in"></div>
+                        <div class="form-group">
+                          <label class="col-sm-2">职位级别</label>
+                          <div class="col-sm-10">
+                            <input type="text" class="form-control" ng-model="vm.position.level" >
+                          </div>
+                        </div>
+                        <div class="line line-dashed b-b line-lg pull-in"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2">职位简介</label>
+                            <div class="col-sm-10">
+                                <textarea class="form-control" rows="6" placeholder="" ng-model="vm.position.description"></textarea>
+                            </div>
+                        </div>
+                        <div class="line line-dashed b-b line-lg pull-in"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">是否管理岗位</label>
+                            <div class="col-sm-10">
+                                <label class="i-switch i-switch-md bg-info m-t-xs m-r">
+                                    <input type="checkbox" ng-model="vm.position.is_manager" value="1" name='is_manager' checked>
+                                    <i></i>
+                                </label>
+                            </div>
+                        </div>
+                      <div class="line line-dashed b-b line-lg pull-in"></div>
+                      <div class="form-group">
+                        <label class="col-sm-2 control-label">是否为顾问</label>
+                        <div class="col-sm-10">
+                          <label class="i-switch i-switch-md bg-info m-t-xs m-r">
+                            <input type="checkbox" ng-model="vm.position.is_adviser" value="1" name='is_adviser' checked>
+                            <i></i>
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                    <footer class="panel-footer text-right bg-light lter">
+                        <button type="submit" class="btn btn-success" ng-disabled="form.$invalid || vm.submitting" ng-click="vm.submitInfo()">Submit</button>
+                    </footer>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script type="text/ng-template" id="modal.html">
+        <div ng-include="'tpl/modal.html'"></div>
+    </script>
+</div>

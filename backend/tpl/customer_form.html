@@ -1,0 +1,151 @@
+<div class="bg-light lter b-b wrapper-md">
+    <h1 class="m-n font-thin h3">
+        客户池
+        <a ng-href="#/app/customer/{{vm.customer.id}}/detail" ng-show="vm.edit" class="btn btn-sm btn-icon btn-info pull-right"><i class="fa fa-chevron-left"></i></a>
+    </h1>
+</div>
+<div class="wrapper-md">
+    <div class="panel panel-default">
+        <div class="panel-heading font-bold">
+            <ul class="breadcrumb m-b-none">
+                <li><a href=""><i class="fa fa-home"></i> 客户池</a></li>
+                <li class="active ng-binding">{{vm.operate}}</li>
+                <li class="text-primary ng-binding" ng-if="vm.edit"><a ng-href="#/app/customer/{{vm.customer.id}}/detail" class="text-primary">{{vm.customer.real_name}}</a></li>
+            </ul>
+        </div>
+        <div class="panel-body">
+            <form class="form-horizontal form-validation" name="form">
+                <div class="form-group">
+                  <label class="col-sm-2 control-label" for="phone"><span class="fa fa-star m-r-xs text-danger"></span><span class="glyphicon glyphicon-phone-alt m-r-xs"></span>联系电话</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" id="phone" ng-model="vm.customer.phone" ng-pattern="/^1[345678]\d{9}$/" required autocomplete="off" ng-blur="vm.phonever(1)">
+                    <small class="help-block m-b-none">11位手机号码</small>
+                  </div>
+                </div>
+              <div class="line line-dashed b-b line-lg pull-in"></div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="sparephone">备用电话</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" id="sparephone" ng-model="vm.customer.mobile_1" ng-pattern="/^1[345678]\d{9}$/"  autocomplete="off" ng-blur="vm.phonever(2)">
+                    <small class="help-block m-b-none">留空，或者输入11位手机号码</small>
+                </div>
+              </div>
+                <div class="line line-dashed b-b line-lg pull-in"></div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label"><span class="fa fa-star m-r-xs text-danger"></span><span class="glyphicon glyphicon-user m-r-xs"></span>客户姓名</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" ng-model="vm.customer.real_name" required>
+                    </div>
+                </div>
+                <div class="line line-dashed b-b line-lg pull-in"></div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">籍贯</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" ng-model="vm.customer.hometown" >
+                    </div>
+                </div>
+                <div class="line line-dashed b-b line-lg pull-in"></div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">性别</label>
+                    <div class="col-sm-4">
+                        <div class="radio-inline">
+                            <label>
+                                <input type="radio" name="gender" id="gender1" ng-value="0"  ng-model="vm.customer.gender">
+                                女
+                            </label>
+                        </div>
+                        <div class="radio-inline">
+                            <label>
+                                <input type="radio" name="gender" id="gender0" ng-value="1" ng-model="vm.customer.gender">
+                                男
+                            </label>
+                        </div>
+                    </div>
+                    <label class="col-sm-1 control-label">出生年月</label>
+                    <div class="col-sm-5">
+                        <div class="input-group w-md">
+                            <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="vm.customer.birthday" is-open="opened" datepicker-options="dateOptions" close-text="Close" />
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                            </span>
+                        </div>
+                        <span class="help-block m-b-none">用于计算客户的年龄</span>
+                    </div>
+                </div>
+                <div class="line line-dashed b-b line-lg pull-in"></div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">来源</label>
+                    <div class="col-sm-10">
+                        <div class="radio-inline" ng-repeat="from in vm.froms">
+                            <label class="i-checks">
+                                <input type="radio" name="from" ng-value="from.value"  ng-model="vm.customer.from_value">
+                                <i></i>
+                                {{from.text}}
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="line line-dashed b-b line-lg pull-in"></div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">学历</label>
+                    <div class="col-sm-10">
+                        <div class="radio-inline" ng-repeat="career in vm.careers">
+                            <label>
+                                <input type="radio" name="career" ng-value="career"  ng-model="vm.customer.career">
+                                {{career}}
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="line line-dashed b-b line-lg pull-in"></div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label"><span class="fa fa-wechat m-r-xs"></span>微信</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" ng-model="vm.customer_data.wechat" >
+                    </div>
+                    <label class="col-sm-1 control-label"><span class="fa fa-qq m-r-xs"></span>QQ</label>
+                    <div class="col-sm-5">
+                        <input type="text" class="form-control" ng-model="vm.customer_data.qq">
+                    </div>
+                </div>
+                <div class="line line-dashed b-b line-lg pull-in"></div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label"><span class="icon icon-envelope m-r-xs"></span>email</label>
+                    <div class="col-sm-4">
+                        <input type="email" class="form-control" ng-model="vm.customer_data.email">
+                        <small class="help-block m-b-none">留空，或者正确的邮箱格式</small>
+                    </div>
+                    <label class="col-sm-1 control-label">住址</label>
+                    <div class="col-sm-5">
+                        <input type="text" class="form-control" ng-model="vm.customer_data.address">
+                    </div>
+                </div>
+                <div class="line line-dashed b-b line-lg pull-in" ng-show="vm.addcustomer"></div>
+                <div class="form-group" ng-show="vm.addcustomer">
+                    <label class="col-sm-2 control-label"><span class="fa fa-file-text-o m-r-xs"></span>联系内容</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" ng-model="vm.customer.contact">
+                        <span class="help-block m-b-none">自动创建一条联系日志</span>
+                    </div>
+                </div>
+                <div class="line line-dashed b-b line-lg pull-in" ng-show="vm.addcustomer"></div>
+                <div class="form-group" ng-show="vm.addcustomer">
+                    <label class="col-sm-2 control-label"><span class="icon icon-flag m-r-xs"></span>是否为意向客户</label>
+                    <div class="col-sm-10">
+                        <label class="i-switch i-switch-md bg-info m-t-xs m-r">
+                            <input type="checkbox" ng-model="vm.customer.intetion" value="1" name="status" checked="" class="ng-pristine ng-untouched ng-valid">
+                            <i></i>
+                        </label>
+                        <span class="help-block m-b-none">开启为意向，关闭为无意向</span>
+                    </div>
+                </div>
+                <div class="line line-dashed b-b line-lg pull-in"></div>
+                <div class="form-group">
+                    <div class="col-sm-4 col-sm-offset-2">
+                        <button type="submit" class="btn btn-primary" ng-disabled="form.$invalid || vm.submitting || vm.contant" ng-click="vm.submitInfo()">提交</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

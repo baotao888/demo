@@ -1,0 +1,27 @@
+<div class="bg-light lter b-b wrapper-md">
+    <h1 class="m-n font-thin h4 row">
+        <ul class="col-sm-10 breadcrumb m-b-none">
+            <li><a ng-href="#/app/job/recommend"><i class="fa fa-home"></i>推荐位</a></li>
+            <li class="ng-binding">{{$stateParams.id}}</li>
+            <li class="active ng-binding">更新职位</li>
+        </ul>
+        <a ng-href="#/app/job/recommend" class="btn btn-sm btn-icon btn-info pull-right"><i class="fa fa-chevron-left"></i></a>
+    </h1>
+</div>
+<div class="wrapper-md">
+    <ul class="list-inline">
+        <li ng-repeat="job in list">
+            <div class="checkbox">
+                <label class="i-checks">
+                    <input type="checkbox" ng-model="checked[job.id]">
+                    <i></i>
+                    {{job.job_name}}
+                </label>
+            </div>
+        </li>
+    </ul>
+    <p class="text-muted">{{error}}</p>
+    <footer class="panel-footer text-right bg-light lter">
+        <button type="submit" class="btn btn-success" ng-disabled="submitting" ng-click="submitInfo()">Submit</button>
+    </footer>
+</div>

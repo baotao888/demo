@@ -1,0 +1,56 @@
+<div class="bg-light lter b-b wrapper-md ng-scope">
+  <h1 class="m-n font-thin h3">
+    拨打计划
+    <a ng-href="#/app/my/task" class="btn btn-sm btn-icon btn-info pull-right  m-l-xs" tooltip="点击我切换成日历形式哦"><i class="fa fa-list"></i></a>
+  </h1>
+</div>
+<div class="wrapper-md">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      拨打计划列表
+    </div>
+    <div class="panel-body text-left">
+        <div class="m-t-sm clearfix">
+          <div class="m-r-sm pull-right">
+            <button class="btn btn-default" ng-click="vm.taskSearch()">Go!</button>
+          </div>
+          <div class="m-r-sm pull-right">
+            <label class="control-label m-t-sm pull-left">结束时间:</label>
+            <div class="input-group w-md" style="width: 130px;">
+              <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="vm.endTime" is-open="vm.opens[1]" datepicker-options="dateOptions" close-text="Close" />
+              <span class="input-group-btn">
+                  <button type="button" class="btn btn-default" ng-click="open($event, 1)"><i class="glyphicon glyphicon-calendar"></i></button>
+              </span>
+            </div>
+          </div>
+          <div class="m-r-sm pull-right">
+            <label class="control-label m-t-sm pull-left">开始时间:</label>
+            <div class="input-group w-md" style="width: 130px;">
+              <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="vm.startTime" is-open="vm.opens[0]" datepicker-options="dateOptions" close-text="Close"/>
+        <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="open($event,0)"><i class="glyphicon glyphicon-calendar"></i></button>
+            </span>
+            </div>
+          </div>
+        </div>
+        <table class="table table-bordered text-center">
+          <thead>
+          <tr>
+            <th class="text-center">任务开始时间</th>
+            <th class="text-center">任务标题</th>
+            <th class="text-center">任务内容</th>
+            <th class="text-center">操作</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr ng-repeat="task in vm.tasklist">
+            <td>{{task.start_time | date:'yyyy-MM-dd H:m'}}</td>
+            <td><a class="text-danger" ng-href="#/app/customer/{{task.customer}}/detail">{{task.title}}</a></td>
+            <td><span class="list-lang-text">{{task.info}}</span></td>
+            <td><button class="btn btn-success m-r" type="button" ng-click="vm.complete($index)">完成</button><a class="btn btn-danger" type="button" ng-click="vm.toCall(task.customer)">拨打</a></td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+  </div>
+</div>

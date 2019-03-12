@@ -1,0 +1,547 @@
+<div class="hbox hbox-auto-xs hbox-auto-sm">
+    <!-- .aside -->
+    <div class="col w w-auto-xs bg-light inherit dk b-r">
+        <div class="wrapper-md b-b">
+            <a class="btn btn-link pull-right m-t-n-xs m-r-n-sm visible-sm visible-xs" ui-toggle-class="show" data-target="#nav-docs">
+                <i class="fa fa-bars"></i>
+            </a>
+            <span class="h4">经理使用说明</span>
+        </div>
+        <div class="hidden-sm hidden-xs" id="nav-docs">
+            <ul class="nav">
+                <li class="padder b-b l-h-2x bg text-info"><em>人选客户池</em></li>
+                <li><a ui-scroll="node-req">客户分类</a></li>
+                <li><a ui-scroll="customer-assign">分配</a></li>
+                <li><a ui-scroll="customer-release">释放</a></li>
+                <li><a ui-scroll="customer-import">导入</a></li>
+                <li><a ui-scroll="customer-search">搜索</a></li>
+                <li><a ui-scroll="grunt">分页</a></li>
+                <li><a ui-scroll="dev-server">认领</a></li>
+                <li><a ui-scroll="customer-detail">客户详情</a></li>
+
+                <li class="padder b-b l-h-2x bg text-info"><em>端口用户</em></li>
+                <li><a ui-scroll="user-all">用户分类</a></li>
+                <li><a ui-scroll="user-assign">分配顾问</a></li>
+                <li><a ui-scroll="user-other">其他人选</a></li>
+
+                <li class="padder b-b l-h-2x bg text-success"><em>人选管理</em></li>
+                <li><a ui-scroll="candidate-search">搜索</a></li>
+                <li><a ui-scroll="candidate-move">划转</a></li>
+                <li><a ui-scroll="candidate-intention">意向</a></li>
+                <li><a ui-scroll="candidate-signup">报名</a></li>
+                <li><a ui-scroll="candidate-meet">接站</a></li>
+                <li><a ui-scroll="candidate-onduty">入职</a></li>
+                <li><a ui-scroll="candidate-outduty">离职</a></li>
+                <li><a ui-scroll="candidate-depose">丢弃</a></li>
+                <li><a ui-scroll="candidate-backup">回退</a></li>
+                <li><a ui-scroll="add-task">创建拨打计划</a></li>
+                <li><a ui-scroll="add-contact">创建联系记录</a></li>
+                <li><a ui-scroll="set-tag">设置标签</a></li>
+                <li><a ui-scroll="customer-add">注册人选</a></li>
+                <li><a ui-scroll="web-user">端口人选</a></li>
+                <li><a ui-scroll="candidate-import">导入</a></li>
+
+                <li ui-scroll="directives" class="padder b-b b-t l-h-2x bg text-primary"><em>人选提醒</em></li>
+                <li><a ui-scroll="ui-toggle-class">搜索</a></li>
+                <li><a ui-scroll="ui-shift">保留</a></li>
+
+                <li ui-scroll="plugins" class="padder b-b b-t l-h-2x bg text-info"><em>拨打计划</em></li>
+                <li><a ui-scroll="task-finish">完成</a></li>
+                <li><a ui-scroll="task-do">拨打</a></li>
+
+                <li ui-scroll="contact" class="padder b-b b-t l-h-2x bg text-info"><em>联系日志</em></li>
+                <li><a ui-scroll="contact-today">今日</a></li>
+                <li><a ui-scroll="contact-all">全部</a></li>
+                <li><a ui-scroll="contact-team">部门</a></li>
+
+                <li ui-scroll="tag-management" class="padder b-b b-t l-h-2x bg text-danger"><em>标签管理</em></li>
+                <li><a ui-scroll="tag-search">搜索</a></li>
+
+            </ul>
+        </div>
+    </div>
+    <!-- /.aside -->
+    <div class="col">
+        <div class="clearfix padder-md">
+            <h3 class="text-info m-t-xl font-thin m-b-none">人选客户池 </h3>
+            <div>所有客户。包括，公海客户池、已分配客户、未分配客户、分配注册用户和分配报名用户。</div>
+
+            <div id="node-req" class="wrapper"></div>
+            <div class="line b-b"></div>
+            <h4 class="m-t-xl">客户分类</h4>
+            <p>
+                <ul>
+                    <li><strong>公海客户池</strong>：包括顾问手动丢弃的人选、系统清理之后释放的人选和经理导入之后手动释放的人选。客户对所有人可见，都可以认领。</li>
+                    <li><strong>已分配客户</strong>：包括顾问认领的客户和经理分配给顾问的客户。</li>
+                    <li><strong>未分配客户</strong>：包括顾问库容已满情况下掉出的客户和经理导入之后未释放或者释放的客户。</li>
+                    <li><strong>分配注册用户</strong>：通过端口注册的用户，顾问未确认的人选和不是系统人选的用户。</li>
+                    <li><strong>分配报名用户</strong>：通过端口报名的用户，顾问未确认的人选和不是系统人选的用户。</li>
+                </ul>
+            </p>
+            <p>
+            <div class="img-full m-b">
+                <img src="img/help/23.png"/>
+            </div>
+            列表项包括客户名称、联系电话、性别、籍贯、来源渠道和最后联系内容。点击公海客户池按钮还可以显示<code>入库时间</code>。
+            </p>
+
+            <div id="customer-assign" class="wrapper"></div>
+            <div class="line b-b"></div>
+            <h4 class="m-t-xl">分配</h4>
+            <div>把公海客户或者未分配客户分配给顾问。</div>
+            <p>
+                <div class="m-b">
+                    <img src="img/help/25.png"/>
+                </div>
+                在<strong>公海客户池</strong>和<strong>未分配的客户</strong>中，勾选客户，选择分配操作，点击确认按钮。系统弹出如下窗口，以供选择顾问
+            </p>
+            <p>
+                <div class="m-b">
+                    <img src="img/help/26.png"/>
+                </div>
+                点击顾问名称，点击ok按钮，操作完成。分配之后，客户成为已分配人选。
+            </p>
+
+            <div id="customer-release" class="wrapper"></div>
+            <div class="line b-b"></div>
+            <h4 class="m-t-xl">释放</h4>
+            <div>把未分配客户释放到公海客户池。</div>
+            <p>
+            <div class="m-b">
+                <img src="img/help/27.png"/>
+            </div>
+            在<strong>未分配的客户</strong>中，勾选客户，选择释放操作，点击确认按钮，操作成功。释放之后，客户进入公海客户池。
+            </p>
+
+            <div id="customer-import" class="wrapper"></div>
+            <div class="line b-b"></div>
+            <h4 class="m-t-xl">导入</h4>
+            <div>导入Excel格式的资源到系统中，目前系统只支持单个sheet，多个sheet请分成多个文件。</div>
+            <p>
+                <div class="img-full m-b">
+                    <img src="img/help/28.png"/>
+                </div>
+                点击人选客户池右上角的导入客户按钮。
+            </p>
+            <p>
+                <div class="img-full m-b">
+                    <img src="img/help/29.png"/>
+                </div>
+                导入步骤如下：
+                <ul>
+                    <li>选择文件。文件格式为Excel97-2003，文件后缀为<code>.xls</code>，而不是<code>.xlsx</code>。</li>
+                    <li>上传。文件上传之后正确的列为绿色；错误的列为红色。</li>
+                    <li>确认。所有列都为绿色说明导入文件内容正确，点击确认按钮完成导入。</li>
+                </ul>
+            </p>
+            <p>
+                <div class="m-b">
+                    <img src="img/help/30.png"/>
+                </div>
+                导入模板如上。
+            </p>
+            <p class="well b bg-light lt wrapper-sm m-t text-danger font-bold">
+                请注意导入文件的格式、文件的模板和文件的内容。否则会导入失败。
+                <ul>
+                    <li>文件格式。Excel97-2003，文件后缀为<code>.xls</code>，而不是<code>.xlsx</code>。</li>
+                    <li>文件模板。列A（姓名），列B（联系电话），列C（身份证号），列D（年龄），列E（户籍），列F（标签）。</li>
+                    <li>文件内容。单元格格式干净，建议新建一个全新的文件，把人选拷贝进来，而不是在原文件的基础上修改。</li>
+                </ul>
+            </p>
+
+            <div id="customer-search" class="wrapper"></div>
+            <div class="line b-b"></div>
+            <h4 class="m-t-xl">搜索</h4>
+            <p>
+                可以根据客户姓名、联系电话和备用电话检索客户。系统检索为<code>模糊匹配</code>。例如，客户姓名为金轮法王，手机号码为13767444444。那么搜索<strong>金轮</strong>，
+                <strong>金轮法</strong>或者<strong>金轮法王</strong>都可以匹配成功，但是搜索<strong>法王</strong>不会匹配；搜索<strong>13767</strong>或者<strong>13767444444</strong>
+                也可以匹配成功，但是搜索<strong>444444</strong>不会匹配，因为系统匹配为<code>前置匹配</code>，即可以根据前面的内容检索，不会根据后面的内容检索，这样做是为了加快检索的速度。
+            </p>
+
+            <div id="grunt" class="wrapper"></div>
+            <div class="line b-b"></div>
+            <h4 class="m-t-xl">分页</h4>
+            <p>
+            <div class="img-full m-b">
+                <img src="img/help/02.png"/>
+            </div>
+            </p>
+            <ul>
+                <li>设置每页显示客户的数目</li>
+                <li>翻页，回到首页，跳转到最后一页</li>
+                <li>跳转到指定页</li>
+            </ul>
+
+            <div id="dev-server" class="wrapper"></div>
+            <div class="line b-b"></div>
+            <h4 class="m-t-xl">认领</h4>
+            <p>
+            <div class="m-b">
+                <img src="img/help/03.png"/>
+            </div>
+            勾选待认领客户，选择认领操作，点击确认按钮，认领成功。认领客户规则参见<a href="#app.help.docs" class="text-info font-bold">客户冲突制度</a>。认领客户之后，此客户成为自己的人选，其他人不会再检索到此客户。
+            认领客户支持<code>批量操作</code>，可以一次认领多个客户。
+            </p>
+
+            <div id="customer-detail" class="wrapper"></div>
+            <div class="line b-b"></div>
+            <h4 class="m-t-xl">客户详情</h4>
+            <p>
+            <div class="img-full m-b">
+                <img src="img/help/24.png"/>
+            </div>
+            客户基本信息，分配记录，工作经验，联系记录和操作历史。
+            </p>
+
+            <div id="user" class="wrapper"></div>
+            <div class="line b-b"></div>
+            <h3 class="text-success m-t-xl font-thin m-b-none">端口用户 </h3>
+            <div>通过端口注册和报名的用户，如下通过人选客户池的分配注册用户或者分配报名用户进入。</div>
+            <div class="m-b">
+                <img src="img/help/31.png"/>
+            </div>
+
+            <div id="user-all" class="wrapper"></div>
+            <div class="line b-b"></div>
+            <h4 class="m-t-xl">用户分类</h4>
+            <p>
+                <div class="m-b">
+                    <img src="img/help/32.png"/>
+                </div>
+                <ul>
+                    <li>所有。所有用户。</li>
+                    <li>名下人选。顾问已确认的用户和已分配给顾问的用户。</li>
+                    <li>其他人选。未分配的用户。</li>
+                </ul>
+            </p>
+
+            <div id="user-assign" class="wrapper"></div>
+            <div class="line b-b"></div>
+            <h4 class="m-t-xl">分配顾问</h4>
+            <div>分配顾问操作之后，用户成为顾问的人选</div>
+            <p>
+            <div class="m-b">
+                <img src="img/help/33.png"/>
+            </div>
+            分配步骤如下：
+            <ul>
+                <li>勾选用户</li>
+                <li>选择分配顾问操作</li>
+                <li>点击确认按钮</li>
+                <li>选择顾问</li>
+                <li>点击ok按钮</li>
+                <li>操作完成</li>
+            </ul>
+            </p>
+
+            <div id="css" class="wrapper"></div>
+            <div class="line b-b"></div>
+            <h3 class="text-success m-t-xl font-thin m-b-none">人选管理 </h3>
+            <div>包括：所有人选、在职人选、离职人选、接站人选、报名人选、意向人选和其他人选。点击如下开关可以切换显示自己的人选和部门的人选。</div>
+            <div class="m-b">
+                <img src="img/help/35.png"/>
+            </div>
+
+            <div id="candidate-search" class="wrapper"></div>
+            <div class="line b-b"></div>
+            <h4 class="m-t-xl">搜索</h4>
+            <p>
+                <strong>快速搜索</strong>
+            </p>
+            <ul>
+                <li>按照人选搜索, 可以根据客户姓名、联系电话和备用电话检索客户。系统检索为<code>模糊匹配</code>，模糊匹配规则详见<a ui-scroll="customer-search">前置匹配</a>。</li>
+                <li>按照标签搜索, 可以根据标签检索客户。类似于标签管理，详见<a ui-scroll="tag-search">标签搜索</a>。</li>
+            </ul>
+            <p>
+                <strong>高级搜索</strong>
+                <div class="img-full m-b">
+                    <img src="img/help/34.png"/>
+                </div>
+                可以按照部门、顾问、报名时间、最后联系时间、分配时间、入职企业和是否为保留人选检索。
+            </p>
+
+            <div id="candidate-move" class="wrapper"></div>
+            <div class="line b-b"></div>
+            <h4 class="m-t-xl">划转</h4>
+            <p>
+                <div class="m-b">
+                    <img src="img/help/36.png"/>
+                </div>
+                在<strong>所有人选</strong>中，勾选人选，选择划转操作，点击确认按钮，选择划转后的顾问，点击ok按钮，操作完成。操作完成之后，人选的负责顾问改变，原顾问不再能够看到人选。
+            </p>
+
+            <div id="candidate-intention" class="wrapper"></div>
+            <div class="line b-b"></div>
+            <h4 class="m-t-xl">意向</h4>
+            <p>
+            <div class="m-b">
+                <img src="img/help/04.png"/>
+            </div>
+            在<strong>其他人选</strong>中，勾选人选，选择意向操作，点击确认按钮，操作成功。操作完成之后，此人选由其他人选变成意向人选。操作成功之后，可以为此人选创建拨打计划或者联系记录。
+            </p>
+
+            <div id="candidate-signup" class="wrapper"></div>
+            <div class="line b-b"></div>
+            <h4 class="m-t-xl">报名</h4>
+            <p>
+            <div class="m-b">
+                <img style="width: 30%" src="img/help/05.png"/>
+            </div>
+            在<strong>意向人选</strong>中，勾选人选，选择报名操作，点击确认按钮，选择职位，点击ok，操作成功。操作完成之后，此人选由意向人选变成其他人选，页面跳转至已报名人选。
+            </p>
+
+            <div id="candidate-meet" class="wrapper"></div>
+            <div class="line b-b"></div>
+            <h4 class="m-t-xl">接站</h4>
+            <p>
+            <div class="m-b">
+                <img src="img/help/06.png"/>
+            </div>
+            在<strong>报名人选</strong>中，勾选人选，选择接站操作，点击确认按钮，填写人选身份证号码，点击ok，操作成功。操作完成之后，此人选由报名人选变成接站人选，页面跳转至已接站人选。
+            </p>
+
+            <div id="candidate-onduty" class="wrapper"></div>
+            <div class="line b-b"></div>
+            <h4  class="m-t-xl">入职</h4>
+            <p>
+            <div class="m-b">
+                <img style="width: 30%" src="img/help/07.png"/>
+            </div>
+            在<strong>接站人选</strong>中，勾选人选，选择入职操作，点击确认按钮，填写企业返费、企业在职天数、人选补贴、推荐人、推荐人联系电话和推荐费，其中前三项为<code>必填</code>，点击ok，操作成功。
+            操作完成之后，此人选由接站人选变成在职人选，页面跳转至在职人选。
+            </p>
+
+            <div id="candidate-outduty" class="wrapper"></div>
+            <div class="line b-b"></div>
+            <h4  class="m-t-xl">离职</h4>
+            <p>
+            <div class="m-b">
+                <img src="img/help/08.png"/>
+            </div>
+            在<strong>在职人选</strong>中，勾选人选，选择离职操作，点击确认按钮，选择确认提醒，点击ok，操作成功。操作完成之后，此人选由在职人选变成离职人选。
+            </p>
+
+            <div id="candidate-depose" class="wrapper"></div>
+            <div class="line b-b"></div>
+            <h4  class="m-t-xl">丢弃</h4>
+            <p>
+            <div class="m-b">
+                <img src="img/help/09.png"/>
+            </div>
+            除了<strong>在职</strong>之外的人选，都可以丢弃，勾选人选，选择丢弃操作，点击确认按钮，选择确认提醒，点击ok，操作成功。操作完成之后，此人选进入公海客户池。
+            </p>
+
+            <div id="candidate-backup" class="wrapper"></div>
+            <div class="line b-b"></div>
+            <h4  class="m-t-xl">回退</h4>
+            <p>
+            <div class="m-b">
+                <img src="img/help/10.png"/>
+            </div>
+            可以对<strong>报名人选</strong>和<strong>接站人选</strong>操作，勾选人选，选择回退操作，点击确认按钮，选择回退状态，点击完成。操作完成之后，页面跳转至回退后的人选。
+            </p>
+
+            <div id="add-task" class="wrapper"></div>
+            <div class="line b-b"></div>
+            <h4  class="m-t-xl">创建拨打计划</h4>
+            <p>
+            <div class="m-b">
+                <img src="img/help/11.png"/>
+            </div>
+            点击人选前的<strong>创建拨打计划</strong>图标<a class="btn btn-sm btn-primary m-t-n-xs fa fa-calendar"></a>，选择计划时间，填写拨打内容，点击继续创建按钮（页面停留在当前页面），
+            或者点击创建完成按钮（页面跳转至拨打计划列表）。
+            </p>
+
+            <div id="add-contact" class="wrapper"></div>
+            <div class="line b-b"></div>
+            <h4  class="m-t-xl">创建联系记录</h4>
+            <p>
+            <div class="m-b">
+                <img src="img/help/12.png"/>
+            </div>
+            点击人选前的<strong>创建联系记录</strong>图标<a class="btn btn-sm btn-primary m-t-n-xs fa fa-phone"></a>，选择联系结果，填写联系内容，点击确认按钮，创建成功。
+            点击继续创建按钮（页面停留在当前页面）或者点击查看联系日志按钮（页面跳转至联系日志列表）。
+            </p>
+            <p class="well b bg-light lt wrapper-sm m-t text-danger font-bold">
+                请注意联系日志中的联系结果和人选的状态没有关系，联系日志统计意向客户数是根据联系日志中的联系结果来计算，而不是根据客户的状态来计算。
+            </p>
+
+            <div id="set-tag" class="wrapper"></div>
+            <div class="line b-b"></div>
+            <h4  class="m-t-xl">设置标签</h4>
+            <div>标签的作用有两个，一个是客户分类，另一个是方便检索。</div>
+            <p>
+            <div class="m-b">
+                <img src="img/help/13.png"/>
+            </div>
+            点击人选前的<strong>设置标签</strong>图标<a class="btn btn-sm btn-primary m-t-n-xs fa fa-tag"></a>，输入标签，点击<code>加号</code>添加新标签，点击<code>减号</code>删除已有标签。
+            点击ok按钮关闭弹出框。
+            </p>
+            <p class="well b bg-light lt wrapper-sm m-t text-danger font-bold">
+                请注意输入标签后，点击ok按钮，系统不会自动添加标签，需要点击输入框前的加号才可以添加新标签。
+            </p>
+
+            <div id="customer-add" class="wrapper"></div>
+            <div class="line b-b"></div>
+            <h4  class="m-t-xl">注册人选</h4>
+            <div>手动把人选的信息录入到系统中。</div>
+            <p>
+            <div class="img-full m-b">
+                <img src="img/help/20.png"/>
+            </div>
+            <strong>联系电话</strong>和<strong>客户名称</strong>为必填，其他选填。
+            </p>
+            <p>
+                如果输入联系内容，则创建客户的同时生成一条联系记录；如果选中为意向客户，则系统会自动创建意向人选。
+            </p>
+
+            <div id="web-user" class="wrapper"></div>
+            <div class="line b-b"></div>
+            <h4  class="m-t-xl">端口人选</h4>
+            <div>通过端口注册和报名的未确认人选。</div>
+            <p>
+            <div class="img-full m-b">
+                <img src="img/help/21.png"/>
+            </div>
+            点击人选管理右上角的端口人选按钮。
+            </p>
+            <p>
+            <div class="img-full m-b">
+                <img src="img/help/22.png"/>
+            </div>
+            <strong>确认</strong>：勾选端口人选，点击确认按钮，操作成功。确认之后，经理无法把此人选分配给其他顾问，否则，自己的人选通过端口注册报名之后，有可能被分配给其他人。
+            </p>
+            <p class="well b bg-light lt wrapper-sm m-t text-danger font-bold">
+                如果不及时确认，自己的人选通过端口注册报名之后，有可能被分配给其他人。
+            </p>
+
+            <div id="candidate-import" class="wrapper"></div>
+            <div class="line b-b"></div>
+            <h4 class="m-t-xl">导入</h4>
+
+            <p>
+                <div class="m-b">
+                    <img src="img/help/37.png"/>
+                </div>
+                点击人选管理右上角的导入人选按钮。
+            </p>
+            <p>
+                <div class="img-full m-b">
+                    <img src="img/help/38.png"/>
+                </div>
+                导入步骤如下：
+                <ul>
+                    <li>选择顾问</li>
+                    <li>选择文件</li>
+                    <li>上传</li>
+                    <li>确认</li>
+                </ul>
+            </p>
+            <p class="well b bg-light lt wrapper-sm m-t text-danger font-bold">
+                导入注意事项请参见客户池<a class="text-info font-bold" ui-scroll="customer-import">导入</a>操作
+            </p>
+
+            <div id="directives" class="wrapper"></div>
+            <div class="line b-b"></div>
+            <h3 class="text-primary font-thin m-t-xl m-b-none">人选提醒</h3>
+            <div>20天之后即将被系统清理而释放的意向人选和其他人选。</div>
+
+            <div id="ui-toggle-class" class="wrapper"></div>
+            <div class="line b-b"></div>
+            <h4 class="m-t-xl">检索</h4>
+            <p>
+            <div class="img-full m-b">
+                <img src="img/help/15.png"/>
+            </div>
+            可以按照分配时间、是否为意向人选和是否为保留人选检索。
+            </p>
+
+            <div id="ui-shift" class="wrapper"></div>
+            <div class="line b-b"></div>
+            <h4 class="m-t-xl">保留</h4>
+            <p>
+            <div class="m-b">
+                <img src="img/help/16.png"/>
+            </div>
+            未保留人选，按钮为红色。点击人选前的保留按钮，操作成功，按钮颜色变为绿色。
+            </p>
+            <p>
+                保留人选，按钮颜色为绿色。点击人选前的取消保留按钮，操作成功，按钮颜色变为红色。
+            </p>
+            <p class="well b bg-light lt wrapper-sm m-t text-danger font-bold">
+                请注意如果人选保留时间超过了系统保留上限（一个月），则取消保留之后，人选会进入公海客户池。
+            </p>
+
+            <div id="plugins" class="wrapper"></div>
+            <div class="line b-b"></div>
+            <h3 class="text-info font-thin m-t-xl m-b-lg">拨打计划</h3>
+            <div>人选拨打计划</div>
+
+            <div id="task-finish" class="wrapper"></div>
+            <div class="line b-b"></div>
+            <h4 class="m-t-xl">完成</h4>
+            <p>
+            <div class="img-full m-b">
+                <img src="img/help/17.png"/>
+            </div>
+            点击拨打计划后的完成按钮，计划完成之后不会再出现在计划中。
+            </p>
+
+            <div id="task-do" class="wrapper"></div>
+            <div class="line b-b"></div>
+            <h4 class="m-t-xl">拨打</h4>
+            <p>
+                同人选的<a ui-scroll="add-contact" class="text-info font-bold">创建联系记录</a>操作。
+            </p>
+
+            <div id="contact" class="wrapper"></div>
+            <div class="line b-b"></div>
+            <h3 class="text-danger font-thin m-t-xl m-b-none">联系日志</h3>
+
+            <div id="contact-today" class="wrapper"></div>
+            <div class="line b-b"></div>
+            <h4 class="m-t-xl">今日</h4>
+            <p>
+            <div class="img-full m-b">
+                <img src="img/help/18.png"/>
+            </div>
+            统计自己当日的联系记录，有效客户数，意向客户数。例如：今天拨打了10个电话，其中3个电话打给人选甲，无意向；4个电话打给人选乙，无意向；2个电话打给人选丙，有意向；1个电话打给人选丁，无意向。
+            那么，今日的联系记录数为10，有效客户数为4，意向客户数为1。
+            </p>
+
+            <div id="contact-all" class="wrapper"></div>
+            <div class="line b-b"></div>
+            <h4 class="m-t-xl">全部</h4>
+            <p>
+                <div class="img-full m-b">
+                    <img src="img/help/19.png"/>
+                </div>
+                可按照时间搜索自己所有的联系记录。
+            </p>
+
+            <div id="contact-team" class="wrapper"></div>
+            <div class="line b-b"></div>
+            <h4 class="m-t-xl">部门</h4>
+            <div>统计下属顾问的联系记录。</div>
+
+            <p>
+                <div class="img-full m-b">
+                    <img src="img/help/39.png"/>
+                </div>
+                默认统计当天，可按照部门、时间筛选联系记录然后统计。
+            </p>
+
+            <div id="tag-management" class="wrapper"></div>
+            <div class="line b-b"></div>
+            <h3 class="text-danger font-thin m-t-xl m-b-none">标签管理</h3>
+            <div>设置标签，按照标签检索人选</div>
+
+            <div id="tag-search" class="wrapper"></div>
+            <div class="line b-b"></div>
+            <h4 class="m-t-xl">检索</h4>
+            <p>
+                标签检索规则为<code>完全匹配</code>。例如，给人选添加标签<strong>top1</strong>，则检索top1有结果，检索top则无结果。
+            </p>
+        </div>
+    </div>
+</div>

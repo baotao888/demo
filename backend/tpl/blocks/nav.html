@@ -1,0 +1,472 @@
+<ul class="nav">
+  <li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
+    <span translate="aside.nav.HEADER">Navigation</span>
+  </li>
+  <li>
+    <a ui-sref="app.index">
+      <i class="glyphicon glyphicon-stats icon text-primary-dker"></i>
+      <span class="font-bold" translate="aside.nav.DASHBOARD">Dashboard</span>
+    </a>
+  </li>
+  <!--<li ui-sref-active="active">-->
+    <!--<a ui-sref="app.calendar">-->
+      <!--<i class="glyphicon glyphicon-calendar icon text-info-dker"></i>-->
+      <!--<span class="font-bold" translate="aside.nav.CALENDAR">Calendar</span>-->
+    <!--</a>-->
+  <!--</li>-->
+  <li>
+    <a ui-sref="app.candidate.list">
+      <i class="glyphicon glyphicon-user icon text-success"></i>
+      <span class="font-bold" translate="aside.nav.CANDIDATE">Candidate</span>
+    </a>
+  </li>
+  <li>
+    <a ui-sref="app.performance.salelist">
+      <i class="fa fa-jpy icon text-success"></i>
+      <span class="font-bold" translate="aside.nav.ACHIEVEMENT">Achievement</span>
+    </a>
+  </li>
+  <li>
+    <a ui-sref="app.candidate.alert">
+      <i class="glyphicon glyphicon-dashboard text-danger-lter"></i>
+      <b ng-if="message.alert>0" class="badge bg-danger pull-right">{{message.alert}}</b>
+      <span class="font-bold" translate="aside.nav.REMIND">Remind</span>
+    </a>
+  </li>
+  <li>
+    <a ui-sref="app.customer.list">
+      <i class="icon icon-users text-info-lter"></i>
+      <b class="badge bg-info pull-right hidden">9</b>
+      <span class="font-bold" translate="aside.nav.CUSTOMER">Customer Pool</span>
+    </a>
+  </li>
+  <li>
+    <a ui-sref="app.my.tasklist">
+      <i class="glyphicon glyphicon-calendar text-info-lter"></i>
+      <b ng-if="message.task>0" class="badge bg-info pull-right">{{message.task}}</b>
+      <span class="font-bold" translate="aside.nav.CALLPLAN">Callplan</span>
+    </a>
+  </li>
+  <li class="line dk"></li>
+  <li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
+    <span translate="aside.nav.your_stuff.YOUR_STUFF">Your Stuff</span>
+  </li>
+  <!--<li>-->
+    <!--<a ui-sref="app.my.profile">-->
+      <!--<i class="icon-user icon text-success-lter"></i>-->
+      <!--<span translate="aside.nav.your_stuff.PROFILE">Profile</span>-->
+    <!--</a>-->
+  <!--</li>-->
+  <li>
+    <a ui-sref="app.candidate.contact">
+      <i class="fa fa-phone text-info-lter"></i>
+      <span translate="aside.nav.your_stuff.CONTACT">Contact</span>
+    </a>
+  </li>
+  <!--<li>-->
+    <!--<a ui-sref="app.my.message">-->
+      <!--<i class="glyphicon glyphicon-envelope icon text-success-lter"></i>-->
+      <!--<b ng-if="message.count>0" class="badge bg-success pull-right">{{message.count}}</b>-->
+      <!--<span translate="aside.nav.your_stuff.MESSAGE">Message</span>-->
+    <!--</a>-->
+  <!--</li>-->
+  <li>
+    <a ui-sref="app.tag.list">
+      <i class="fa fa-tags icon text-info-lter"></i>
+      <span translate="aside.nav.your_stuff.LABELMANAGEMENT">LabelManagement</span>
+    </a>
+  </li>
+  <li ng-if="user.menu.recruit" class="line dk"></li>
+  <li ng-if="user.menu.recruit" class="hidden-folded padder m-t m-b-sm text-muted text-xs">
+    <span translate="aside.nav.modules.recruit.RECRUIT">Recruit</span>
+  </li>
+  <li ng-if="user.menu.recruit" ng-class="{active:$state.includes('app.recruit')}">
+    <a href class="auto">
+      <span class="pull-right text-muted">
+        <i class="fa fa-fw fa-angle-right text"></i>
+        <i class="fa fa-fw fa-angle-down text-active"></i>
+      </span>
+      <i class="icon icon-users"></i>
+      <span translate="aside.nav.modules.recruit.RECRUIT">Recruit</span>
+    </a>
+    <ul class="nav nav-sub dk">
+      <li class="nav-sub-header">
+        <a href>
+          <span translate="aside.nav.modules.recruit.RECRUIT">Recruit</span>
+        </a>
+      </li>
+      <li ui-sref-active="active">
+        <a ui-sref="app.recruit.list">
+          <span translate="aside.nav.modules.LIST">List</span>
+        </a>
+      </li>
+      <li ui-sref-active="active">
+        <a ui-sref="app.recruit.form">
+          <span translate="aside.nav.modules.NEW">New</span>
+        </a>
+      </li>
+      <li ui-sref-active="active">
+        <a ui-sref="app.job.enterprise">
+          <span translate="aside.nav.modules.job.ENTERPRISE">Enterprise</span>
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li ng-if="user.menu.recruit" ng-class="{active:$state.includes('app.labourservice')}">
+    <a href class="auto">
+      <span class="pull-right text-muted">
+        <i class="fa fa-fw fa-angle-right text"></i>
+        <i class="fa fa-fw fa-angle-down text-active"></i>
+      </span>
+      <i class="icon icon-call-out"></i>
+      <span translate="aside.nav.modules.labourservice.LABOURSERVICE">LabourService</span>
+    </a>
+    <ul class="nav nav-sub dk">
+      <li class="nav-sub-header">
+        <a href>
+          <span translate="aside.nav.modules.labourservice.LABOURSERVICE">Labourservice</span>
+        </a>
+      </li>
+      <li ui-sref-active="active">
+        <a ui-sref="app.labourservice.list">
+          <span translate="aside.nav.modules.LIST">List</span>
+        </a>
+      </li>
+      <li ui-sref-active="active">
+        <a ui-sref="app.labourservice.form">
+          <span translate="aside.nav.modules.NEW">New</span>
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li ng-if="user.menu.team" class="line dk"></li>
+  <li ng-if="user.menu.team" class="hidden-folded padder m-t m-b-sm text-muted text-xs">
+    <span translate="aside.nav.your_stuff.TEAM">Team</span>
+  </li>
+  <li ng-if="user.menu.team">
+    <a ui-sref="app.my.organization">
+      <i class="glyphicon glyphicon-user icon text-primary-lter"></i>
+      <span translate="aside.nav.your_stuff.MEMBER">Member</span>
+    </a>
+  </li>
+  <li ng-if="user.menu.web" class="line dk"></li>
+  <li ng-if="user.menu.web" class="hidden-folded padder m-t m-b-sm text-muted text-xs">
+    <span translate="aside.nav.modules.MODULES">Modules</span>
+  </li>
+  <li ng-if="user.menu.web" ng-class="{active:$state.includes('app.job')}">
+    <a href class="auto">
+      <span class="pull-right text-muted">
+        <i class="fa fa-fw fa-angle-right text"></i>
+        <i class="fa fa-fw fa-angle-down text-active"></i>
+      </span>
+      <i class="glyphicon glyphicon-globe"></i>
+      <span translate="aside.nav.modules.job.JOB">Job</span>
+    </a>
+    <ul class="nav nav-sub dk">
+      <li class="nav-sub-header">
+        <a href>
+          <span translate="aside.nav.modules.job.JOB">Job</span>
+        </a>
+      </li>
+      <li ui-sref-active="active">
+        <a ui-sref="app.job.list">
+          <span translate="aside.nav.modules.LIST">List</span>
+        </a>
+      </li>
+      <li ui-sref-active="active">
+        <a ui-sref="app.job.form">
+          <span translate="aside.nav.modules.NEW">New</span>
+        </a>
+      </li>
+      <li ui-sref-active="active">
+        <a ui-sref="app.job.enterprise">
+          <span translate="aside.nav.modules.job.ENTERPRISE">Enterprise</span>
+        </a>
+      </li>
+      <li ui-sref-active="active">
+        <a ui-sref="app.job.recommend">
+          <span translate="aside.nav.modules.job.RECOMMEND">Recommend</span>
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li ng-if="user.menu.web" ng-class="{active:$state.includes('app.user')}">
+    <a href class="auto">
+      <span class="pull-right text-muted">
+        <i class="fa fa-fw fa-angle-right text"></i>
+        <i class="fa fa-fw fa-angle-down text-active"></i>
+      </span>
+      <b class="label bg-primary pull-right">{{latest.user}}</b>
+      <i class="glyphicon glyphicon-user"></i>
+      <span translate="aside.nav.modules.user.USER">User</span>
+    </a>
+    <ul class="nav nav-sub dk">
+      <li class="nav-sub-header">
+        <a href>
+          <span translate="aside.nav.modules.user.USER">User</span>
+        </a>
+      </li>
+      <li ui-sref-active="active">
+        <a ui-sref="app.user.list">
+          <span translate="aside.nav.modules.user.WEB">Web User</span>
+        </a>
+      </li>
+      <li ui-sref-active="active">
+        <a ui-sref="app.user.signup">
+          <span translate="aside.nav.customer.SIGNUP">Signup Customer</span>
+        </a>
+      </li>
+      <li ui-sref-active="active">
+        <a ui-sref="app.user.invite">
+          <span translate="aside.nav.modules.user.INVITE_USER">Invite User</span>
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li ng-if="user.menu.web" ng-class="{active:$state.includes('app.poster')}">
+    <a href class="auto">
+      <span class="pull-right text-muted">
+        <i class="fa fa-fw fa-angle-right text"></i>
+        <i class="fa fa-fw fa-angle-down text-active"></i>
+      </span>
+      <i class="glyphicon glyphicon-picture"></i>
+      <span translate="aside.nav.modules.poster.POSTER">Poster</span>
+    </a>
+    <ul class="nav nav-sub dk">
+      <li class="nav-sub-header">
+        <a href>
+          <span translate="aside.nav.modules.poster.POSTER">Poster</span>
+        </a>
+      </li>
+      <li ui-sref-active="active">
+        <a ui-sref="app.poster.space">
+          <span translate="aside.nav.modules.LIST">List</span>
+        </a>
+      </li>
+    </ul>
+  </li>
+  <!--<li ng-if="user.menu.web" ng-class="{active:$state.includes('app.city')}">
+    <a href class="auto">
+      <span class="pull-right text-muted">
+        <i class="fa fa-fw fa-angle-right text"></i>
+        <i class="fa fa-fw fa-angle-down text-active"></i>
+      </span>
+      <i class="fa fa-bank"></i>
+      <span translate="aside.nav.modules.city.CITY">City</span>
+    </a>
+    <ul class="nav nav-sub dk">
+      <li class="nav-sub-header">
+        <a href>
+          <span translate="aside.nav.modules.city.CITY">City</span>
+        </a>
+      </li>
+      <li ui-sref-active="active">
+        <a>
+          <span translate="aside.nav.modules.city.REGION">Region</span>
+        </a>
+      </li>
+      <li ui-sref-active="active">
+        <a>
+          <span translate="aside.nav.modules.city.CITY">City</span>
+        </a>
+      </li>
+    </ul>
+  </li>-->
+  <li ng-if="user.menu.web" ng-class="{active:$state.includes('app.article')}">
+    <a href class="auto">
+      <span class="pull-right text-muted">
+        <i class="fa fa-fw fa-angle-right text"></i>
+        <i class="fa fa-fw fa-angle-down text-active"></i>
+      </span>
+      <i class="glyphicon glyphicon-book"></i>
+      <span translate="aside.nav.modules.article.ARTICLE">Article</span>
+    </a>
+    <ul class="nav nav-sub dk">
+      <li class="nav-sub-header">
+        <a href>
+          <span translate="aside.nav.modules.article.ARTICLE">Article</span>
+        </a>
+      </li>
+      <li ui-sref-active="active">
+        <a ui-sref="app.article.list">
+          <span translate="aside.nav.modules.LIST">List</span>
+        </a>
+      </li>
+      <li ui-sref-active="active">
+        <a ui-sref="app.article.form">
+          <span translate="aside.nav.modules.NEW">New</span>
+        </a>
+      </li>
+      <li ui-sref-active="active">
+        <a>
+          <span translate="aside.nav.modules.article.CATEGORY">Category</span>
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li ng-if="user.menu.web" ng-class="{active:$state.includes('app.wechat')}">
+    <a href class="auto">
+      <span class="pull-right text-muted">
+        <i class="fa fa-fw fa-angle-right text"></i>
+        <i class="fa fa-fw fa-angle-down text-active"></i>
+      </span>
+      <i class="fa fa-wechat"></i>
+      <span translate="aside.nav.modules.wechat.WECHAT">Wechat</span>
+    </a>
+    <ul class="nav nav-sub dk">
+      <li class="nav-sub-header">
+        <a href>
+          <span translate="aside.nav.modules.wechat.WECHAT">Wechat</span>
+        </a>
+      </li>
+      <li ui-sref-active="active">
+        <a ui-sref="app.wechat.list">
+          <span translate="aside.nav.modules.wechat.USER">User</span>
+        </a>
+      </li>
+      <li ui-sref-active="active">
+        <a ui-sref="app.wechat.log">
+          <span translate="aside.nav.modules.wechat.LOG">Log</span>
+        </a>
+      </li>
+      <li ui-sref-active="active">
+        <a ui-sref="app.ctrlpanel.wechat">
+          <span translate="aside.nav.modules.wechat.PANEL">Panel</span>
+        </a>
+      </li>
+    </ul>
+  </li>
+
+  <li ng-if="user.menu.control" class="line dk"></li>
+  <li ng-if="user.menu.control" class="hidden-folded padder m-t m-b-sm text-muted text-xs">
+    <span translate="aside.nav.control_panel.ADMIN_PANEL">Control Panel</span>
+  </li>
+  <li ng-if="user.menu.control" ng-class="{active:$state.includes('app.admin')}">
+    <a href class="auto">
+      <span class="pull-right text-muted">
+        <i class="fa fa-fw fa-angle-right text"></i>
+        <i class="fa fa-fw fa-angle-down text-active"></i>
+      </span>
+      <i class="glyphicon glyphicon-user text-danger-dk"></i>
+      <span translate="aside.nav.control_panel.admin.ADMIN">Admin</span>
+    </a>
+    <ul class="nav nav-sub dk">
+      <li class="nav-sub-header">
+        <a href>
+          <span translate="aside.nav.control_panel.admin.ADMIN">Admin</span>
+        </a>
+      </li>
+      <li ui-sref-active="active">
+        <a ui-sref="app.admin.list">
+          <span translate="aside.nav.modules.LIST">List</span>
+        </a>
+      </li>
+      <li ui-sref-active="active">
+        <a ui-sref="app.admin.form">
+          <span translate="aside.nav.modules.NEW">New</span>
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li ng-if="user.menu.control" ng-class="{active:$state.includes('app.role')}">
+    <a href class="auto">
+      <span class="pull-right text-muted">
+        <i class="fa fa-fw fa-angle-right text"></i>
+        <i class="fa fa-fw fa-angle-down text-active"></i>
+      </span>
+      <i class="glyphicon glyphicon-lock text-danger-dk"></i>
+      <span translate="aside.nav.control_panel.role.ROLE">Role</span>
+    </a>
+    <ul class="nav nav-sub dk">
+      <li class="nav-sub-header">
+        <a href>
+          <span translate="aside.nav.control_panel.role.ROLE">Role</span>
+        </a>
+      </li>
+      <li ui-sref-active="active">
+        <a ui-sref="app.role.list">
+          <span translate="aside.nav.modules.LIST">List</span>
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li ng-if="user.menu.control" ng-class="{active:$state.includes('app.organization')}">
+    <a href class="auto">
+      <span class="pull-right text-muted">
+        <i class="fa fa-fw fa-angle-right text"></i>
+        <i class="fa fa-fw fa-angle-down text-active"></i>
+      </span>
+      <i class="fa fa-sitemap text-danger-dk"></i>
+      <span translate="aside.nav.control_panel.organization.ORG">Organization</span>
+    </a>
+    <ul class="nav nav-sub dk">
+      <li class="nav-sub-header">
+        <a href>
+          <span translate="aside.nav.control_panel.organization.ORG">Organization</span>
+        </a>
+      </li>
+      <li ui-sref-active="active">
+        <a ui-sref="app.organization.tree">
+          <span translate="aside.nav.control_panel.organization.TREE">Tree</span>
+        </a>
+      </li>
+      <li ui-sref-active="active">
+        <a ui-sref="app.organization.position">
+          <span translate="aside.nav.control_panel.organization.POSITION">Position</span>
+        </a>
+      </li>
+      <li ui-sref-active="active">
+        <a ui-sref="app.organization.employee">
+          <span translate="aside.nav.control_panel.organization.EMPLOYEE">Employee</span>
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li ng-if="user.menu.control" ng-class="{active:$state.includes('app.ctrlpanel')}">
+    <a ui-sref="app.ctrlpanel.admin">
+      <i class="glyphicon glyphicon-briefcase icon text-danger-dk"></i>
+      <span class="font-bold" translate="aside.nav.control_panel.tool.TOOL">Tool</span>
+    </a>
+  </li>
+  <li ng-if="user.menu.control" ng-class="{active:$state.includes('app.patch')}">
+    <a ui-sref="app.patch">
+      <i class="fa fa-cloud-upload icon text-danger-dk"></i>
+      <span class="font-bold" translate="aside.nav.control_panel.patch.PATCH">Patch</span>
+    </a>
+  </li>
+  <li ng-if="user.menu.control" ng-class="{active:$state.includes('app.recycle')}">
+    <a ui-sref="app.recycle.bin">
+      <i class="fa fa-trash-o icon text-danger-dk"></i>
+      <span class="font-bold" translate="aside.nav.control_panel.recycle.BIN">Recycle Bin</span>
+    </a>
+  </li>
+  <li class="line dk"></li>
+  <li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
+    <span translate="aside.nav.help.HELP">Help</span>
+  </li>
+  <!--<li>-->
+    <!--<a ui-sref="app.help.manual">-->
+      <!--<i class="fa fa-book icon"></i>-->
+      <!--<span translate="aside.nav.help.MANUAL">Manual</span>-->
+    <!--</a>-->
+  <!--</li>-->
+  <!--<li ng-if="user.menu.team">-->
+    <!--<a ui-sref="app.help.advancemanual">-->
+      <!--<i class="glyphicon glyphicon-book icon"></i>-->
+      <!--<span translate="aside.nav.help.ADVANCE_MANUAL">Advance Manual</span>-->
+    <!--</a>-->
+  <!--</li>-->
+  <li ng-class="{active:$state.includes('app.help.docs')}">
+    <a ui-sref="app.help.docs">
+      <i class="icon-question icon"></i>
+      <span translate="aside.nav.help.SYSTEM_RULES">System Rules</span>
+    </a>
+  </li>
+  <li ng-class="{active:$state.includes('app.help.customerrules')}">
+    <a ui-sref="app.help.customerrules">
+      <i class="fa fa-question"></i>
+      <span translate="aside.nav.help.CUSTOMER_RULES">System Rules</span>
+    </a>
+  </li>
+</ul>
+<!-- / list

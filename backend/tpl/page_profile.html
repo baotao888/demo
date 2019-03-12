@@ -1,0 +1,76 @@
+<div class="bg-light lter b-b wrapper-md">
+  <h1 class="m-n font-thin h3">个人信息</h1>
+</div>
+<div class="wrapper-md">
+  <div class="row">
+  	<div class="col-sm-12">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <div class="clearfix">
+            <a ng-href="#/app/organization/{{vm.user.employee_id}}/employeeavatar" class="pull-left thumb-md avatar b-3x m-r">
+              <img src="{{vm.user.avatar}}" alt="...">
+            </a>
+            <div class="clear">
+              <div class="h3 m-t-xs m-b-xs">
+                {{vm.user.real_name}}
+                <i class="fa fa-circle text-success pull-right text-xs m-t-sm {{vm.user.is_manager==0?'hidden':''}}"></i>
+              </div>
+              <small class="text-muted">{{vm.user.position_name}}</small>
+              <small class="text-info">{{vm.user.pos_level}}</small>
+              <div class="text-muted">
+                <i class="fa fa-database text-muted"></i> 人选库容 <a class="m-r-sm">{{vm.user.sti_candidates}}</a>
+                <i class="fa fa-lock text-muted"></i> 人选保留上限 <a class="m-r-sm">{{vm.user.sti_remains}}</a>
+                <i class="fa fa-clock-o text-muted"></i> 人选保留天数 <a class="m-r-sm">{{vm.user.sti_remain_days}}</a>
+                <i class="glyphicon glyphicon-dashboard text-muted"></i> 优先认领客户时间 <a class="m-r-sm">{{vm.user.recognize_prior_time}}</a>
+                <i class="glyphicon glyphicon-flag text-muted"></i> 优先认领客户名额 <a class="m-r-sm">{{vm.user.recognize_priors}}</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="list-group no-radius alt">
+          <a ng-if="vm.user.admin>0" ng-href="#/app/my/{{vm.user.admin}}/admin" class="list-group-item" title="点击修改密码">
+            <i class="fa fa-chevron-right text-muted"></i>
+            <i class="fa fa-edit fa-fw m-r-xs"></i>
+            {{vm.user.admin_name}}
+          </a>
+          <a class="list-group-item" href>
+            <i class="fa fa-user fa-fw text-muted" title="昵称"></i> 
+            {{vm.user.nickname}}
+          </a>
+          <a class="list-group-item" href>
+            <i class="text-muted fa fa-graduation-cap" title="工号"></i>
+            {{vm.user.number}}
+          </a>
+          <a class="list-group-item" href>
+            <i class="glyphicon glyphicon-time fa-fw text-muted" title="入职时间"></i> 
+            {{vm.user.join_at}}
+          </a>
+          <a class="list-group-item" href>
+            <i class="fa fa-mobile fa-fw text-muted" title="联系电话"></i> 
+            {{vm.user.phone}}
+          </a>
+          <a class="list-group-item" href>
+            <i class="icon {{vm.user.gender==0?'icon-user-female':'icon-user'}} fa-fw text-muted" title="性别"></i> 
+            {{vm.user.gender==0?'女':'男'}}
+          </a>
+          <a class="list-group-item" href>
+            <i class="fa fa-bookmark fa-fw text-muted" title="组织机构"></i>
+            {{vm.user.organization_name}}
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div ng-if="vm.user.my_qrcode" class="row">
+    <div class="col-sm-3">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          我的二维码
+        </div>
+        <div class="panel-body">
+          <img ng-src="{{vm.user.my_qrcode}}" class="b b-a wrapper-xs bg-white img-responsive">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

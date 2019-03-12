@@ -1,0 +1,138 @@
+{extend name="$base" /}
+{block name="banner"}
+{/block}
+{block name="content"}
+<div class="job-content">
+  <div class="container">
+    <div class="block info">
+      <div class="clearfix">
+        <div class="pull-left">
+          {include file="$thumbs"}
+        </div>
+        <div class="pull-right text">
+          <h3 class="clearfix"><span class="pull-left">{$com.job_name}</span><div class="pull-right salary"><strong>{$com.salary_floor}-{$com.salary_ceil}</strong> {$Think.lang.salary_unit}</div></h3>
+          <div class="condition first-row">{$Think.lang.job_condition}{$Think.lang.colon}{$com.condition_short}</div>
+          <div class="condition">{$Think.lang.work_time}{$Think.lang.colon}{$com.jobdata.view_time}</div>
+          <div class="condition">{$Think.lang.work_address}{$Think.lang.colon}{$com.jobdata.address_short}</div>
+          <div class="tag">{$Think.lang.job_welfare}{$Think.lang.colon}
+           {volist name='$com.welfare_tag' id='ls'}
+             <span class="label">{$ls}</span>
+           {/volist} 
+          </div>
+          <div class="signup">
+          	{if $com.status==1}
+            <a class="pull-right btn-signup" href="javascript:signup({$com.id})">
+              <div class="number">{$com.renshu.deliveries}{$Think.lang.signup_unit}</div>
+              <div class="value">{$Think.lang.signup_now}</div>          
+            </a>
+            {else if $com.status==99}
+            <a class="pull-right btn-signup">
+              <div class="number">{$com.renshu.deliveries}{$Think.lang.signup_unit}</div>
+              <div class="value">{$Think.lang.signup_stop}</div>          
+            </a>
+            {/if}
+          </div>
+        </div>
+      </div>
+      <div class="attention">
+        <div class=" message">
+          <span class="glyphicon glyphicon-info-sign pull-left"></span><b>{$Think.lang.tip_1}{$Think.lang.colon}</b>{$Think.lang.tip_info_1}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row second-row">
+      <div class="col-sm-12 col-md-9 col">
+        <div class="block detail">
+          <div class="panel panel-default panel-instruct">
+            <div class="panel-heading clearfix">
+              <span class="pull-left field">{$Think.lang.salary_detail}</span>
+              <span class="pull-right auth"><span class="icon">证</span>{$Think.lang.salary_auth}</span>
+            </div>
+            <div class="panel-body">
+              {$com.jobdata.salary_detail}
+            </div>
+          </div>
+          <div class="panel panel-default panel-instruct">
+            <div class="panel-heading clearfix">
+              <span class="pull-left field">{$Think.lang.job_detail}</span>
+              <span class="pull-right auth"><span class="icon">验</span>{$Think.lang.job_auth_2}</span>
+            </div>
+            <div class="panel-body">
+              {$com.jobdata.content}
+            </div>
+          </div>
+          <div class="panel panel-default panel-instruct">
+            <div class="panel-heading clearfix">
+              <span class="pull-left field">{$Think.lang.signup_process}</span>
+              <span class="pull-right auth"><span class="icon">保</span>{$Think.lang.signup_auth}</span>
+            </div>
+            <div class="panel-body">
+              {include file="$signupitem"}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-12 col-md-3 side">
+        <div class="block enterprise">
+          <div class="panel panel-default panel-instruct">
+            <div class="panel-heading">
+              <span>{$com.job_name}</span>
+              <span class="auth-tag">{$Think.lang.auth_job}</span>
+            </div>
+            <div class="panel-body">
+              <div class="btn-group btn-group-justified btn-field" role="group" aria-label="...">
+                <div class="btn-group" role="group">
+                  <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-list-alt"></span>{$com.company.industry}</button>
+                </div>
+                <div class="btn-group" role="group">
+                  <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-user"></span>{$com.company.scale}</button>
+                </div>
+              </div>
+              <dl class="desc">
+                <dt>{$Think.lang.description}{$Think.lang.colon}</dt>
+                <dd>{$com.company.description}
+                </dd>
+              </dl>
+            </div>
+          </div>
+        </div>
+        <div class="block maps">
+          {include file="$maps"}
+        </div>
+        <div class="block hotjob">
+          <div class="panel panel-default panel-instruct">
+            <div class="panel-heading">
+              <span>{$Think.lang.other_hot_jobs}</span>
+                <a href="/index/index/search">
+                  <span class="more">{$Think.lang.more} <span class="glyphicon glyphicon-chevron-right"></span></span>
+                </a>
+            </div>
+            <div class="panel-body">
+			  <ul class="list-unstyled">
+              {volist name='list' id='dl'}
+                <li>
+                  <h5><a href="/job/{$dl.id}">{$dl.job_name}</a></h5>
+                  <span class="salary"><strong>{$dl.salary_floor}-{$dl.salary_ceil}</strong> 元/月</span>
+                  <div class="tag">
+                    {volist name='dl.welfare_tag' id='ls'}
+                      <span class="label">{$ls}</span>
+                    {/volist}
+                  </div>
+                </li>
+              {/volist}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="/job/index/hit?id={$com.id}"></script>
+{/block}
+{block name="popup"}
+  {__block__}
+  {include file="$signupmodal"}
+{/block}

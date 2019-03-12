@@ -1,0 +1,56 @@
+<div class="bg-light lter b-b wrapper-md">
+    <h1 class="m-n font-thin h3">招聘</h1>
+</div>
+<div class="wrapper-md">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+          <ul class="breadcrumb m-b-none">
+              <li><a href=""><i class="icon icon-users"></i> 招聘</a></li>
+              <li class="active ng-binding">列表</li>
+          </ul>
+      </div>
+      <div class="panel-body b-b b-light">
+        <div class="form-group">
+          <div class="col-sm-11">
+            <label class="control-label text-right pull-left" style="margin-top: 6px;">有效日期:</label>
+            <div class="m-r-sm pull-left">
+              <div class="input-group w-md pull-left">
+                <input type="text" class="form-control" datepicker-popup="{{format}}" is-open="vm.opens[0]" datepicker-options="dateOptions" close-text="Close" ng-model="vm.date"/>
+                <span class="input-group-btn">
+                  <button type="button" class="btn btn-default" ng-click="vm.open($event,0)"><i class="glyphicon glyphicon-calendar"></i></button>
+                </span>
+              </div>
+              <button class="btn btn-default pull-left" ng-click="vm.searchvalidity()">检索</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="table-striped">
+        <table class="table table-striped b-t b-light text-center">
+          <thead>
+            <tr>
+              <th ng-repeat="item in vm.headers" class="text-center">{{item}}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="recruit in vm.recruitlist" class="text-center">
+              <td style="width: 5%; vertical-align: middle;">{{recruit.region}}</td>
+              <td style="width: 8%; vertical-align: middle;">{{recruit.enterprise_name}}</td>
+              <td style="width: 5%; vertical-align: middle;">{{recruit.type}}</td>
+              <td style="width: 20%; vertical-align: middle;"><div>{{recruit.salary_intro}}</div></td>
+              <td style="width: 13%; vertical-align: middle;"><p ng-repeat="subsity in recruit.allowance track by $index" style="margin: 0">{{subsity}}</p></td>
+              <td style="width: 5%;">{{recruit.validity_period}}</td>
+              <td style="width: 10%; padding: 0!important; vertical-align: middle;">
+                <a class="btn m-b-xs btn-sm btn-primary fa fa-edit" title="编辑" href="#/app/recruit/{{recruit.id}}/form"></a>
+                <a class="btn m-b-xs btn-sm btn-primary fa fa-copy (alias)" title="克隆" href="#/app/recruit/{{recruit.id}}-1/form"></a>
+                <a class="btn m-b-xs btn-sm btn-danger fa fa-trash" title="删除" ng-click="vm.delete(recruit.id)"></a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="list-loading">
+        <img ng-src="img/timg.gif" ng-show="vm.showLoading">
+      </div>
+    </div>
+</div>

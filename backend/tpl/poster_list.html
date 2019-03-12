@@ -1,0 +1,55 @@
+<div class="bg-light lter b-b wrapper-md clearfix">
+    <h1 class="m-n font-thin h3 pull-left">广告位</h1>
+    <a ng-href="#/app/poster/fileupload/{{$stateParams.space}}" class="btn btn-sm btn-icon btn-info pull-right m-r-xs" title="新增广告"><i class="fa fa-plus-square"></i></a>
+</div>
+<div class="wrapper-md">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <ul class="breadcrumb m-b-none">
+                <li><a href=""><i class="fa fa-home"></i> 广告位</a></li>
+                <li class="active ng-binding">广告列表</li>
+            </ul>
+        </div>
+        <div class="panel-body b-b b-light">
+            Search: <input id="filter" type="text" class="form-control input-sm w-sm inline m-r"/>
+        </div>
+        <div>
+            <table class="table m-b-none text-center">
+                <thead>
+                <tr>
+                    <th class="text-center">
+                        广告编号
+                    </th>
+                    <th class="text-center">
+                        广告标题
+                    </th>
+                    <th class="text-center">
+                        广告图片
+                    </th>
+                    <th class="text-center">
+                        排序
+                    </th>
+                    <th class="text-center">
+                        广告位
+                    </th>
+                    <th class="text-center">
+                        是否禁用(是x)
+                    </th>
+                    <th class="text-center">操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="poster in vm.list">
+                    <td>{{poster.id}}</td>
+                    <td><a ng-href="">{{poster.title}}</a></td>
+                    <td><a class="list-lang-text">{{poster.content}}</a></td>
+                    <td>{{poster.listorder}}</td>
+                    <td>{{poster.space_id}}</td>
+                    <td class="{{poster.disabled?'text-danger':'text-success'}}"><span class="glyphicon {{poster.disabled ? 'glyphicon-remove':'glyphicon-ok'}}"></span></td>
+                    <td><a ng-href="#/app/poster/{{poster.id}}/fileuploadupdate" class="btn btn-success">更新</a></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

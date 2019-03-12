@@ -1,0 +1,57 @@
+<div class="bg-light lter b-b wrapper-md">
+    <h1 class="m-n font-thin h4 row">
+        <ul class="col-sm-10 breadcrumb m-b-none">
+            <li><a href=""><i class="fa fa-home"></i>系统权限</a></li>
+            <li class="active ng-binding">设置</li>
+        </ul>
+        <a ng-href="#/app/role/list" class="btn btn-sm btn-icon btn-info pull-right"><i class="fa fa-chevron-left"></i></a>
+    </h1>
+</div>
+<div class="wrapper-md">
+    <div class="checkbox">
+        <label class="i-checks">
+            <input type="checkbox" ng-model="select_all" ng-change="selectAll()">
+            <i></i>
+            全选
+        </label>
+    </div>
+    <ul>
+        <li ng-repeat="(mk, ms) in list">
+            <div class="checkbox">
+                {{mk}}
+                <label class="i-checks">
+                    <input type="checkbox" ng-model="checked[mk].checked" ng-change="selectModule('{{mk}}')">
+                    <i></i>
+                    全选
+                </label>
+            </div>
+            <ul>
+                <li ng-repeat="(ck, cs) in ms">
+                    <div class="checkbox">
+                        {{ck}}
+                        <label class="i-checks">
+                            <input id="flag" type="checkbox" ng-model="checked[mk].controllers[ck].checked" ng-change="selectController('{{mk}}', '{{ck}}')">
+                            <i></i>
+                            全选
+                        </label>
+                    </div>
+                    <ul class="list-inline">
+                        <li ng-repeat="(ak, as) in cs">
+                            <div class="checkbox">
+                                <label class="i-checks">
+                                    <input type="checkbox" ng-model="checked[mk].controllers[ck].actions[as].checked" ng-change="selectOne('{{mk}}', '{{ck}}', '{{as}}')">
+                                    <i></i>
+                                    {{as}}
+                                </label>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+    </ul>
+    <p class="text-muted">{{error}}</p>
+    <footer class="panel-footer text-right bg-light lter">
+        <button type="submit" class="btn btn-success" ng-disabled="submitting" ng-click="submitInfo()">Submit</button>
+    </footer>
+</div>

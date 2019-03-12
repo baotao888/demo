@@ -1,0 +1,365 @@
+<div class="hbox hbox-auto-xs hbox-auto-sm">
+  <!-- .aside -->
+  <div class="col w w-auto-xs bg-light inherit dk b-r">
+    <div class="wrapper-md b-b">
+      <a class="btn btn-link pull-right m-t-n-xs m-r-n-sm visible-sm visible-xs" ui-toggle-class="show" data-target="#nav-docs">
+        <i class="fa fa-bars"></i>
+      </a>
+      <span class="h4">系统规则</span>
+    </div>
+    <div class="hidden-sm hidden-xs" id="nav-docs">
+      <ul class="nav">
+        <li class="padder b-b l-h-2x bg text-info"><em>概念</em></li>
+        <li><a ui-scroll="node-req">人选库容</a></li>
+        <li><a ui-scroll="bower">人选保留上限</a></li>
+        <li><a ui-scroll="grunt">人选保留天数</a></li>
+        <li><a ui-scroll="dev-server">优先认领客户时间</a></li>
+        <li><a ui-scroll="prior-count">优先认领客户名额</a></li>
+
+        <li class="padder b-b l-h-2x bg text-success"><em>优先认领</em></li>
+        <li><a ui-scroll="bootstrap">不可认领</a></li>
+        <li><a ui-scroll="less">优先认领</a></li>
+
+        <li ui-scroll="core" class="padder b-b b-t l-h-2x bg text-danger"><em>库容已满</em></li>
+        <li><a ui-scroll="ui-router">客户掉出</a></li>
+
+        <li ui-scroll="directives" class="padder b-b b-t l-h-2x bg text-primary"><em>保留期限已过</em></li>
+        <li><a ui-scroll="ui-toggle-class">取消保留</a></li>
+      </ul>
+    </div>
+  </div>
+  <!-- /.aside -->
+  <div class="col">
+    <div class="clearfix padder-md">
+      <h3 class="text-info m-t-xl font-thin m-b-none">概念 </h3>
+      <div>进入个人资料可以看到如下数据</div>
+      <div class="m-b">
+        <img src="img/help/40.png"/>
+      </div>
+
+      <div id="node-req" class="wrapper"></div>
+      <div class="line b-b"></div>
+      <h4 class="m-t-xl">人选库容</h4>
+      <div>可以持有的非在职人选上限。从公海客户池中认领客户时，受此库容限制。人选库容不包含在职人选。</div>
+      <p>
+        <div class="m-b">
+          <img src="img/help/41.png"/>
+        </div>
+        上图为人选管理中的所有人选总数，即自己名下的人选数，此总数有可能超过人选库容，因为此处的总数包含了在职人选。
+      </p>
+
+      <div id="bower" class="wrapper"></div>
+      <div class="line b-b"></div>
+      <h4 class="m-t-xl">人选保留上限</h4>
+      <div>系统的<code>人选保留期限</code>为<strong>30天</strong>，如果此人选为保留人选，则保留期限在30天的基础上再加上<code>人选保留天数</code>。</div>
+
+      <p>
+        <div class="img-full m-b">
+          <img src="img/help/42.png"/>
+        </div>
+        如上图，保留人选总数可以通过人选管理中的高级搜索设置搜索条件查询得到，此总数不会超过人选保留上限。
+      </p>
+      <p class="well b bg-light lt wrapper-sm m-t text-danger font-bold">
+          顾问的最大人选数 = 人选库容 + 人选保留上限
+      </p>
+
+      <div id="grunt" class="wrapper"></div>
+      <div class="line b-b"></div>
+      <h4 class="m-t-xl">人选保留天数</h4>
+      <p>
+        保留人选在<code>系统保留期限</code>基础上多出来的保留天数。
+      </p>
+
+      <div id="dev-server" class="wrapper"></div>
+      <div class="line b-b"></div>
+      <h4 class="m-t-xl">优先认领客户时间</h4>
+      <div>对于丢弃的人选，系统的认领时间为每日的<strong>18:00</strong>，如果优先认领客户时间小于18:00，则表示自己拥有优先认领客户的权利。</div>
+
+      <div id="prior-count" class="wrapper"></div>
+      <div class="line b-b"></div>
+      <h4 class="m-t-xl">优先认领客户名额</h4>
+      <div>如果拥有优先认领客户的权利，则在优先认领时间内，认领的优先客户名额不会超过此数字</div>
+
+      <div id="css" class="wrapper"></div>
+      <div class="line b-b"></div>
+      <h3 class="text-success m-t-xl font-thin m-b-none">优先认领 </h3>
+
+      <div id="bootstrap" class="wrapper"></div>
+      <div class="line b-b"></div>
+      <h4 class="m-t-xl">不可认领客户</h4>
+      <div>
+          顾问丢弃的人选
+          <ul>
+            <li>自己丢弃的人选<code>15天</code>之内不能认领</li>
+            <li>同组丢弃的人选<code>7天</code>之内不能认领</li>
+          </ul>
+          系统清理的人选
+          <ul>
+            <li>自己的人选<code>7天</code>之内不能认领</li>
+            <li>同组的人选<code>3天</code>之内不能认领</li>
+          </ul>
+          其他人选
+          <ul>
+            <li>丢弃当天不能认领</li>
+          </ul>
+      </div>
+
+      <div id="less" class="wrapper"></div>
+      <div class="line b-b"></div>
+      <h4 class="m-t-xl">优先认领</h4>
+      <p>不可认领客户变成可认领客户的当天<code>17:30至18:00</code>为优先认领时间，拥有<code>优先认领时间</code>和<code>优先认领名额</code>的顾问可认领此客户</p>
+      <p>例如，有如下情景</p>
+      <table class="table table-border bg-white-only b-a">
+        <tbody>
+        <tr class="bg-light lt">
+          <td>顾问</td><td>部门</td><td>优先认领时间</td><td>优先认领名额</td>
+        </tr>
+        <tr>
+          <td>杨过</td>
+          <td>古墓派</td>
+          <td>17:30</td>
+          <td>5</td>
+        </tr>
+        <tr>
+          <td>小龙女</td>
+          <td>古墓派</td>
+          <td>无</td>
+          <td>0</td>
+        </tr>
+        <tr>
+          <td>尹志平</td>
+          <td>全真教</td>
+          <td>无</td>
+          <td>0</td>
+        </tr>
+        <tr>
+          <td>赵志敬</td>
+          <td>全真教</td>
+          <td>17:30</td>
+          <td>10</td>
+        </tr>
+        <tr>
+          <td>任我行</td>
+          <td>日月神教</td>
+          <td>17:30</td>
+          <td>10</td>
+        </tr>
+        <tr>
+          <td>东方不败</td>
+          <td>日月神教</td>
+          <td>无</td>
+          <td>0</td>
+        </tr>
+        </tbody>
+      </table>
+      <p>
+        尹志平在<strong>2017-10-10 13:30:30</strong>丢弃了客户张三，现在是<strong>2017-10-18 17:35:00</strong>，则
+      </p>
+      <table class="table table-border bg-white-only b-a">
+        <tbody>
+        <tr class="bg-light lt">
+          <td>顾问</td><td>是否可认领</td><td>是否为优先认领</td><td>是否受优先认领名额限制</td>
+        </tr>
+        <tr>
+          <td>杨过</td>
+          <td><a class="glyphicon glyphicon-ok text-success"></a></td>
+          <td><a class="glyphicon glyphicon-remove text-danger"></a></td>
+          <td><a class="glyphicon glyphicon-remove text-danger"></a></td>
+        </tr>
+        <tr>
+          <td>小龙女</td>
+          <td><a class="glyphicon glyphicon-ok text-success"></a></td>
+          <td><a class="glyphicon glyphicon-remove text-danger"></a></td>
+          <td><a class="glyphicon glyphicon-remove text-danger"></a></td>
+        </tr>
+        <tr>
+          <td>尹志平</td>
+          <td><a class="glyphicon glyphicon-remove text-danger"></a>自己丢弃的客户15天之内不能认领</td>
+          <td><a class="glyphicon glyphicon-remove text-danger"></a></td>
+          <td><a class="glyphicon glyphicon-remove text-danger"></a></td>
+        </tr>
+        <tr>
+          <td>赵志敬</td>
+          <td><a class="glyphicon glyphicon-ok text-success"></a></td>
+          <td><a class="glyphicon glyphicon-remove text-danger"></a></td>
+          <td><a class="glyphicon glyphicon-remove text-danger"></a></td>
+        </tr>
+        <tr>
+          <td>任我行</td>
+          <td><a class="glyphicon glyphicon-ok text-success"></a></td>
+          <td><a class="glyphicon glyphicon-remove text-danger"></a></td>
+          <td><a class="glyphicon glyphicon-remove text-danger"></a></td>
+        </tr>
+        <tr>
+          <td>东方不败</td>
+          <td><a class="glyphicon glyphicon-ok text-success"></a></td>
+          <td><a class="glyphicon glyphicon-remove text-danger"></a></td>
+          <td><a class="glyphicon glyphicon-remove text-danger"></a></td>
+        </tr>
+        </tbody>
+      </table>
+      <p>
+        尹志平在<strong>2017-10-12 16:36:10</strong>丢弃了客户李四，现在是<strong>2017-10-18 17:35:00</strong>，则
+      </p>
+      <table class="table table-border bg-white-only b-a">
+        <tbody>
+        <tr class="bg-light lt">
+          <td>顾问</td><td>是否可认领</td><td>是否为优先认领</td><td>是否受优先认领名额限制</td>
+        </tr>
+        <tr>
+          <td>杨过</td>
+          <td><a class="glyphicon glyphicon-ok text-success"></a></td>
+          <td><a class="glyphicon glyphicon-remove text-danger"></a></td>
+          <td><a class="glyphicon glyphicon-remove text-danger"></a></td>
+        </tr>
+        <tr>
+          <td>小龙女</td>
+          <td><a class="glyphicon glyphicon-ok text-success"></a></td>
+          <td><a class="glyphicon glyphicon-remove text-danger"></a></td>
+          <td><a class="glyphicon glyphicon-remove text-danger"></a></td>
+        </tr>
+        <tr>
+          <td>尹志平</td>
+          <td><a class="glyphicon glyphicon-remove text-danger"></a>自己丢弃的客户15天之内不能认领</td>
+          <td><a class="glyphicon glyphicon-remove text-danger"></a></td>
+          <td><a class="glyphicon glyphicon-remove text-danger"></a></td>
+        </tr>
+        <tr>
+          <td>赵志敬</td>
+          <td><a class="glyphicon glyphicon-remove text-danger"></a>同组丢弃的客户7天之内不能认领</td>
+          <td><a class="glyphicon glyphicon-remove text-danger"></a></td>
+          <td><a class="glyphicon glyphicon-remove text-danger"></a></td>
+        </tr>
+        <tr>
+          <td>任我行</td>
+          <td><a class="glyphicon glyphicon-ok text-success"></a></td>
+          <td><a class="glyphicon glyphicon-remove text-danger"></a></td>
+          <td><a class="glyphicon glyphicon-remove text-danger"></a></td>
+        </tr>
+        <tr>
+          <td>东方不败</td>
+          <td><a class="glyphicon glyphicon-ok text-success"></a></td>
+          <td><a class="glyphicon glyphicon-remove text-danger"></a></td>
+          <td><a class="glyphicon glyphicon-remove text-danger"></a></td>
+        </tr>
+        </tbody>
+      </table>
+      <p>
+        尹志平在<strong>2017-10-17 17:26:00</strong>丢弃了客户王五，现在是<strong>2017-10-18 17:35:00</strong>，则
+      </p>
+      <table class="table table-border bg-white-only b-a">
+        <tbody>
+        <tr class="bg-light lt">
+          <td>顾问</td><td>是否可认领</td><td>是否为优先认领</td><td>是否受优先认领名额限制</td>
+        </tr>
+        <tr>
+          <td>杨过</td>
+          <td><a class="glyphicon glyphicon-ok text-success"></a></td>
+          <td><a class="glyphicon glyphicon-ok text-success"></a></td>
+          <td><a class="glyphicon glyphicon-ok text-success"></a></td>
+        </tr>
+        <tr>
+          <td>小龙女</td>
+          <td><a class="glyphicon glyphicon-remove text-danger"></a>无优先认领权限</td>
+          <td><a class="glyphicon glyphicon-remove text-danger"></a></td>
+          <td><a class="glyphicon glyphicon-remove text-danger"></a></td>
+        </tr>
+        <tr>
+          <td>尹志平</td>
+          <td><a class="glyphicon glyphicon-remove text-danger"></a>自己丢弃的客户15天之内不能认领</td>
+          <td><a class="glyphicon glyphicon-remove text-danger"></a></td>
+          <td><a class="glyphicon glyphicon-remove text-danger"></a></td>
+        </tr>
+        <tr>
+          <td>赵志敬</td>
+          <td><a class="glyphicon glyphicon-remove text-danger"></a>同组丢弃的客户7天之内不能认领</td>
+          <td><a class="glyphicon glyphicon-remove text-danger"></a></td>
+          <td><a class="glyphicon glyphicon-remove text-danger"></a></td>
+        </tr>
+        <tr>
+          <td>任我行</td>
+          <td><a class="glyphicon glyphicon-ok text-success"></a></td>
+          <td><a class="glyphicon glyphicon-ok text-success"></a></td>
+          <td><a class="glyphicon glyphicon-ok text-success"></a></td>
+        </tr>
+        <tr>
+          <td>东方不败</td>
+          <td><a class="glyphicon glyphicon-remove text-danger"></a>无优先认领权限</td>
+          <td><a class="glyphicon glyphicon-remove text-danger"></a></td>
+          <td><a class="glyphicon glyphicon-remove text-danger"></a></td>
+        </tr>
+        </tbody>
+      </table>
+      <p>
+        同样是尹志平在<strong>2017-10-17 17:26:00</strong>丢弃的客户王五，现在时间如果是<strong>2017-10-18 19:10:00</strong>，则
+      </p>
+      <table class="table table-border bg-white-only b-a">
+        <tbody>
+        <tr class="bg-light lt">
+          <td>顾问</td><td>是否可认领</td><td>是否为优先认领</td><td>是否受优先认领名额限制</td>
+        </tr>
+        <tr>
+          <td>杨过</td>
+          <td><a class="glyphicon glyphicon-ok text-success"></a></td>
+          <td><a class="glyphicon glyphicon-remove text-danger"></a></td>
+          <td><a class="glyphicon glyphicon-remove text-danger"></a></td>
+        </tr>
+        <tr>
+          <td>小龙女</td>
+          <td><a class="glyphicon glyphicon-ok text-success"></a></td>
+          <td><a class="glyphicon glyphicon-remove text-danger"></a></td>
+          <td><a class="glyphicon glyphicon-remove text-danger"></a></td>
+        </tr>
+        <tr>
+          <td>尹志平</td>
+          <td><a class="glyphicon glyphicon-remove text-danger"></a>自己丢弃的客户15天之内不能认领</td>
+          <td><a class="glyphicon glyphicon-remove text-danger"></a></td>
+          <td><a class="glyphicon glyphicon-remove text-danger"></a></td>
+        </tr>
+        <tr>
+          <td>赵志敬</td>
+          <td><a class="glyphicon glyphicon-remove text-danger"></a>同组丢弃的客户7天之内不能认领</td>
+          <td><a class="glyphicon glyphicon-remove text-danger"></a></td>
+          <td><a class="glyphicon glyphicon-remove text-danger"></a></td>
+        </tr>
+        <tr>
+          <td>任我行</td>
+          <td><a class="glyphicon glyphicon-ok text-success"></a></td>
+          <td><a class="glyphicon glyphicon-remove text-danger"></a></td>
+          <td><a class="glyphicon glyphicon-remove text-danger"></a></td>
+        </tr>
+        <tr>
+          <td>东方不败</td>
+          <td><a class="glyphicon glyphicon-ok text-success"></a></td>
+          <td><a class="glyphicon glyphicon-remove text-danger"></a></td>
+          <td><a class="glyphicon glyphicon-remove text-danger"></a></td>
+        </tr>
+        </tbody>
+      </table>
+
+      <div id="core" class="wrapper"></div>
+      <div class="line b-b"></div>
+      <h3 class="text-danger font-thin m-t-xl m-b-none">库容已满</h3>
+      <div>库容已满之后，顾问自己无法认领客户，经理也无法给顾问分配或者划转客户。</div>
+
+      <div id="ui-router" class="wrapper"></div>
+      <div class="line b-b"></div>
+      <h4 class="m-t-xl">客户掉出</h4>
+      <p>
+          库容已满之后，顾问仍然可以录入人选，但是此时的人选录入之后，状态变成未分配，并未成为自己的人选。释放库容之后，通过经理分配才能成为自己的人选。
+      </p>
+
+      <div id="directives" class="wrapper"></div>
+      <div class="line b-b"></div>
+      <h3 class="text-danger font-thin m-t-xl m-b-none">保留期限已过</h3>
+      <div>人选保留期限已过，系统清理之后，会将人选释放到公海客户池。</div>
+
+      <div id="ui-toggle-class" class="wrapper"></div>
+      <div class="line b-b"></div>
+      <h4 class="m-t-xl">取消保留</h4>
+      <p>
+         人选保留期限已过，对此人选做取消保留操作，则人选在取消保留的同时会掉入公海客户池。
+      </p>
+    </div>
+  </div>
+</div>

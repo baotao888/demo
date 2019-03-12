@@ -1,0 +1,47 @@
+{extend name="$base" /}
+{block name="content"}
+  <div class="container">
+    {include file="$banner"}
+    <img src="{$Think.config.img_domain}/apply-process.png" class="apply-process"/>
+  </div>
+  <div class="main-delimiter"></div>
+  <div class="container">
+    <div class="clearfix main-search">
+      <div class="pull-left form-search">
+        <form action="/index/index/search">
+          <div class="input-group">
+            <input type="text" class="form-control" name="key" placeholder="请输入关键字，如：仁宝">
+            <span class="input-group-btn">
+              <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search"></span>搜索</button>
+            </span>
+          </div>
+        </form>
+      </div>
+      <div class="pull-right statistics">
+        <div class="signup">
+          <span class="text">今日免费报名人数</span>
+          {volist name='$signcount' id='ls'}
+            <span class="label label-number">{$ls}</span>
+          {/volist}
+        </div>
+      </div>
+    </div>
+    <ul class="list-group">
+      {include file="$list_item"}
+    </ul>
+    <div class="container main-more"><a href="/index/index/search">查看更多</a></div>
+  </div>
+{/block}
+{block name="javascript"}
+<script type="text/javascript" src="{$Think.config.js_domain}/jquery-plugin/bxslider/jquery.bxslider.js"></script>
+<link rel="stylesheet" href="{$Think.config.js_domain}/jquery-plugin/bxslider/jquery.bxslider.css" />
+<script type="text/javascript">
+$(function(){
+	$('.bxslider').bxSlider({speed:1200, auto:true, infiniteLoop: true, autoHover: true});
+});
+</script>
+{/block}
+{block name="popup"}
+  {__block__}
+  {include file="$signupmodal"}
+{/block}

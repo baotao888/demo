@@ -1,0 +1,191 @@
+<div class="modal-header">
+  <h3 class="modal-title">客户详情</h3>
+</div>
+<div class="modal-body">
+ <div class="hbox hbox-auto-xs hbox-auto-sm bg-light">
+  <!-- column -->
+  <div class="col bg-white-only">
+   <div class="vbox">
+    <div class="wrapper-xs">
+     <div class="hbox m-b-lg">
+      <div class="col text-center w-sm">
+       <div class="thumb-lg avatar inline">
+        <img ng-src="img/a{{vm.customer.gender | genderClass:2}}.jpg" tooltip="请称呼我【{{vm.customer.gender | genderClass:3}}】哦">
+       </div>
+       <div class="h1 font-thin text-info">
+         {{vm.customer.real_name}}
+       </div>
+      </div>
+      <!-- fields -->
+      <div class="col form-horizontal">
+       <div class="form-group m-b-sm">
+        <label class="col-sm-3 control-label text-primary text-right">联系电话:</label>
+        <div class="col-sm-3">
+         <p class="form-control-static"><strong class="text-md">{{vm.customer.phone}}</strong></p>
+        </div>
+        <label class="col-sm-3 control-label text-primary text-right">备用电话:</label>
+        <div class="col-sm-3">
+         <p class="form-control-static">{{vm.customer.mobile_1}}</p>
+        </div>
+       </div>
+       <div class="form-group m-b-sm">
+        <label class="col-sm-3 control-label text-primary text-right">籍贯:</label>
+        <div class="col-sm-3">
+         <p class="form-control-static">{{vm.customer.hometown}}</p>
+        </div>
+        <label class="col-sm-3 control-label text-primary text-right">年龄:</label>
+        <div class="col-sm-3">
+         <p class="form-control-static">{{vm.customer.age}}</p>
+        </div>
+       </div>
+       <div class="form-group m-b-sm">
+        <label class="col-sm-3 control-label text-primary text-right">最后联系内容:</label>
+        <div class="col-sm-9">
+         <p class="form-control-static">{{vm.customer.latest_contact_content}}</p>
+        </div>
+       </div>
+      </div>
+      <!-- / fields -->
+     </div>
+     <div class="row form-horizontal">
+      <div class="form-group m-b-sm">
+       <label class="col-sm-2 control-label text-right">学历:</label>
+       <div class="col-sm-2">
+        <p class="form-control-static">{{vm.customer.career}}</p>
+       </div>
+       <label class="col-sm-2 control-label text-right">来源:</label>
+       <div class="col-sm-2">
+        <p class="form-control-static">{{vm.customer.from}}</p>
+       </div>
+       <label class="col-sm-2 control-label text-right">备注:</label>
+       <div class="col-sm-2">
+        <p class="form-control-static">{{vm.customer.description}}</p>
+       </div>
+      </div>
+      <div class="form-group m-b-sm">
+       <label class="col-sm-2 control-label text-right">QQ:</label>
+       <div class="col-sm-2">
+        <p class="form-control-static">{{vm.customer_data.qq}}</p>
+       </div>
+       <label class="col-sm-2 control-label text-right">邮箱:</label>
+       <div class="col-sm-2">
+        <p class="form-control-static">{{vm.customer_data.email}}</p>
+       </div>
+       <label class="col-sm-2 control-label text-right">微信:</label>
+       <div class="col-sm-2">
+        <p class="form-control-static">{{vm.customer_data.wechat}}</p>
+       </div>
+      </div>
+      <div class="form-group m-b-sm">
+       <label class="col-sm-2 control-label text-right">身份证号:</label>
+       <div class="col-sm-2">
+        <p class="form-control-static">{{vm.customer.idcard}}</p>
+       </div>
+       <label class="col-sm-2 control-label text-right">住址:</label>
+       <div class="col-sm-6">
+        <p class="form-control-static">{{vm.customer_data.address}}</p>
+       </div>
+      </div>
+     </div>
+    </div>
+   </div>
+  </div>
+  <!-- /column -->
+ </div>
+ <div class="wrapper-sm wrapper-md-bt ng-scope">
+  <div class="panel panel-default panel-removem">
+   <div class="panel-heading ng-binding">
+    工作经验
+   </div>
+   <div class="table-responsive">
+    <table class="table table-striped b-t b-light">
+     <thead>
+     <tr>
+      <th>编号</th>
+      <th>企业名称</th>
+      <th>入职时间</th>
+      <th>离职时间</th>
+     </tr>
+     </thead>
+     <tbody>
+     <tr ng-repeat="work in vm.workhistorylist">
+      <td>{{$index+1}}</td>
+      <td>{{work.job_name}}</td>
+      <td>{{work.create_time}}</td>
+      <td>{{work.end_time}}</td>
+     </tr>
+     </tbody>
+    </table>
+   </div>
+
+  </div>
+ </div>
+ <div class="wrapper-sm wrapper-md-bt ng-scope">
+  <div class="panel panel-default panel-removem">
+   <div class="panel-heading ng-binding">
+    分配记录
+   </div>
+   <div class="table-responsive">
+    <table class="table table-striped b-t b-light">
+     <thead>
+     <tr>
+      <th>状态</th>
+      <th>分配时间</th>
+      <th>负责顾问</th>
+      <th>报名企业</th>
+      <th>企业返费</th>
+      <th>在职天数</th>
+      <th>人选补贴</th>
+      <th>推荐人</th>
+      <th>推荐费</th>
+     </tr>
+     </thead>
+     <tbody>
+     <tr ng-repeat="can in vm.assign">
+      <td>{{can.status}}</td>
+      <td>{{can.create_time}}</td>
+      <td>{{can.employee}}</td>
+      <td>{{can.job}}</td>
+      <td>{{can.award}}</td>
+      <td>{{can.dutydays}}</td>
+      <td>{{can.subsidy}}</td>
+      <td>{{can.inviter}}</td>
+      <td>{{can.invite_amount}}</td>
+     </tr>
+     </tbody>
+    </table>
+   </div>
+  </div>
+ </div>
+ <div class="wrapper-sm wrapper-md-bt ng-scope">
+  <div class="panel panel-default panel-removem">
+   <div class="panel-heading ng-binding">
+    联系记录
+   </div>
+   <div class="table-responsive">
+    <table class="table table-striped b-t b-light">
+     <thead>
+     <tr>
+      <th>联系时间</th>
+      <th>顾问名称</th>
+      <th>联系内容</th>
+      <th>结果</th>
+     </tr>
+     </thead>
+     <tbody>
+     <tr ng-repeat="cons in vm.contactrecord">
+      <td>{{cons.contact_time}}</td>
+      <td>{{cons.employee}}</td>
+      <td class="break-word">{{cons.content}}</td>
+      <td>{{cons.result}}</td>
+     </tr>
+     </tbody>
+    </table>
+   </div>
+
+  </div>
+ </div>
+</div>
+<div class="modal-footer">
+ <button class="btn btn-primary" ng-click="ok()">OK</button>
+</div>

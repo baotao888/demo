@@ -1,0 +1,17 @@
+<div class="modal-header">
+    <h3 class="modal-title">标签管理</h3>
+</div>
+<div class="modal-body">
+    <p>
+        <button ng-repeat="item in items" class="btn m-b-xs btn-sm btn-success btn-addon m-b-xs m-r-xs"><i class="fa fa-minus pull-right" ng-click="deleteTag($index)" tooltip="移除"></i>{{ item }}</button>
+    </p>
+    <div class="form-group">
+        <div class="input-group m-b">
+            <input type="text" class="form-control" ng-model="tag" maxlength="8" size="10" required>
+            <span class="input-group-addon" ng-click="addTag()" tooltip="添加"><span class="fa fa-plus"></span></span>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary" ng-click="ok()">关闭</button>
+</div>

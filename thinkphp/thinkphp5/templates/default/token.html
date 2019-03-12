@@ -1,0 +1,159 @@
+<div id="loginModal" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="token-bg">
+      <div class="modal-content token-content" id="loginContent" style="display:{$t_type=='register'? 'none' : 'block'}">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">永乐打工网<strong>登录</strong></h4>
+        </div>
+        <div class="modal-body">
+          <form id="loginForm" class="form-content" method="post" action="/user/index/login">
+            <div class="form-group">
+              <div class="input-group input-login">
+                <span class="input-group-addon glyphicon glyphicon-phone"></span>
+                <input type="text" class="form-control" name="mobile" id="loginMobile" aria-describedby="inputGroupSuccess1Status" placeholder="手机号码" maxlength="11">
+              </div>
+            </div>  
+            <div class="form-group">
+              <div class="input-group input-login">
+                <span class="input-group-addon glyphicon glyphicon-lock"></span>
+                <input type="password" class="form-control" name="password" id="loginPassword" aria-describedby="inputGroupSuccess1Status" placeholder="密码">
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="input-group input-login clearfix">
+                <div class="checkbox pull-left">
+                  <label>
+                    <input type="checkbox" id="checkboxSuccess" name="auto_login" value="1" class="item">
+                    <span class="item">下次自动登录</span>
+                  </label>
+                </div>
+                <div class="pull-right user-other">还不是会员？<a id="registerBtn">立即注册</a></div>
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary btn-lg btn-block bnt-login">登录</button>
+          </form>
+        </div>
+      </div>
+      <div id="registerContent" class="modal-content token-content" style="display:{$t_type=='register'? 'block' : 'none'}">
+        <div class="modal-header register-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">永乐打工网<strong>注册</strong></h4>
+          <div class="tip">免费注册将会获得永乐打工网独家赞助的洗漱套装一份！</div>
+        </div>
+        <div class="modal-body">
+          <form id="registerForm" class="form-content" method="post" action="/user/index/register">
+            <div class="form-group">
+              <div class="input-group">
+                <span class="input-group-addon glyphicon glyphicon-phone"></span>
+                <input type="text" class="form-control" name="mobile" id="registerMobile" aria-describedby="inputGroupSuccess1Status" placeholder="手机号码" maxlength="11">
+              </div>
+            </div>  
+            <div class="form-group">
+              <div class="input-group">
+                <span class="input-group-addon glyphicon glyphicon-user"></span>
+                <input type="text" class="form-control" name="realname" id="registerRealname" aria-describedby="inputGroupSuccess1Status" placeholder="姓名" maxlength="5">
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="input-group">
+                <span class="input-group-addon glyphicon glyphicon-lock"></span>
+                <input type="password" class="form-control" name="password" id="registerPassword" aria-describedby="inputGroupSuccess1Status" placeholder="密码">
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="input-group">
+                <span class="input-group-addon glyphicon glyphicon-lock"></span>
+                <input type="password" class="form-control" name="re_password" id="registerRepassword" aria-describedby="inputGroupSuccess1Status" placeholder="确认密码">
+              </div>
+            </div>
+            <div class="form-group form-checkbox">
+              <div class="input-group clearfix">
+                <div class="checkbox pull-left">
+                  <label>
+                    <input type="checkbox" name="userservice" id="checkboxSuccess" value="option1" class="item" checked>
+                    <span class="item">接受<a href="/index/index/protocol" target="_blank">用户服务协议</a></span>
+                  </label>
+                </div>
+                <div class="pull-right user-other">已有账号？<a id="loginBtn">马上登录</a></div>
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary btn-lg btn-block">免费注册</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="inviteModal" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="token-bg">
+      <div class="modal-content invite-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          推荐排行榜
+        </div>
+        <div class="modal-body">
+          <table id="inviteTable">
+            <thead style="display:none;">
+              <tr><th>排名</th><th>头像</th><th>推荐人</th><th>奖金</th></tr>
+            </thead>
+            <tbody>
+            </tbody>
+          </table>
+          <h4>推荐好友入职满一定天数即可领取现金奖励</h4>
+          <ul class="list-unstyled award">
+            <li>1-2人<b>奖金100元/人</b></li>
+            <li>3-5人<b>奖金150元/人</b></li>
+            <li>6人及以上<b>奖金200元/人</b></li>
+          </ul>
+          <div class="invite-form">
+            <form id="inviteForm" class="form-content" method="post" action="/user/index/invite">
+              <div class="form-group">
+                <div class="input-group input-login">
+                  <input type="text" class="form-control" name="mobile" id="inviteMobile" aria-describedby="inputGroupSuccess1Status" placeholder="输入好友手机号码" maxlength="11">
+                </div>
+              </div>  
+              <div class="form-group">
+                <div class="input-group input-login">
+                  <input type="text" class="form-control" name="realname" id="inviteRealname" aria-describedby="inputGroupSuccess1Status" placeholder="输入好友姓名" maxlength="5">
+                </div>
+              </div>
+              <button type="submit" class="btn btn-primary btn-lg btn-block">立即推荐</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="{$Think.config.js_domain}/bootstrap-plugin/bootstrapValidator/bootstrapValidator.js"></script>
+<link rel="stylesheet" href="{$Think.config.js_domain}/bootstrap-plugin/bootstrapValidator/bootstrapValidator.css" />
+<script src="{$Think.config.js_domain}/controller/form-web-token.js"></script>
+<script type="text/javascript">
+  $(function(){
+	$("#registerBtn").on('click', function(){
+	  showRegisterModal();
+	});
+	$("#loginBtn").on('click', function(){
+	  showLoginModal();	
+	});	
+	//登录框
+	$("#loginModal").on('show.bs.modal', function(){
+	  /*居中*/
+	  var $this = $(this);
+	  var $modal_dialog = $this.find('.modal-dialog');
+	  // 关键代码，如没将modal设置为 block，则$modala_dialog.height() 为零
+	  $this.css('display', 'block');
+	  $modal_dialog.css({'margin-top': Math.max(0, ($(window).height() - $modal_dialog.height()) / 2) });
+	});
+	$("#inviteModal").on('show.bs.modal', function(){
+	  /*居中*/
+	  var $this = $(this);
+	  var $modal_dialog = $this.find('.modal-dialog');
+	  // 关键代码，如没将modal设置为 block，则$modala_dialog.height() 为零
+	  $this.css('display', 'block');
+	  $modal_dialog.css({'margin-top': Math.max(0, ($(window).height() - $modal_dialog.height()) / 2) });
+	});
+  });
+</script>

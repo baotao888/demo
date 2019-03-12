@@ -1,0 +1,75 @@
+{extend name="$base" /}
+
+{block name="content"}
+<div class="job-content">
+  <div class="container">
+  <div class="row block info">
+    <div class="col-xs-12">
+      {include file="$thumbs"}
+    </div>
+    <div class="col-xs-12 text">
+      <h3>{$com.job_name}</h3>
+      <div class="clearfix job-signup">
+        <div class="pull-left salary"><strong>{$com.salary_floor}-{$com.salary_ceil}</strong> 元/月</div>
+        <div class="pull-right signup">
+          {if $com.status==1}
+          	<a class="btn-signup" href="/wechat/signup/{$com.id}">{$Think.lang.signup_now}</a>
+          {else if $com.status==99}
+          	<a class="btn-signup">{$Think.lang.signup_stop}</a>
+          {/if}  
+        </div>
+      </div>
+      <div class="condition">{$Think.lang.job_condition}{$Think.lang.colon}{$com.condition_short}</div>
+      <div class="condition">{$Think.lang.work_time}{$Think.lang.colon}{$com.jobdata.view_time}</div>
+      <div class="condition">{$Think.lang.work_address}{$Think.lang.colon}{$com.jobdata.address_short}</div>
+      <div class="tag">{$Think.lang.job_welfare}{$Think.lang.colon}
+        {volist name='$com.welfare_tag' id='ls'}
+          <span class="label">{$ls}</span>
+        {/volist}
+      </div>
+      
+    </div>
+    <div class="col-xs-12">
+      <div class="attention">
+        <div class="message">
+          <span class="glyphicon glyphicon-info-sign pull-left"></span><b>{$Think.lang.tip_1}{$Think.lang.colon}</b>{$Think.lang.tip_info_1}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12 block detail">
+        <div class="panel panel-default panel-instruct">
+          <div class="panel-heading clearfix">
+            <span class="pull-left field">{$Think.lang.salary_detail}</span>
+            <span class="pull-right auth"><span class="icon">证</span>{$Think.lang.salary_auth}</span>
+          </div>
+          <div class="panel-body">
+            {$com.jobdata.salary_detail}
+          </div>
+        </div>
+        <div class="panel panel-default panel-instruct">
+          <div class="panel-heading clearfix">
+            <span class="pull-left field">{$Think.lang.job_detail}</span>
+            <span class="pull-right auth"><span class="icon">验</span>{$Think.lang.job_auth_2}</span>
+          </div>
+          <div class="panel-body">
+            {$com.jobdata.content}
+          </div>
+        </div>
+        <div class="panel panel-default panel-instruct">
+          <div class="panel-heading clearfix">
+            <span class="pull-left field">{$Think.lang.signup_process}</span>
+            <span class="pull-right auth"><span class="icon">保</span>{$Think.lang.signup_auth}</span>
+          </div>
+          <div class="panel-body">
+            {include file="$signupitem"}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+</div>
+{/block}

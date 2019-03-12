@@ -1,0 +1,40 @@
+<div class="bg-light lter b-b wrapper-md">
+  <h1 class="m-n font-thin h3">我的门派</h1>
+</div>
+<div class="wrapper-md">
+  <div class="row">
+    <div class="col-sm-6 connected" ng-repeat="orgitem in vm.organization">
+      <div class="panel panel-success">
+        <div class="panel-heading">
+          {{orgitem.nickname}}成员
+        </div>
+        <ul class="list-group alt">
+          <li class="list-group-item" ng-repeat="teacher in orgitem.header">
+            <div class="media">
+              <span class="pull-left thumb-sm"><img ng-src="{{teacher.avatar}}" alt="{{teacher.real_name}}" class="img-circle"></span>
+              <div class="pull-right text-muted m-t-sm">
+                <i class="fa fa-circle"></i>
+              </div>
+              <div class="media-body">
+                <div><a>{{teacher.nickname}}</a></div>
+                <small class="text-muted">{{teacher.real_name}}</small>
+              </div>
+            </div>
+          </li>
+          <li class="list-group-item" ng-repeat="employee in orgitem.list">
+            <div class="media">
+              <span class="pull-left thumb-sm"><img ng-src="{{employee.avatar}}" alt="{{employee.real_name}}" class="img-circle"></span>
+              <div class="pull-right {{employee.gender?'text-success':'text-warning'}} m-t-sm">
+                <i class="fa fa-circle"></i>
+              </div>
+              <div class="media-body">
+                <div><a>{{employee.nickname}}</a></div>
+                <small class="text-muted">{{employee.real_name}}</small>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

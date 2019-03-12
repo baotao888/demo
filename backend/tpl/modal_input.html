@@ -1,0 +1,246 @@
+<div class="modal-body">
+    <div class="row">
+        <div class="col-sm-12" ng-show="operate==3">
+            <form class="form-validation" role="form" name="form">
+                <div class="panel panel-default line-xs">
+                    <div class="panel-heading h3">接站</div>
+                    <div class="alert alert-warning" role="alert">请输入人选信息，完成接站流程</div>
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <label>性别</label>
+                            <div>
+                                <div class="radio-inline">
+                                    <label>
+                                        <input type="radio" name="gender" id="gender1" ng-value="0"  ng-model="candidate.customer.gender">
+                                        女
+                                    </label>
+                                </div>
+                                <div class="radio-inline">
+                                    <label>
+                                        <input type="radio" name="gender" id="gender0" ng-value="1" ng-model="candidate.customer.gender">
+                                        男
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>出生年月</label>
+                            <div class="input-group w-md">
+                                <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="candidate.customer.birthday" is-open="opened" />
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>身份证</label>
+                            <input type="text" class="form-control" ng-model="idcard" maxlength="20" required>
+                        </div>
+                    </div>
+                    <div class="panel-footer clearfix">
+                        <button type="submit" class="btn btn-success pull-right" ng-click="ok()"  ng-disabled="form.$invalid || submitting"><strong>完成</strong></button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-sm-12" ng-show="operate==4">
+            <form role="form" name="ondutyform">
+                <div class="panel panel-default line-xs">
+                    <div class="panel-heading h3">入职</div>
+                    <div class="alert alert-warning m-b-none" role="alert">请输入人选入职信息，完成接站流程</div>
+                    <div class="panel-body">
+                        <div class="col-sm-12 m-b-md">
+                            <a class="pull-left thumb thumb-wrapper m-r">
+                                <img ng-src="img/a{{candidate.customer.gender | genderClass:2}}.jpg">
+                            </a>
+                            <div class="clear">
+                                <div class="font-semibold"><b class="text-md text-info m-r-lg">{{candidate.customer.real_name}}</b><i class="fa fa-phone m-l-xs" title="电话"></i> <b>{{candidate.customer.phone}}</b></div>
+                                <div class="text-xs block m-t-xs"><i class="fa fa-credit-card m-r-sm" title="身份证号码"></i> {{candidate.customer.idcard}}<i class="fa fa-user m-l-lg m-r-sm" title="年龄"></i> {{candidate.customer.age}}</div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>入职企业</label>
+                                <div class="input-group m-b">
+                                    <span class="input-group-addon"><span class="fa icon-basket"></span></span>
+                                    <input type="text" class="form-control" ng-value="candidate.recruit.enterprise.enterprise_name" readonly>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>入职日期</label>
+                                <div class="input-group m-b">
+                                    <span class="input-group-addon"><span class="fa icon-clock"></span></span>
+                                    <input type="text" class="form-control" ng-value="candidate.signup_time" readonly>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>返费类型</label>
+                                <div class="input-group m-b">
+                                    <span class="input-group-addon"><span class="fa fa-list"></span></span>
+                                    <input type="text" class="form-control" ng-value="candidate.recruit.allowance.type | allowanceType" readonly>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6" ng-if="candidate.recruit.allowance.type == 1 || candidate.recruit.allowance.type == 3">
+                            <div class="form-group">
+                                <label>企业返费</label>
+                                <div class="input-group m-b">
+                                    <span class="input-group-addon"><span class="fa fa-cny"></span></span>
+                                    <input type="number" class="form-control" ng-value="candidate.recruit.allowance.amount" readonly>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6" ng-if="candidate.recruit.allowance.type == 1 || candidate.recruit.allowance.type == 3">
+                            <div class="form-group">
+                                <label>企业{{candidate.recruit.allowance.onduty_type | ondutyType}}天数</label>
+                                <div class="input-group m-b">
+                                    <span class="input-group-addon"><span class="fa fa-clock-o"></span></span>
+                                    <input type="number" class="form-control" ng-value="candidate.recruit.allowance.term" readonly>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6" ng-if="candidate.recruit.allowance.type == 1 || candidate.recruit.allowance.type == 3">
+                        <div class="form-group">
+                            <label>人选补贴</label>
+                            <div class="input-group m-b">
+                                <span class="input-group-addon"><span class="fa fa-cny"></span></span>
+                                <input type="number" class="form-control" ng-value="candidate.recruit.allowance.allowance" readonly>
+                            </div>
+                        </div>
+                        </div>
+                        <div class="col-sm-6" ng-if="candidate.recruit.allowance.type == 2 || candidate.recruit.allowance.type == 3">
+                            <div class="form-group">
+                                <label>企业每小时工资</label>
+                                <div class="input-group m-b">
+                                    <span class="input-group-addon"><span class="fa fa-cny"></span></span>
+                                    <input type="number" class="form-control" ng-value="candidate.recruit.allowance.ent_wage" readonly>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6" ng-if="candidate.recruit.allowance.type == 2 || candidate.recruit.allowance.type == 3">
+                            <div class="form-group">
+                                <label>人选每小时工资</label>
+                                <div class="input-group m-b">
+                                    <span class="input-group-addon"><span class="fa fa-cny"></span></span>
+                                    <input type="number" class="form-control" ng-value="candidate.recruit.allowance.cp_wage" readonly>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="text-primary">推荐人</label>
+                            <div class="input-group m-b">
+                                <span class="input-group-addon"><span class="fa fa-user"></span></span>
+                                <input type="text" class="form-control" ng-model="inviter" maxlength="50">
+                            </div>
+                        </div>
+                        </div>
+                        <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="text-primary">推荐人联系电话</label>
+                            <div class="input-group m-b">
+                                <span class="input-group-addon"><span class="fa fa-phone"></span></span>
+                                <input type="text" class="form-control" ng-model="inviter_phone" maxlength="11">
+                            </div>
+                        </div>
+                        </div>
+                        <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="text-primary">推荐费</label>
+                            <div class="input-group m-b">
+                                <span class="input-group-addon"><span class="fa fa-cny"></span></span>
+                                <select class="form-control"  ng-model="invite_amount">
+                                    <option value="0">0</option>
+                                    <option value="100">100</option>
+                                    <option value="150">150</option>
+                                    <option value="200">200</option>
+                                </select>
+                            </div>
+                        </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label class="text-primary">推荐人是否为会员</label>
+                                <div class="input-group m-b">
+                                    <span class="input-group-addon"><span class="fa fa-user"></span></span>
+                                    <label class="i-switch m-t-xs m-r">
+                                        <input type="checkbox" checked ng-model="invite_is_member">
+                                        <i></i>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-footer clearfix">
+                        <button type="submit" class="btn btn-default pull-right" ng-click="cancel()"><strong>取消</strong></button>
+                        <button type="submit" class="btn btn-success pull-right" ng-click="ok()"  ng-disabled="ondutyform.$invalid || submitting || ! candidate.recruit.enterprise.enterprise_name"><strong>完成</strong></button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-sm-12" ng-show="operate==10">
+            <form role="form" name="taskform">
+                <div class="panel panel-default line-xs">
+                    <div class="panel-heading h3">新建拨打计划</div>
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <label class="text-info">计划时间</label>
+                                    <div class="m-b">
+                                        <datepicker ng-model="dt" min-date="minDate" show-weeks="true" class="datepicker"></datepicker>
+                                        <timepicker ng-model="dt" hour-step="1" minute-step="10" show-meridian="true"></timepicker>
+                                    </div>
+                                </div>
+                                <div class="form-group col-xs-6">
+                                    <label class="text text-info">计划拨打内容</label>
+                                    <textarea  class="form-control" style="height:300px;" ng-model="content"></textarea>
+                                </div>
+                            </div>
+                            <pre class="alert alert-info">您设置的拨打时间是: <em>{{dt | date:'yyyy-MM-dd H:m' }}</em></pre>
+                        </div>
+                    </div>
+                    <div class="panel-footer">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="alert ng-isolate-scope alert-warning alert-dismissable m-b-none" role="alert" type="warning">
+                                    <span class="ng-binding ng-scope">{{error}}</span>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <button type="submit" class="btn btn-sm btn-primary pull-right text-uc m-l-lg" ng-click="ok()" ng-disabled="submitting"><strong>创建完成</strong></button>
+                                <button type="submit" class="btn btn-sm btn-success pull-right text-uc" ng-click="close()" ng-disabled="submitting"><strong>继续创建</strong></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-sm-12" ng-show="operate==98">
+            <form role="form" name="backform">
+                <div class="panel panel-default line-xs">
+                    <div class="panel-heading h3">人选状态回退</div>
+                    <div class="alert alert-warning" role="alert">请选择回退之后的状态，完成回退流程</div>
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <div class="radio-inline" ng-repeat="st in status_list">
+                                <label class="i-checks">
+                                    <input type="radio" name="back_status" ng-value="st.value"  ng-model="back.status">
+                                    <i></i>
+                                    {{st.text}}
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-footer clearfix">
+                        <button type="submit" class="btn btn-success pull-right" ng-click="ok()" ng-disabled="submitting"><strong>完成</strong></button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

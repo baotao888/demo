@@ -1,0 +1,45 @@
+<div class="bg-light lter b-b wrapper-md">
+    <h1 class="m-n font-thin h3">
+        权限
+        <a ng-href="#/app/role/list" class="btn btn-sm btn-icon btn-info pull-right"><i class="fa fa-chevron-left"></i></a>
+    </h1>
+</div>
+<div class="wrapper-md" ng-controller="RoleFormController">
+    <div class="row">
+        <div class="col-sm-12">
+            <form name="form" class="form-validation">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <ul class="breadcrumb m-b-none">
+                            <li><a href=""><i class="fa fa-home"></i> 权限</a></li>
+                            <li class="active ng-binding">{{vm.operate}}</li>
+                            <li class="text-primary ng-binding" ng-show="vm.edit">{{vm.role.role_name}}</li>
+                        </ul>
+                    </div>
+                    <div class="panel-body">
+                        <p class="text-muted">{{vm.error}}</p>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">角色名称</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" ng-model="vm.role.role_name" required >
+                            </div>
+                        </div>
+                        <div class="line line-dashed b-b line-lg pull-in"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">简介</label>
+                            <div class="col-sm-10">
+                                <textarea class="form-control" rows="6" placeholder="" ng-model="vm.role.description"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <footer class="panel-footer text-right bg-light lter">
+                        <button type="submit" class="btn btn-success" ng-disabled="form.$invalid || vm.submitting" ng-click="vm.submitInfo()">Submit</button>
+                    </footer>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script type="text/ng-template" id="modal.html">
+        <div ng-include="'tpl/modal.html'"></div>
+    </script>
+</div>

@@ -1,0 +1,50 @@
+{extend name="$base" /}
+{block name="header"}
+<div class="wechat-top invite-top">
+  推荐排行榜
+</div>
+{/block}
+{block name="content"}
+<div class="wechat-content invite-content">
+  <table>
+    <thead style="display:none">
+      <tr><th>排名</th><th>头像</th><th>推荐人</th><th>奖金</th></tr>
+    </thead>
+    <tbody>
+      {volist name='res' id='ls' key='k'}
+        <tr><td><span class="num {if $k == 1 } first {elseif $k == 2} second {elseif $k == 3} third {else} four {/if}">{$k}</span></td><td><img src="{$Think.config.img_domain}/logo.png"/></td><td>{$ls.user_name}</td><td>￥{$ls.amount}</td></tr>
+      {/volist}
+    </tbody>
+  </table>
+  <h4>推荐好友入职满一定天数即可领取现金奖励</h4>
+  <ul class="list-unstyled award list-inline reward">
+    <li>1-2人<b>奖金100元/人</b></li>
+    <li>3-5人<b>奖金150元/人</b></li>
+    <li>6人及以上<b>奖金200元/人</b></li>
+  </ul>
+  <p class="text-center reward-list">累计推荐10人及以上即可获得永乐打工网独家赞助的<b>冰箱或洗衣机</b>一台</p>
+  <div class="invite-form">
+    <form id="inviteForm" class="form-content" method="post" action="">
+      <div class="form-group">
+        <div class="input-group input-login">
+          <input type="text" class="form-control" name="mobile" id="inviteMobile" aria-describedby="inputGroupSuccess1Status" placeholder="输入好友手机号码" maxlength="11">
+        </div>
+      </div>  
+      <div class="form-group">
+        <div class="input-group input-login">
+          <input type="text" class="form-control" name="realname" id="inviteRealname" aria-describedby="inputGroupSuccess1Status" placeholder="输入好友姓名">
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary btn-lg btn-block">立即推荐</button>
+    </form>
+  </div>
+  <div class="bottom"></div>
+</div>
+{/block}
+{block name="javascript"}
+<script src="{$Think.config.js_domain}/bootstrap-plugin/bootstrapValidator/bootstrapValidator.js"></script>
+<link rel="stylesheet" href="{$Think.config.js_domain}/bootstrap-plugin/bootstrapValidator/bootstrapValidator.css" />
+<script src="{$Think.config.js_domain}/controller/form-wechat-invite.js"></script>
+{/block}
+{block name="footer"}
+{/block}

@@ -1,0 +1,191 @@
+<div class="bg-light lter b-b wrapper-md">
+    <h1 class="m-n font-thin h3">
+      <!-- 菜单 -->	
+        <!--<a ng-href="#/app/candidate/list/all" class="btn m-b-xs w-xs btn-default">所有客户池</a>-->
+        <a ng-href="#/app/customer/list/public" class="btn m-b-xs w-xs btn-success">公海客户池</a>
+        <!--<a ng-if="vm.navi.customer_btn.distribute" ng-href="#/app/customer/list/public" class="btn m-b-xs w-xs btn-primary">可认领客户池</a>-->
+        <a ng-if="vm.navi.customer_btn.distribute" ng-href="#/app/customer/list/signned" class="btn m-b-xs btn-primary">已分配客户</a>
+        <a ng-if="vm.navi.customer_btn.distribute" ng-href="#/app/customer/list/unsignned" class="btn m-b-xs btn-danger">未分配客户</a>
+        <a ng-if="vm.navi.customer_btn.distribute" ng-href="#/app/callin/user/unsignned" class="btn m-b-xs btn-danger">端口注册用户</a>
+        <a ng-if="vm.navi.customer_btn.distribute" ng-href="#/app/callin/applicant/unsignned" class="btn m-b-xs btn-danger">端口报名用户</a>
+        <label class="i-switch m-t-xs m-r" tooltip="点我可以切换显示公海和可认领的客户池哦">
+            <input type="checkbox" checked ng-model="vm.onlyMy" ng-change="vm.switchType()">
+            <i></i>
+        </label>
+      <!-- 操作 -->  
+        <a ng-href="#/app/customer//form" class="btn btn-sm btn-icon btn-info pull-right m-r-xs" title="录入客户"><i class="fa fa-plus-square"></i></a>
+    	<a ng-if="vm.navi.customer_btn.import" ng-href="#/app/customer/import" class="btn btn-sm btn-icon btn-info pull-right m-r-xs" title="导入客户"><i class="glyphicon glyphicon-import"></i></a>
+    </h1>
+</div>
+<div class="wrapper-md">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <ul class="breadcrumb m-b-none">
+                <li><a href=""><i class="fa fa-home"></i> 人选客户池</a></li>
+                <li>{{vm.type}}客户池</li>
+                <li class="active">{{vm.subType}}</li>
+            </ul>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-8 col-lg-7 m-b-xs">
+                    <div class="col-lg-5 col-md-4" ng-if="vm.pagingOptions.count>0">
+                        <select class="input-sm form-control w-xs inline v-middle" ng-model="vm.operate">
+                            <option value="0">请选择</option>
+                            <option ng-repeat="item in vm.operates" value="{{item.id}}">{{item.text}}</option>
+                        </select>
+                        <button class="btn btn-sm btn-default" ng-click="vm.doOperate()" ng-disabled="vm.unresubmit">{{vm.sure}}</button>
+                    </div>
+                    <div class="col-lg-7 col-md-8" ng-if="vm.pagingOptions.count>0">
+                        <div class="col-sm-6">
+                            <label class="showlength">
+                                <span>显示</span>
+                                <select name="datalength" class="form-control input-sm inline" ng-model="vm.pagingOptions.pageSize" ng-change="vm.selectLength()" style="width: auto;">
+                                    <option  ng-repeat="showPages in vm.pagingOptions.pageShowLength" value="{{showPages}}">{{showPages}}</option>
+                                </select>
+                                <span>条</span>
+                            </label>
+                        </div>
+                        <div class="col-sm-6 text-center">
+                            <small class="text-muted inline m-t-sm m-b-sm">总共 {{vm.pagingOptions.count}} 个客户</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-lg-4">
+                    <div class="input-group">
+                        <input type="text" class="input-sm form-control" placeholder="输入客户名称或者手机号码" ng-model="vm.searchText">
+                    <span class="input-group-btn">
+                      <button class="btn btn-sm btn-default" type="button" ng-click="vm.showdatalist()" ng-disabled="!vm.searchText">Go!</button>
+                    </span>
+                    </div>
+                </div>
+                <div class="col-md-1 input-group pull-right">
+                    <span class="input-group-btn">
+                      <button class="btn btn-sm btn-default" target="#detailParams" type="button" ng-click="vm.btnSearchDetail()" ui-toggle-class="show">高级搜索</button>
+                    </span>
+                </div>
+            </div>
+            <div class="row wrapper animated fadeInDown hide" id="detailParams">
+                <div class="col-lg-6 col-md-7 m-b-xs">
+                    <div class="col-md-3">
+                        <label class="control-label m-t-sm">释放时间:</label>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="input-group w-sm">
+                            <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="vm.searchDis"  is-open="vm.opens[2]" datepicker-options="dateOptions" close-text="Close" />
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-default" ng-click="open($event, 2)"><i class="glyphicon glyphicon-calendar"></i></button>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="input-group w-sm distritime">
+                            <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="vm.searchDised"  is-open="vm.opens[3]" datepicker-options="dateOptions" close-text="Close" />
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-default" ng-click="open($event, 3)"><i class="glyphicon glyphicon-calendar"></i></button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-1">
+                    <div class="">
+                        <button class="btn btn-success" ng-click="vm.timersearch()" ng-disabled="!vm.searchDised || !vm.searchDis">搜索</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-striped b-t b-light">
+                <thead>
+                <tr>
+                    <th>
+                      <label class="i-checks m-b-none">
+                        <input type="checkbox" ng-model="vm.select_all" ng-change="vm.selectAll()"><i></i>
+                      </label>
+                    </th>
+                    <th style="min-width: 90px;">客户名称</th>
+                    <th>联系电话</th>
+                    <th class="tablet" style="min-width: 60px;">性别</th>
+                    <th style="min-width: 60px;" class="tablet">籍贯</th>
+                    <th style="min-width: 60px;" class="tablet">来源</th>
+                    <th>最后联系内容</th>
+                    <th style="min-width: 130px;" ng-if="vm.showOpenTime">入库时间</th>
+                    <th style="min-width: 150px;">操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="(i, customer) in vm.list">
+                    <td><label class="i-checks m-b-none"><input type="checkbox" ng-model="vm.checked[i]" ng-change="vm.selectCustomer()"><i></i></label></td>
+                    <td>{{customer.real_name}}</td>
+                    <td><label class="btn btn-default ng-untouched ng-valid ng-dirty ng-valid-parse">{{customer.phone}}</label></td>
+                    <td class="tablet"><a class="{{customer.gender | genderClass}}" title="{{customer.gender | genderClass:1}}"></a></td>
+                    <td class="tablet">{{customer.hometown}}</td>
+                    <td class="tablet">{{customer.from}}</td>
+                    <td><a class="list-lang-text" title="{{customer.latest_contact_content}}">{{customer.latest_contact_content}}</a></td>
+                    <td ng-if="vm.showOpenTime" title="{{customer.open_time | frontendBackendDate:'b2f' | fromNow}}">{{customer.open_time | frontendBackendDate:'b2f' | date:'yyyy-MM-dd H:m'}}</td>
+                    <td>
+                    	<a ng-href="#/app/customer/{{customer.id}}/detail" class="btn m-b-xs btn-sm btn-primary fa icon-doc" title="查看详情"></a>
+                        <a ng-click="vm.customerDetail(customer.id)" class="btn m-b-xs btn-sm btn-primary fa icon-folder" title="预览"></a>
+                        <a ng-if="vm.navi.customer_btn.delete" ng-click="vm.drop(customer.id)" class="btn m-b-xs btn-sm btn-danger fa icon-trash" title="删除"></a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <footer class="panel-footer">
+            <div class="row">
+                <div class="col-lg-4 col-md-3">
+                  <div class="col-lg-6 col-md-12" ng-if="vm.pagingOptions.count>0">
+                    <select class="input-sm form-control w-xs inline v-middle" ng-model="vm.operate">
+                        <option value="0">请选择</option>
+                        <option ng-repeat="item in vm.operates" value="{{item.id}}">{{item.text}}</option>
+                    </select>
+                    <button class="btn btn-sm btn-default" ng-click="vm.doOperate()">确定</button>
+                  </div>
+                  <div class="col-lg-6 col-md-12 tablet" ng-if="vm.pagingOptions.count>0">
+                      <label class="showlength">
+                        <span>显示</span>
+                        <select name="datalength" class="form-control input-sm inline" ng-model="vm.pagingOptions.pageSize" ng-change="vm.selectLength()" style="width: auto;">
+                          <option  ng-repeat="showPages in vm.pagingOptions.pageShowLength" value="{{showPages}}">{{showPages}}</option>
+                        </select>
+                        <span>条</span>
+                      </label>
+                  </div>
+                </div>
+                <div class="col-lg-8 col-md-9">
+                  <div ng-if="vm.pagingOptions.count>0" class="text-right text-center-xs col-lg-8 col-md-10">
+                      <pagination
+                              boundary-link-numbers="true"
+                              boundary-links="true"
+                              max-size="vm.pagingOptions.pageMax"
+                              items-per-page="vm.pagingOptions.pageSize"
+                              total-items="vm.pagingOptions.count"
+                              ng-model="vm.pagingOptions.currentPage"
+                              ng-change="vm.getPagedDataAsync()"
+                              class="m-t-none m-b"
+                              previous-text="&lsaquo;"
+                              next-text="&rsaquo;"
+                              first-text="&laquo;"
+                              last-text="&raquo;"
+                      ></pagination>
+                  </div>
+                  <div class="col-lg-2 text-center tablet">
+                    <small class="text-muted inline m-t-sm m-b-sm m-l-sm">{{vm.pagingOptions.currentPage}}/{{vm.pagingOptions.pages}}</small>
+                    <small class="text-muted inline m-t-sm m-b-sm">总共{{vm.pagingOptions.count}}人</small>
+                  </div>
+                  <div ng-if="vm.pagingOptions.count>0" class="form-group col-lg-2 col-md-2" ng-if="vm.pagingOptions.count>0">
+                    <div class="input-group w-xs">
+                      <input type="text" class="input-sm form-control text-center" ng-model="vm.inputPage">
+                      <span class="input-group-btn">
+                        <button class="btn btn-sm btn-default" type="button" ng-click="vm.switchPage()">跳转</button>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <div class="list-loading">
+      <img ng-src="img/timg.gif" ng-show="vm.showLoading">
+    </div>
+</div>

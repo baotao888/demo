@@ -1,0 +1,100 @@
+<div class="bg-light lter b-b wrapper-md">
+    <h1 class="m-n font-thin h3">
+        员工
+        <a ng-href="#/app/organization/employee" class="btn btn-sm btn-icon btn-info pull-right"><i class="fa fa-chevron-left"></i></a>
+    </h1>
+</div>
+<div class="wrapper-md">
+    <div class="panel panel-default">
+        <div class="panel-heading font-bold">
+            <ul class="breadcrumb m-b-none">
+                <li><a href=""><i class="fa fa-home"></i> 组织架构</a></li>
+                <li class="ng-binding">员工</li>
+                <li class="active ng-binding">{{vm.operate}}</li>
+                <li class="text-primary ng-binding" ng-show="vm.edit">{{vm.account.real_name}}</li>
+            </ul>
+        </div>
+        <div class="panel-body">
+            <form class="form-horizontal" name="form">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">真实姓名</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control rounded" ng-model="vm.account.real_name" required>
+                    </div>
+                </div>
+                <div class="line line-dashed b-b line-lg pull-in"></div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">昵称</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" ng-model="vm.account.nickname" required>
+                    </div>
+                </div>
+                <div class="line line-dashed b-b line-lg pull-in"></div>
+                <div class="form-group">
+                <label class="col-sm-2 control-label">工号</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" ng-model="vm.account.number">
+                </div>
+              </div>
+                <div class="line line-dashed b-b line-lg pull-in"></div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" for="phone">联系电话</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="phone" ng-model="vm.account.phone" required>
+                    </div>
+                    <div class="alert alert-danger help-block" ng-show="vm.contant">手机号已被注册</div>
+                </div>
+                <div class="line line-dashed b-b line-lg pull-in"></div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">性别</label>
+                    <div class="col-sm-10">
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="gender" id="gender1" ng-value="0"  ng-model="vm.account.gender">
+                                女
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="gender" id="gender0" ng-value="1" ng-model="vm.account.gender">
+                                男
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="line line-dashed b-b line-lg pull-in"></div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">是否在职</label>
+                    <div class="col-sm-10">
+                        <label class="i-switch i-switch-md bg-info m-t-xs m-r">
+                            <input type="checkbox" ng-model="vm.account.status" value="1" name='status' checked>
+                            <i></i>
+                        </label>
+                        <span class="help-block m-b-none">选中为在职，不选中为离职.</span>
+                    </div>
+                </div>
+                <div class="line line-dashed b-b line-lg pull-in"></div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">入职时间</label>
+                    <div class="col-sm-10">
+                        <div class="input-group w-md">
+                            <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="vm.account.join_at" is-open="opened" datepicker-options="dateOptions" close-text="Close" />
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="line line-dashed b-b line-lg pull-in"></div>
+                <div class="form-group">
+                    <div class="col-sm-4 col-sm-offset-2">
+                        <button type="submit" class="btn btn-primary" ng-disabled="form.$invalid || vm.submitting" ng-click="vm.submitInfo()">提交</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script type="text/ng-template" id="modal.html">
+    <div ng-include="'tpl/modal.html'"></div>
+</script>

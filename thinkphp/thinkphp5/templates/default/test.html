@@ -1,0 +1,77 @@
+{extend name="$base" /}
+{block name="content"}
+  <div class="container apply-process">
+    <img src="{$Think.config.img_domain}/apply-process.jpg"/>
+  </div>
+  <div class="main-delimiter"></div>
+  <div class="container">  
+    <div class="btn-group btn-group-justified main-statistics" role="group" aria-label="...">
+      <div class="btn-group" role="group">
+        <span class="item clearfix">
+          <span class="glyphicon glyphicon-user"></span>
+          <span class="text">本周新增职位</span>
+          <span class="label label-number">0</span>
+          <span class="label label-number">0</span>
+          <span class="label label-number">0</span>
+          <span class="label label-number">0</span>
+          <span class="label label-number">1</span>
+          <span class="text">个</span>
+        </span>
+      </div>
+      <div class="btn-group" role="group">
+        <span class="item clearfix">
+          <span class="glyphicon glyphicon-list-alt"></span>
+          <span class="text">今日申请报名</span>
+          <span class="label label-number">0</span>
+          <span class="label label-number">0</span>
+          <span class="label label-number">0</span>
+          <span class="label label-number">6</span>
+          <span class="label label-number">1</span>
+          <span class="text">个</span>
+        </span>
+      </div>
+    </div>
+  </div>
+  <div class="container main-list">
+    <ul class="list-group">
+    {volist name='com' id='user'}
+      <li class="list-group-item">
+        <div class="row job">
+          <div class="col-xs-3 col-md-2 image"><img class="thumb" src="{$user.cover}"/><span class="seal"></span></div>
+          <div class="col-xs-9 col-md-10">
+            <div class="row">
+              <div class="col-md-6">
+                <h4>
+                  <span class="title">{$user.job_name}<div class="tooltip right" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner">入职返现</div></div></span>
+                  <span class="region"><span class="glyphicon glyphicon-map-marker"></span>{$user.region_txt}</span>
+                </h4>
+                <div class="desc"><span class="glyphicon glyphicon-user"></span>职位要求：{$user.condition_short}</div>
+                <div class="desc"><span class="glyphicon glyphicon-time"></span>面试时间：{$user.subdata.view_time}</div>
+                <div class="tag">
+                {volist name='$user.welfare_tag' id='ls'}
+                  <span class="label">{$ls}</span>
+                {/volist}  
+                </div>
+              </div>
+              <div class="col-md-6 clearfix">
+                <div class="pull-left salary">
+                  <strong>{$user.salary_floor} - {$user.salary_ceil}</strong> 元/月
+                </div>
+                <div class="pull-right operate">
+                  <div class="people"><b>{$user.renshu.deliveries}</b>人已报名</div>
+                  <a href="javascript:signup({$user.id})" class="btn btn-default" role="button"><span class="glyphicon glyphicon-list-alt"></span>免费报名</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </li>
+    {/volist}
+    </ul>
+  </div>
+  <div class="container main-more">查看更多</div>
+{/block}
+{block name="popup"}
+  {__block__}
+  {include file="$signupmodal"}
+{/block}

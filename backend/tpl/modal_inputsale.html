@@ -1,0 +1,192 @@
+<div class="modal-body">
+    <div class="row">
+        <div class="col-sm-12" ng-show="operate==1">
+            <form class="form-validation" role="form" name="form">
+                <div class="panel panel-default line-xs">
+                    <div class="panel-heading h3">入账</div>
+                    <div class="alert alert-warning" role="alert">请输入订单数据，完成入账流程</div>
+                    <div class="panel-body">
+                        <div class="form-group" ng-show="type==1 || type==3">
+                            <label>在职天数/天</label>
+                            <input type="text" class="form-control" ng-model="ondutyday">
+                        </div>
+                        <div class="form-group" ng-show="type==2">
+                            <label>本月工时/小时</label>
+                            <input type="text" class="form-control" ng-model="worktime">
+                        </div>
+                    </div>
+                    <div class="panel-footer clearfix">
+                        <button type="submit" class="btn btn-success pull-right" ng-click="ok()"  ng-disabled="form.$invalid || submitting"><strong>完成</strong></button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-sm-12" ng-show="operate==2">
+            <form class="form-validation" role="form" name="form">
+                <div class="panel panel-default line-xs">
+                    <div class="panel-heading h3">删除</div>
+                    <div class="alert alert-warning" role="alert">请输入删除的理由，完成删除流程</div>
+                    <div class="panel-body">
+                        <div class="form-group" >
+                            <label>删除的理由</label>
+                            <textarea class="form-control" ng-model="deletereason"> </textarea>
+                        </div>
+                    </div>
+                    <div class="panel-footer clearfix">
+                        <button type="submit" class="btn btn-success pull-right" ng-click="ok()"  ng-disabled="form.$invalid || submitting"><strong>完成</strong></button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-sm-12" ng-show="operate==3">
+            <form class="form-validation" role="form" name="form">
+                <div class="panel panel-default line-xs">
+                    <div class="panel-heading h3">恢复</div>
+                    <div class="alert alert-warning" role="alert">请输入恢复的理由，完成恢复流程</div>
+                    <div class="panel-body">
+                        <div class="form-group" >
+                            <label>恢复的理由</label>
+                            <textarea class="form-control" ng-model="recovery"> </textarea>
+                        </div>
+                    </div>
+                    <div class="panel-footer clearfix">
+                        <button type="submit" class="btn btn-success pull-right" ng-click="ok()"  ng-disabled="form.$invalid || submitting"><strong>完成</strong></button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-sm-12" ng-show="operate==4">
+            <form class="form-validation" role="form" name="form">
+                <div class="panel panel-default line-xs">
+                    <div class="panel-heading h3">领补贴</div>
+                    <div class="alert alert-warning" role="alert">请输入领补贴信息，完成领补贴流程</div>
+                    <div class="panel-body">
+                        <div class="form-group" >
+                            <div class="col-sm-2 text-right" style="padding: 0;">领取方式:</div>
+                            <div class="col-sm-2">
+                                <label class="i-checks control-label">
+                                    <input type="radio" ng-model="receive" ng-value="1"><i></i>现金
+                                </label>
+                            </div>
+                            <div class="col-sm-8">
+                                <label class="i-checks control-label">
+                                    <input type="radio" ng-value="2" ng-model="receive"><i></i>转账
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label m-t-xs text-right" style="padding: 0;">是否垫付:</label>
+                            <div class="col-sm-2">
+                              <label class="i-switch bg-primary m-t-xs m-r">
+                                <input type="checkbox"  name="switch" ng-model="advance"><i></i>
+                              </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <div class="col-sm-2 text-right" style="padding: 0 12px 0 0;margin-right: 7px;">备注:</div>
+                                <textarea style="width: 60%;" class="form-control col-sm-8" ng-model="remarks"> </textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-footer clearfix">
+                        <button type="submit" class="btn btn-success pull-right" ng-click="ok()"  ng-disabled="form.$invalid || submitting"><strong>完成</strong></button>
+                    </div>
+                </div>
+            </form>
+        </div>
+         <div class="col-sm-12" ng-show="operate==5">
+            <form class="form-validation" role="form" name="form">
+                <div class="panel panel-default line-xs">
+                    <div class="panel-heading h3">领推荐费</div>
+                    <div class="alert alert-warning" role="alert">请输入领推荐费信息，完成领推荐费流程</div>
+                    <div class="panel-body">
+                        <div class="form-group" >
+                            <div class="col-sm-2 text-right" style="padding: 0;">领取方式:</div>
+                            <div class="col-sm-2">
+                                <label class="i-checks control-label">
+                                    <input type="radio" ng-model="recomm" ng-value="1"><i></i>现金
+                                </label>
+                            </div>
+                            <div class="col-sm-8">
+                                <label class="i-checks control-label">
+                                    <input type="radio" ng-value="2" ng-model="recomm"><i></i>转账
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <div class="col-sm-2 text-right" style="padding: 0 12px 0 0;margin-right: 7px;">备注:</div>
+                                <textarea style="width: 60%;" class="form-control col-sm-8" ng-model="marks"> </textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-footer clearfix">
+                        <button type="submit" class="btn btn-success pull-right" ng-click="ok()"  ng-disabled="form.$invalid || submitting"><strong>完成</strong></button>
+                    </div>
+                </div>
+            </form>
+        </div>
+         <div class="col-sm-12" ng-show="operate==7">
+            <form class="form-validation" role="form" name="form">
+                <div class="panel panel-default line-xs">
+                    <div class="panel-heading h3">调整差价</div>
+                    <div class="alert alert-warning" role="alert">请输入差价数据，完成调整差价流程</div>
+                    <div class="panel-body">
+                        <div class="form-group col-sm-12">
+                            <label class="col-sm-3 control-label text-center">差价金额:</label>
+                            <input class="col-sm-4" type="number" class="form-control" ng-model="difference">
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <div class="col-sm-2 text-right" style="padding: 0;margin-right: 43px;">备注:</div>
+                                <textarea style="width: 60%;" class="form-control col-sm-8" ng-model="mark"> </textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-footer clearfix">
+                        <button type="submit" class="btn btn-success pull-right" ng-click="ok()"  ng-disabled="form.$invalid || submitting"><strong>完成</strong></button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-sm-12" ng-show="operate==8">
+            <form class="form-validation" role="form" name="form">
+                <div class="panel panel-default line-xs">
+                    <div class="panel-heading h3">继续在职</div>
+                    <div class="alert alert-warning" role="alert">请输入备注，完成继续在职流程</div>
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <div class="col-sm-2 text-right" style="padding: 0;margin-right: 43px;">备注:</div>
+                                <textarea style="width: 60%;" class="form-control col-sm-8" ng-model="mark"> </textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-footer clearfix">
+                        <button type="submit" class="btn btn-success pull-right" ng-click="ok()"  ng-disabled="form.$invalid || submitting"><strong>完成</strong></button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-sm-12" ng-show="operate==9">
+            <form class="form-validation" role="form" name="form">
+                <div class="panel panel-default line-xs">
+                    <div class="panel-heading h3">离职</div>
+                    <div class="alert alert-warning" role="alert">请输入备注，完成离职流程</div>
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <div class="col-sm-2 text-right" style="padding: 0;margin-right: 43px;">备注:</div>
+                                <textarea style="width: 60%;" class="form-control col-sm-8" ng-model="mark"> </textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-footer clearfix">
+                        <button type="submit" class="btn btn-success pull-right" ng-click="ok()"  ng-disabled="form.$invalid || submitting"><strong>完成</strong></button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

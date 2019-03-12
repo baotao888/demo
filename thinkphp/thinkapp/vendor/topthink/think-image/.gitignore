@@ -1,0 +1,5 @@
+/vendor/
+/thinkphp/
+/composer.lock
+/.idea/
+/tests/

@@ -1,0 +1,41 @@
+{extend name="$base" /}
+{block name="header"}
+  {include file="$weixin_header"}
+{/block}
+{block name="content"}
+<div class="wechat-content form-page">
+  <form class="form-content" method="post">
+    <div class="list-group">
+      <div class="form-group">
+        <div class="input-group">
+          <span class="input-group-addon glyphicon glyphicon-time"></span>
+          <input type="text" class="form-control form-simple" name="birthday" id="signupBirthday" aria-describedby="inputGroupSuccess1Status" placeholder="请选择出生日期">
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="input-group">
+          <span class="input-group-addon glyphicon glyphicon-user"></span>
+          <label class="radio-inline">
+            <input type="radio" name="gender" value="1"> 男
+          </label>
+          <label class="radio-inline">
+            <input type="radio" name="gender" value="2"> 女
+          </label>
+        </div>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-lg btn-block btn-wechat">提交</button>
+  </form>
+  <div class="bottom"></div>
+</div>
+{/block}
+{block name="javascript"}
+<script src="{$Think.config.js_domain}/bootstrap-plugin/bootstrapValidator/bootstrapValidator.js"></script>
+<link rel="stylesheet" href="{$Think.config.js_domain}/bootstrap-plugin/bootstrapValidator/bootstrapValidator.css" />
+<script src="{$Think.config.js_domain}/controller/form-wechat-signup.js"></script>
+<script src="{$Think.config.js_domain}/bootstrap-plugin/datetimepicker/bootstrap-datetimepicker.min.js"></script>
+<link rel="stylesheet" href="{$Think.config.js_domain}/bootstrap-plugin/datetimepicker/bootstrap-datetimepicker.min.css" />
+<script src="{$Think.config.js_domain}/bootstrap-plugin/datetimepicker/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+{/block}
+{block name="footer"}
+{/block}

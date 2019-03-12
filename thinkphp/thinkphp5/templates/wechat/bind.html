@@ -1,0 +1,36 @@
+{extend name="$base" /}
+{block name="dialog"}
+<div class="modal fade" tabindex="-1" role="dialog" id="bindModal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">提示信息</h4>
+      </div>
+      <div class="modal-body">
+        <p>您已经注册了账号</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+      </div>
+    </div>
+  </div>
+</div>
+{/block}
+{block name="header"}
+<div class="wechat-top">
+  <a class="icons" href="/wechat/web"><img class="logo" src="{$Think.config.img_domain}/logo.png"/></a>
+  我的账号
+</div>
+{/block}
+{block name="content"}
+<div class="panel panel-info my-info">
+  <div class="panel-heading">
+    <h3 class="panel-title">已注册信息</h3>
+  </div>
+  <ul class="list-group">
+    <li class="list-group-item"><span class="glyphicon glyphicon-user"></span><b>{$user.profile.real_name}</b></li>
+    <li class="list-group-item"><span class="glyphicon glyphicon-phone-alt"></span><b>{$user.mobile}</b></li>
+  </ul>
+</div>
+{/block}

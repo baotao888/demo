@@ -1,0 +1,35 @@
+{volist name='com' id='user'}
+  <li class="list-group-item scrollitem">
+    <div class="row job">
+      <div class="col-xs-3 col-md-2 image">
+        <a href="/job/{$user.id}"><img class="thumb" src="{$user.cover}"/><span class="seal"></span></a>
+      </div>
+      <div class="col-xs-9 col-md-10">
+        <div class="row">
+          <div class="col-md-6">
+            <h4>
+              <span class="title"><a href="/job/{$user.id}">{$user.job_name}</a><div class="tooltip right" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner">入职返现</div></div></span>
+              <span class="region"><span class="glyphicon glyphicon-map-marker"></span>{$user.region_txt}</span>
+            </h4>
+            <div class="desc"><span class="glyphicon glyphicon-user"></span>职位要求：{$user.condition_short}</div>
+            <div class="desc"><span class="glyphicon glyphicon-time"></span>面试时间：{$user.subdata.view_time}</div>
+            <div class="tag">
+            {volist name='$user.welfare_tag' id='ls'}
+              <span class="label">{$ls}</span>
+            {/volist}
+            </div>
+          </div>
+          <div class="col-md-6 clearfix">
+            <div class="pull-left salary">
+              <strong>{$user.salary_floor} - {$user.salary_ceil}</strong>元/月
+            </div>
+            <div class="pull-right operate">
+              <div class="people"><b>{$user.renshu.deliveries}</b>人已报名</div>
+              <a href="javascript:signup({$user.id})" class="btn btn-default btn-signup" role="button"><span class="glyphicon glyphicon-list-alt"></span>免费报名</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </li>
+{/volist}

@@ -1,0 +1,84 @@
+<div class="bg-light lter b-b wrapper-md">
+    <h1 class="m-n font-thin h4 row">
+        <ul class="col-sm-10 breadcrumb m-b-none">
+            <li><a href=""><i class="fa fa-home"></i> 职位</a></li>
+            <li class="ng-binding">企业</li>
+            <li class="active ng-binding"><a ng-href="#/app/job/enterprise">{{vm.enterprise.enterprise_name}}</a></li>
+        </ul>
+        <a ng-href="#/app/job/enterprise" class="btn btn-sm btn-icon btn-info pull-right"><i class="fa fa-chevron-left"></i></a>
+    </h1>
+</div>
+<div class="wrapper-md">
+    <div class="row">
+        <div class="col-sm-12">
+            <form name="formInfo" class="form-horizontal form-validation">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <strong>基本信息</strong>
+                    </div>
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">公司名称</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" placeholder="请输入公司名称" ng-model="vm.enterprise.enterprise_name" required minlength="2" >
+                            </div>
+                        </div>
+                        <div class="line line-dashed b-b line-lg pull-in"></div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">行业</label>
+                            <div class="col-sm-9">
+                                <select class="form-control" ng-model="vm.enterprise.industry" >
+                                    <option value="">请选择</option>
+                                    <option  ng-repeat="industry in vm.industrys" value="{{industry}}">{{industry}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="line line-dashed b-b line-lg pull-in"></div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">性质</label>
+                            <div class="col-sm-9">
+                                <select class="form-control" ng-model="vm.enterprise.nature" >
+                                    <option value="">请选择</option>
+                                    <option  ng-repeat="nature in vm.natures" value="{{nature}}">{{nature}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="line line-dashed b-b line-lg pull-in"></div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">标签</label>
+                            <div class="col-sm-6">
+                                <ui-select multiple ng-model="vm.enterprise.tag" theme="bootstrap" ng-disabled="disabled">
+                                    <ui-select-match placeholder="请选择...">{{$item}}</ui-select-match>
+                                    <ui-select-choices group-by="someGroupFn" repeat="tag in vm.tag">
+                                        <div ng-bind-html="tag"></div>
+                                    </ui-select-choices>
+                                </ui-select>
+                            </div>
+                        </div>
+                        <div class="line line-dashed b-b line-lg pull-in"></div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">公司简介</label>
+                            <div class="col-sm-9">
+                                <textarea class="form-control" rows="6" placeholder="" ng-model="vm.enterprise.description"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">公司规模</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" placeholder="例如：200-1000人" ng-model="vm.enterprise.scale" >
+                            </div>
+                        </div>
+                        <div class="line line-dashed b-b line-lg pull-in"></div>
+                    </div>
+                    <footer class="panel-footer text-right bg-light lter">
+                        <button type="submit" class="btn btn-success" ng-click="vm.submitInfo()" ng-disabled='formInfo.$invalid || vm.submitting'>Submit</button>
+                    </footer>
+                    <div class="alert alert-warning" role="alert">{{vm.error}}</div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script type="text/ng-template" id="modal.html">
+    <div ng-include="'tpl/modal.html'"></div>
+</script>

@@ -1,0 +1,42 @@
+<div class="bg-light lter b-b wrapper-md clearfix">
+    <h1 class="m-n font-thin h3 pull-left">职位</h1>
+</div>
+<div class="wrapper-md">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <ul class="breadcrumb m-b-none">
+                <li><a href=""><i class="fa fa-home"></i> 职位</a></li>
+                <li class="active ng-binding">推荐位</li>
+            </ul>
+        </div>
+        <div>
+            <table class="table m-b-none text-center">
+                <thead>
+                <tr>
+                    <th class="text-center">
+                        推荐位编号
+                    </th>
+                    <th class="text-center">
+                        名称
+                    </th>
+                    <th class="text-center">
+                        简介
+                    </th>
+                    <th class="text-center">操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="space in vm.list">
+                    <td>{{space.id}}</td>
+                    <td>{{space.name}}</td>
+                    <td>{{space.description}}</td>
+                    <td>
+                        <a ng-href="#/app/job/recommendlist/{{space.id}}" class="btn btn-success">职位列表</a>
+                        <a ng-href="#/app/job/recommenddata/{{space.id}}" class="btn btn-success">职位调整</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,61 @@
+<footer class="container">
+  <div class="text-center authentication">
+    联系电话：0512-57353025（王经理）
+  </div>
+  <div class="text-center authentication">
+    Copyright © 江苏众鑫蓝企业管理有限公司
+  </div>
+  <address>
+    地址：昆山市开发区柏庐路东中华园路北博悦万品大厦2幢923室
+  </address>
+  <div class="text-center authentication">
+    苏ICP备17043895号
+  </div>
+</footer>
+<div class="third-part-auth hidden">
+  <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1263359102'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s19.cnzz.com/z_stat.php%3Fid%3D1263359102%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+</div>
+{if isset($is_weixin) && $is_weixin}
+<script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+<script>
+wx.config({
+    debug: false,
+    appId: '{$wechat_sign.appId}',
+    timestamp: '{$wechat_sign.timestamp}',
+    nonceStr: '{$wechat_sign.nonceStr}',
+    signature: '{$wechat_sign.signature}',
+    jsApiList: ['onMenuShareTimeline', 'onMenuShareAppMessage', 'onMenuShareQQ']
+});
+var share_title = '{$share_title|default="永乐打工网"}',
+	share_link = '{$share_link|default="http://www.yldagong.com/wechat/web"}',
+	share_imgurl = 'http:{$Think.config.img_domain}/share.jpg',
+	share_desc = '{$share_desc|default="永乐打工网是致力于免费为基层打工者提供求职服务的平台，力图向您提供安全、纯净的打工环境。"}';
+wx.ready(function () {
+  wx.onMenuShareTimeline({
+    title: share_title,
+    link: share_link,
+    imgUrl: share_imgurl
+  });
+  wx.onMenuShareAppMessage({
+	  title: share_title, // 分享标题
+	  desc: share_desc, // 分享描述
+	  link: share_link, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+	  imgUrl: share_imgurl
+  });
+  wx.onMenuShareQQ({
+	  title: share_title, // 分享标题
+	  desc: share_desc, // 分享描述
+	  link: share_link, // 分享链接
+	  imgUrl: share_imgurl
+  });  
+});
+</script>
+{/if}
+<div class="shortcut">
+  <a class="icon qbtn shortcut_qrcode">
+    <img class="qrcode_img" src="{$Think.config.img_domain}/qrcode-wechat.jpg">
+  </a>
+  <a class="icon qbtn service" href="tel://051257353025"></a>
+  <a class="icon qbtn invite" href="/wechat/user/invite"></a>
+  <a class="icon top" href="#top"></a>
+</div>

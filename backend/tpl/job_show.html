@@ -1,0 +1,106 @@
+<div class="bg-light lter b-b wrapper-md">
+  <h1 class="m-n font-thin h4">
+    <ul class="breadcrumb m-b-none">
+      <li><a href=""><i class="fa fa-home"></i> 职位</a></li>
+      <li class="ng-binding"><a ng-href="#/app/job/list">列表</a></li>
+      <li class="active ng-binding">{{vm.job.job_name}}</li>
+    </ul>
+    </h1>
+</div>
+<div class="wrapper-md" ng-controller="JobShowController">
+  <div class="panel panel-default">
+    <div class="panel-heading font-bold">
+      职位详情
+    </div>
+    <div class="panel-body" style="background-image: url({{vm.job.cover}}); background-position: right top; background-repeat: no-repeat;">
+      <div class="row">
+        <label class="col-sm-2 control-label">职位名称</label>
+        <div class="col-sm-10 text-info">
+          {{vm.job.job_name}}
+        </div>
+      </div>
+      <div class="line line-dashed b-b line-lg pull-in"></div>
+      <div class="row">
+        <label class="col-sm-2 control-label">状态</label>
+        <div class="col-sm-10">
+          {{vm.job.status_txt}}
+        </div>
+      </div>
+      <div class="line line-dashed b-b line-lg pull-in"></div>
+      <div class="row">
+          <label class="col-sm-2 control-label">编号</label>
+          <div class="col-sm-4">
+            {{vm.job.id}}
+          </div>
+          <label class="col-sm-2 control-label">排序</label>
+          <div class="col-sm-4">
+            {{vm.job.list_order}}
+          </div>
+      </div>
+      <div class="line line-dashed b-b line-lg pull-in"></div>
+      <div class="row">
+        <label class="col-sm-2 control-label">底薪</label>
+        <div class="col-sm-4">
+          {{vm.job.salary_floor}}
+        </div>
+        <label class="col-sm-2 control-label">顶薪</label>
+        <div class="col-sm-4">
+          {{vm.job.salary_ceil}}
+        </div>
+      </div>
+      <div class="line line-dashed b-b line-lg pull-in"></div>
+      <div class="row">
+        <label class="col-sm-2 control-label">城市/地区</label>
+        <div class="col-sm-10">
+          <i class="fa">{{vm.job.region_id}}</i> {{vm.job.region_txt}}
+        </div>
+      </div>
+      <div class="line line-dashed b-b line-lg pull-in"></div>
+      <div class="row">
+        <label class="col-sm-2 control-label">职位要求</label>
+        <div class="col-sm-10">
+          {{vm.job.condition_short}}
+        </div>
+      </div>
+      <div class="line line-dashed b-b line-lg pull-in"></div>
+      <div class="row">
+        <label class="col-sm-2 control-label">入职补贴</label>
+        <div class="col-sm-10">
+          {{vm.job.cash_back}}
+        </div>
+      </div>
+      <div class="line line-dashed b-b line-lg pull-in"></div>
+      <div class="row">
+        <label class="col-sm-2 control-label">职位标签</label>
+        <div class="col-sm-10">
+          {{vm.job.job_tag}}
+        </div>
+      </div>
+      <div class="line line-dashed b-b line-lg pull-in"></div>
+      <div class="row">
+        <label class="col-sm-2 control-label">福利标签</label>
+        <div class="col-sm-10">
+          {{vm.job.welfare_tag}}
+        </div>
+      </div>
+      <div class="line line-dashed b-b line-lg pull-in"></div>
+      <div class="row">
+        <label class="col-sm-2 control-label">推荐标签</label>
+        <div class="col-sm-10">
+          {{vm.job.recommend_tag}}
+        </div>
+      </div>
+      <div class="line line-dashed b-b line-lg pull-in"></div>
+        <div class="row">
+          <div class="col-sm-8 col-sm-offset-2">
+            <button class="btn m-b-xs btn-sm btn-danger btn-addon hide"><i class="fa fa-trash-o"></i>删除</button>
+            <button class="btn m-b-xs btn-sm btn-primary btn-addon" ng-click="vm.editInfo()"><i class="fa icon-pencil"></i>修改</button>
+            <button class="btn m-b-xs btn-sm btn-default btn-addon" ng-click="vm.addTag()"><i class="fa icon-tag"></i>标签</button>
+            <button class="btn m-b-xs btn-sm btn-info btn-addon" ng-click="vm.addCover()"><i class="fa icon-camera"></i>封面</button>
+            <button class="btn m-b-xs btn-sm btn-default btn-addon" ng-click="vm.uploadImages()"><i class="fa icon-picture"></i>组图</button>
+            <button class="btn m-b-xs btn-sm btn-info btn-addon" ng-click="vm.editEnterprise()"><i class="fa icon-user"></i>企业</button>
+          </div>
+        </div>
+    </div>
+  </div>
+</div>

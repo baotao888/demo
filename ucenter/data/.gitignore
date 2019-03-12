@@ -1,0 +1,13 @@
+*
+!/avatar/
+!/backup/
+!/cache/
+!/logs/
+!/tmp
+!/view/
+!config.inc.php
+!.gitignore
+!install.lock
+!updatetime.lock
+!upgrade.lock
+!index.htm

@@ -1,0 +1,22 @@
+{extend name="$base" /}
+
+{block name="content"}
+  <div class="container main-list">
+    <div class="search-container">	
+      <div class="form-search">
+        <form>
+          <div class="input-group">
+            <input type="text" class="form-control" name="key" value="{$keyword}" placeholder="请输入关键字，如：仁宝">
+            <span class="input-group-btn">
+              <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search"></span>搜索</button>
+            </span>
+          </div>
+        </form>
+      </div>
+    </div>
+    <ul class="list-group">
+      {include file="$list_item"}
+    </ul>
+  </div>
+  <div class="container main-more hidden"><a href="">查看更多</a></div>
+{/block}

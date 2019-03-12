@@ -1,0 +1,53 @@
+<div class="bg-light lter b-b wrapper-md">
+    <h1 class="m-n font-thin h4 row">
+        <ul class="col-sm-10 breadcrumb m-b-none">
+            <li><a href=""><i class="fa fa-home"></i> 职位</a></li>
+            <li class="ng-binding"><a ng-href="#/app/job/{{vm.job.id}}/show">{{vm.job.job_name}}</a></li>
+            <li class="active ng-binding">更新标签</li>
+        </ul>
+        <a ng-href="#/app/job/{{vm.job.id}}/show" class="btn btn-sm btn-icon btn-info pull-right"><i class="fa fa-chevron-left"></i></a>
+    </h1>
+</div>
+<div class="wrapper-md">
+    <form class="form-horizontal">
+        <div class="alert alert-warning" role="alert">{{vm.error}}</div>
+        <fieldset>
+            <div class="form-group">
+                <label class="col-sm-3 control-label text-right"><small class="text-info m-r-sm">用于检索职位</small>职位标签</label>
+                <div class="col-sm-6">
+                    <ui-select multiple ng-model="vm.job.job_tag" theme="bootstrap" ng-disabled="disabled">
+                        <ui-select-match placeholder="Select ...">{{$item}}</ui-select-match>
+                        <ui-select-choices group-by="someGroupFn" repeat="tag in vm.tag">
+                            <div ng-bind-html="tag"></div>
+                        </ui-select-choices>
+                    </ui-select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label text-right"><small class="text-info m-r-sm">在职位列表显示</small>福利标签</label>
+                <div class="col-sm-6">
+                    <ui-select multiple ng-model="vm.job.welfare_tag" theme="bootstrap" ng-disabled="disabled">
+                        <ui-select-match placeholder="Select ...">{{$item}}</ui-select-match>
+                        <ui-select-choices group-by="someGroupFn" repeat="tag in vm.tag">
+                            <div ng-bind-html="tag"></div>
+                        </ui-select-choices>
+                    </ui-select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label text-right"><small class="text-info m-r-sm">用于推荐相关职位</small>推荐标签</label>
+                <div class="col-sm-6">
+                    <ui-select multiple ng-model="vm.job.recommend_tag" theme="bootstrap" ng-disabled="disabled">
+                        <ui-select-match placeholder="Select ...">{{$item}}</ui-select-match>
+                        <ui-select-choices group-by="someGroupFn" repeat="tag in vm.tag">
+                            <div ng-bind-html="tag"></div>
+                        </ui-select-choices>
+                    </ui-select>
+                </div>
+            </div>
+        </fieldset>
+        <footer class="panel-footer bg-light lter">
+            <button type="button" class="btn btn-success" ng-click="vm.updateTag()" ng-disabled='vm.submitting'>Submit</button>
+        </footer>
+    </form>
+</div>

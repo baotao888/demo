@@ -1,0 +1,58 @@
+{extend name="$base" /}
+{block name="banner"}
+{/block}
+{block name="content"}
+  <div class="main-delimiter"></div>
+  <div class="container">  
+    <div class="btn-group btn-group-justified main-statistics" role="group" aria-label="...">
+      <div class="btn-group" role="group">
+        <span class="item clearfix">
+          <span class="glyphicon glyphicon-user"></span>
+          <span class="text">本周新增职位</span>
+          {volist name='$jobcount' id='ls'}
+          <span class="label label-number">{$ls}</span>
+          {/volist}
+        </span>
+      </div>
+      <div class="btn-group" role="group">
+        <span class="item clearfix">
+          <span class="glyphicon glyphicon-list-alt"></span>
+          <span class="text">今日申请报名</span>
+          {volist name='$signcount' id='ls'}
+            <span class="label label-number">{$ls}</span>
+          {/volist}
+        </span>
+      </div>
+    </div>
+  </div>
+  <div class="container main-list">
+    <ul class="list-group" id="JobList">
+      {include file="$list_item"}
+    </ul>
+  </div>
+  <div class="container main-more" id="next"><a href="/index/index/search?ajax=1&page=2">查看更多</a></div>
+{/block}
+{block name="javascript"}
+<script type="text/javascript" src="{$Think.config.js_domain}/jquery-plugin/infinite-scroll/jquery.infinitescroll.js"></script>
+<script type="text/javascript">
+$(function(){
+  $('#JobList').infinitescroll({
+	navSelector  : "#next",
+    nextSelector : "#next a",
+    itemSelector : ".scrollitem",
+	debug : false,
+	appendCallback : true,
+	dataType : 'html',
+	loading : {
+	  "img" : "{$Think.config.img_domain}/loading.gif",
+	  "finishedMsg" : "没有更多了",
+	  "msgText" : ""
+	}
+  });
+});
+</script>
+{/block}
+{block name="popup"}
+  {__block__}
+  {include file="$signupmodal"}
+{/block}

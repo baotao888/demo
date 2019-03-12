@@ -1,0 +1,208 @@
+      <!-- navbar header -->
+      <div class="navbar-header {{app.settings.navbarHeaderColor}}">
+        <button class="pull-right visible-xs dk" ui-toggle-class="show" data-target=".navbar-collapse">
+          <i class="glyphicon glyphicon-cog"></i>
+        </button>
+        <button class="pull-right visible-xs" ui-toggle-class="off-screen" data-target=".app-aside" ui-scroll="app">
+          <i class="glyphicon glyphicon-align-justify"></i>
+        </button>
+        <!-- brand -->
+        <a href="#/app/index" class="navbar-brand text-lt">
+          <i class="fa fa-home"></i>
+          <img src="img/logo.png" alt="{{app.name}}" class="hide">
+          <span class="hidden-folded m-l-xs">{{app.name}}</span>
+        </a>
+        <!-- / brand -->
+      </div>
+      <!-- / navbar header -->
+
+      <!-- navbar collapse -->
+      <div class="collapse pos-rlt navbar-collapse box-shadow {{app.settings.navbarHeaderColor}}">
+        <!-- buttons -->
+        <div class="nav navbar-nav hidden-xs">
+          <a href class="btn no-shadow navbar-btn" ng-click="app.settings.asideFolded = !app.settings.asideFolded">
+            <i class="fa {{app.settings.asideFolded ? 'fa-indent' : 'fa-dedent'}} fa-fw"></i>
+          </a>
+          <a class="btn no-shadow navbar-btn" ui-toggle-class="button">
+            <i class="fa fa-heart-o text" ng-click="showFavorite()" title="点击收藏"></i>
+            <i class="fa fa-heart text-active text-danger" ng-click="cancelFavorite()" title="已收藏"></i>
+          </a>
+          <!--<a href class="btn no-shadow navbar-btn" ui-toggle-class="show" target="#aside-user">-->
+            <!--<i class="{{user.profile.gender==1?'icon-user':'icon-user-female'}} fa-fw"></i>-->
+          <!--</a>-->
+        </div>
+        <!-- / buttons -->
+
+        <div class="navbar-form form-group pull-left {{favoriteSetting.doing?'show':'hide'}}">
+          <div class="input-group">
+            <input type="text" ng-model="favoriteSetting.title" class="form-control" placeholder="输入收藏标题">
+            <span class="input-group-btn">
+                  <button class="btn btn-default" type="button" ng-click="addFavorite()">收藏</button>
+                </span>
+          </div>
+        </div>
+
+        <!-- link and dropdown -->
+        <ul class="nav navbar-nav hidden-sm">
+          <li class="dropdown pos-stc" dropdown>
+            <a href class="dropdown-toggle" dropdown-toggle>
+              <span>快捷菜单</span>
+              <span class="caret"></span>
+            </a>
+            <div class="dropdown-menu wrapper w-full bg-white">
+              <div class="row">
+                <div class="col-sm-10">
+                  <div class="m-l-xs m-t-xs m-b-xs font-bold">收藏</div>
+                  <div class="row">
+                    <div class="col-xs-12">
+                      <ul class="list-unstyled l-h-2x clearfix">
+                        <li class="m-r-md pull-left" ng-repeat="favor in user.favorite">
+                          <a ng-href="#{{favor.url}}"><i class="fa fa-fw fa-angle-right text-muted m-r-xs"></i>{{favor.title}}</a>
+                          <i class="fa fa-fw icon-close m-l-xs" ng-click="deleteFavorite($index, favor.url)" title="点击删除"></i>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-2 b-l b-light">
+                  <div class="m-l-xs m-t-xs m-b-xs font-bold">常用</div>
+                  <div class="row">
+                    <div class="col-xs-6">
+                      <ul class="list-unstyled l-h-2x">
+                        <li>
+                          <a ng-href="#/app/candidate/list/intention"><i class="fa fa-fw fa-angle-right text-muted m-r-xs"></i>意向人选</a>
+                        </li>
+                        <li>
+                          <a ng-href="#/app/candidate/contacttable"><i class="fa fa-fw fa-angle-right text-muted m-r-xs"></i>全部联系日志</a>
+                        </li>
+                        <li>
+                          <a ng-href="#/app/my/signup/register"><i class="fa fa-fw fa-angle-right text-muted m-r-xs"></i>端口注册人选</a>
+                        </li>
+                        <li>
+                          <a ng-href="#/app/help/manual"><i class="fa fa-fw fa-angle-right text-muted m-r-xs"></i>系统使用说明</a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li ng-if="user.menu.web" class="dropdown" dropdown>
+            <a href class="dropdown-toggle" dropdown-toggle>
+              <i class="fa fa-fw fa-plus visible-xs-inline-block"></i>
+              <span translate="header.navbar.new.NEW">New</span> <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu" role="menu">
+              <li>
+                <a ui-sref="app.user.list">
+                  <span class="badge bg-success pull-right">{{latest.user}}</span>
+                  <span translate="header.navbar.new.CUSTOMER">Customer</span>
+                </a>
+              </li>
+              <li>
+                <a ui-sref="app.user.invite">
+                  <span class="badge bg-success pull-right">{{latest.invite}}</span>
+                  <span translate="header.navbar.new.INVITE">Invite</span>
+                </a>
+              </li>
+              <li>
+                <a ui-sref="app.user.signup">
+                  <span class="badge bg-success pull-right">{{latest.signup}}</span>
+                  <span translate="header.navbar.new.SIGNUP">Signup</span>
+                </a>
+              </li>
+              <li class="divider"></li>
+              <li>
+                <a ui-sref="app.job.list">
+                  <span class="badge bg-danger pull-right">{{latest.job}}</span>
+                  <span translate="header.navbar.new.JOB">Job</span>
+                </a>
+              </li>
+              <li>
+                <a ui-sref="app.article.list">
+                  <span class="badge bg-info pull-right">{{latest.article}}</span>
+                  <span translate="header.navbar.new.ARTICLE">Article</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <!-- / link and dropdown -->
+
+        <!-- search form -->
+        <form class="navbar-form navbar-form-sm navbar-left shift" role="search">
+          <div class="form-group">
+            <div class="input-group">
+              <input type="text" ng-model="searchSetting.customer" class="form-control input-sm bg-light no-border rounded padder" placeholder="输入人选姓名或手机">
+              <span class="input-group-btn">
+                <button type="button" ng-click="searchCustomer()" class="btn btn-sm bg-light rounded"><i class="fa fa-search"></i></button>
+              </span>
+            </div>
+          </div>
+        </form>
+        <!-- / search form -->
+
+        <!-- nabar right -->
+        <ul class="nav navbar-nav navbar-right">
+          <li class="hidden-xs">
+            <a ui-fullscreen></a>
+          </li>
+          <li class="dropdown" dropdown>
+            <a href class="dropdown-toggle" dropdown-toggle>
+              <i class="icon-bell fa-fw"></i>
+              <span class="visible-xs-inline">短消息</span>
+              <span ng-if="message.count>0" class="badge badge-sm up bg-danger pull-right-xs">{{message.count}}</span>
+            </a>
+            <!-- dropdown -->
+            <div class="dropdown-menu w-xl animated fadeInUp">
+              <div class="panel bg-white">
+                <div class="panel-heading b-light bg-light">
+                  <strong>您有<span>{{message.count}}</span>条最新消息</strong>
+                </div>
+                <div ng-if="message.count>0" class="list-group">
+                  <div class="media list-group-item" ng-repeat="msg in message.list">
+                    <a href="#/app/my/message" class="media-body block m-b-none">
+                      <span class="text-info">{{msg.sender_name}}</span>
+                      {{msg.content}}<br>
+                      <small class="text-muted">{{msg.create_time}}</small>
+                    </a>
+                  </div>
+                </div>
+                <div class="panel-footer text-sm">
+                  <a href="#/app/my/message" data-toggle="class:show animated fadeInRight">查看全部短消息</a>
+                </div>
+              </div>
+            </div>
+            <!-- / dropdown -->
+          </li>
+          <li class="dropdown" dropdown>
+            <a href class="dropdown-toggle clear" dropdown-toggle>
+              <span class="thumb-sm avatar pull-right m-t-n-sm m-b-n-sm m-l-sm">
+                <img ng-src="{{user.profile.avatar}}" alt="{{user.profile.nickname}}">
+                <i ng-if="user.profile.is_manager" class="on md b-white bottom"></i>
+              </span>
+              <span>{{user.profile.real_name}}</span> <b class="caret"></b>
+            </a>
+            <!-- dropdown -->
+            <ul class="dropdown-menu animated fadeInRight w">
+              <li ng-if="user.profile.employee_id>0">
+                <a ng-href="#/app/organization/{{user.profile.employee_id}}/employeeavatar">
+                  <span>更换头像</span>
+                </a>
+              </li>
+              <li>
+                <a ui-sref="app.my.profile">个人资料</a>
+              </li>
+              <li class="divider"></li>
+              <li>
+                <a ui-sref="access.signout">安全退出</a>
+              </li>
+            </ul>
+            <!-- / dropdown -->
+          </li>
+        </ul>
+        <!-- / navbar right -->
+
+      </div>
+      <!-- / navbar collapse -->

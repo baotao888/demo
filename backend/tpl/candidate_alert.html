@@ -1,0 +1,139 @@
+<div ui-view="" class="fade-in-up ng-scope">
+  <div class="app-content-body fade-in-up ng-scope">
+      <div ui-view="" class="fade-in ng-scope">
+            <div class="bg-light lter b-b wrapper-md ng-scope">
+                <h1 class="m-n font-thin h3">人选提醒</h1>
+            </div>
+         <div class="wrapper-md">
+            <div class="panel panel-default m-t-sm">
+                <div class="panel-heading">
+                  20天之内将要释放的人选列表
+                </div>
+              <div class="wrapper">
+                <div class="m-t-sm m-b-sm clearfix">
+                  <div class="m-r-sm pull-left">
+                    <label class="control-label m-t-sm m-r-xs pull-left">分配时间（起）:</label>
+                    <div class="input-group w-md" style="width: 130px;">
+                      <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="vm.startTime" is-open="vm.opens[0]" datepicker-options="dateOptions" close-text="Close"/>
+                      <span class="input-group-btn">
+                          <button type="button" class="btn btn-default" ng-click="vm.open($event,0)"><i class="glyphicon glyphicon-calendar"></i></button>
+                      </span>
+                    </div>
+                  </div>
+                  <div class="m-r-sm pull-left">
+                    <label class="control-label m-t-sm m-r-xs pull-left">分配时间（止）:</label>
+                    <div class="input-group w-md" style="width: 130px;">
+                      <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="vm.endTime" is-open="vm.opens[1]" datepicker-options="dateOptions" close-text="Close" />
+                <span class="input-group-btn">
+                    <button type="button" class="btn btn-default" ng-click="vm.open($event, 1)"><i class="glyphicon glyphicon-calendar"></i></button>
+                </span>
+                    </div>
+                  </div>
+                  <div class="m-r-sm pull-left">
+                    <div class="form-group">
+                      <label class="control-label m-t-xs m-r-xs pull-left">意向人选</label>
+                      <div class="input-group">
+                        <label class="i-switch i-switch-md bg-info m-t-xs m-r">
+                          <input type="checkbox" ng-model="vm.intention" value="1" name="status" checked="" class="ng-pristine ng-untouched ng-valid"><i></i>
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="m-r-sm pull-left">
+                    <div class="form-group">
+                      <label class=" control-label m-t-xs m-r-xs pull-left">保留人选</label>
+                      <div class="input-group">
+                        <label class="i-switch i-switch-md bg-info m-t-xs m-r">
+                          <input type="checkbox" ng-model="vm.remain" value="1" name="status" checked="" class="ng-pristine ng-untouched ng-valid">
+                          <i></i>
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="w-xl pull-left">
+                        <div class="input-group">
+                            <input type="text" class="input-sm form-control ng-pristine ng-untouched ng-valid" placeholder="输入标签、客户名称或者手机号码" ng-model="vm.searchText">
+                            <span class="input-group-btn"><button class="btn btn-sm btn-default" type="button"  ng-click="vm.searchar()" >Go!</button> </span>
+                        </div>
+                    </div>
+                  <div class="w-xr pull-right"><button class="btn m-b-xs w-xs btn-info btn-rounded" tooltip="点击我可以一次保留所有即将释放的人选哦" ng-click="vm.remainAll()">一键保留</button></div>
+                </div>
+                <table class="table table-striped b-t b-light">
+                  <thead>
+                    <tr>
+                      <th>操作</th>
+                      <th>人选</th>
+                      <th>电话</th>
+                      <th>释放时间</th>
+                      <th>状态</th>
+                      <th>联系时间</th>
+                      <th>最后联系内容</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                  <tr  ng-repeat="remind in vm.remindlist">
+                    <td>
+                      <a ng-click="vm.newTask(remind.cp_id)" class="btn m-b-xs btn-sm btn-primary fa fa-calendar" title="创建拨打计划"></a>
+                      <a class="btn m-b-xs btn-sm btn-primary fa fa-phone" title="创建联系记录" ng-click="vm.contactRecord(remind.cp_id)"></a>
+                      <a ng-href="#/app/customer/{{remind.cp_id}}/detail" class="btn m-b-xs btn-sm btn-primary fa icon-doc" title="查看详情"></a>
+                      <a ng-click="vm.customerDetail(remind.cp_id)" class="btn m-b-xs btn-sm btn-primary fa icon-doc" title="预览"></a>
+                      <a ng-click="vm.setTag(remind.id)" class="btn m-b-xs btn-sm btn-primary fa fa-tag" title="设置标签"></a>
+                      <a ng-if="remind.is_remain==0" ng-click="vm.remainCandidate(remind.id)" class="btn m-b-xs btn-sm btn-danger fa fa-clock-o" title="未保留人选【点击保留】"></a>
+                      <a ng-if="remind.is_remain==1" ng-click="vm.cancelRemain(remind.id)" class="btn m-b-xs btn-sm btn-success fa fa-clock-o" title="已保留人选【点击取消保留】"></a>
+                    </td>
+                    <td>{{remind.real_name}}</td>
+                    <td><label class="btn btn-default ng-untouched ng-valid ng-dirty ng-valid-parse">{{remind.phone}}</label></td>
+                    <td>{{remind.release_time}}</td>
+                    <td>{{remind.status}}</td>
+                    <td title="{{remind.latest_contact_time}}">{{remind.latest_contact_time | fromNow}}</td>
+                    <td><a class="list-lang-text" title="{{remind.latest_contact_content}}">{{remind.latest_contact_content}}</a></td>
+                  </tr>
+                  </tbody>
+                </table>
+                <div class="row">
+                   <small class="text-muted inline m-t-sm m-b-sm ng-binding col-sm-5">总共<b class="text-info">{{vm.pagingOptions.count}}</b>个人选</small>
+                   <div ng-if="vm.pagingOptions.count>0" class="col-sm-5 text-right text-center-xs">
+                     <pagination
+                           boundary-link-numbers="true"
+                           boundary-links="true"
+                           max-size="vm.pagingOptions.pageMax"
+                           items-per-page="vm.pagingOptions.pageSize"
+                           total-items="vm.pagingOptions.count"
+                           ng-model="vm.pagingOptions.currentPage"
+                           ng-change="vm.getPagedDataAsync()"
+                           class="m-t-none m-b"
+                           previous-text="&lsaquo;"
+                           next-text="&rsaquo;"
+                           first-text="&laquo;"
+                           last-text="&raquo;"
+                     ></pagination>
+                  </div>
+                  <div ng-if="vm.pagingOptions.count>0" class="form-group col-sm-2">
+                    <input class="form-control input-sm pull-left" type="text" ng-model="vm.inputPage" style="width:45px;!important;text-align: center;">
+                    <button class="btn btn-info pull-left" ng-click="vm.switchPage()" style="height:30px;!important;">跳转</button>
+                  </div>
+              </div>
+              </div>
+            </div>
+          </div>
+      </div>
+  </div>
+  <div style="position:absolute;top:30%;left:40%; ">
+    <img ng-src="img/timg.gif" ng-show="vm.showLoading">
+  </div>
+</div>
+<script type="text/ng-template" id="modal.html">
+  <div ng-include="'tpl/modal.html'"></div>
+</script>
+<script type="text/ng-template" id="modalJob.html">
+  <div ng-include="'tpl/modal_job.html'"></div>
+</script>
+<script type="text/ng-template" id="modalTag.html">
+  <div ng-include="'tpl/modal_tag.html'"></div>
+</script>
+<script type="text/ng-template" id="modalCall.html">
+  <div ng-include="'tpl/modal_call.html'"></div>
+</script>
+<script type="text/ng-template" id="modalSearch.html">
+  <div ng-include="'tpl/modal_search.html'"></div>
+</script>

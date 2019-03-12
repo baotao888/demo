@@ -1,0 +1,45 @@
+{extend name="$base" /}
+{block name="banner"}
+{/block}
+{block name="content"}
+<div class="article-info">
+  <ol class="container breadcrumb">
+    <li><a href="/">首页</a></li>
+    <li class="active">求职资讯</li>
+  </ol>
+  <div class="container">
+    <div class="panel panel-default panel-article">
+      <div class="panel-heading">
+        <h3 class="panel-title">求职资讯列表</h3>
+      </div>
+      <div class="panel-body">
+
+        {volist name='res' id='ls'}
+        <div class="list-group">
+          <a href="article/{$ls.id}" class="list-group-item">
+            <div class="row">
+              <div class="col-sm-3">
+            	<img class="thumb" src="{$ls.thumb}" />
+              </div>
+              <div class="col-sm-9">
+                <h3 class="article-title">{$ls.title}</h3>
+                <p class="article-desc">{$ls.desc}</p>
+                <div class="clearfix article-operate">
+                  <span class="datetime pull-left">{$ls.create_at | date = 'Y-m-d' , ###}</span>
+                  <span class="more pull-right">继续阅读<span class="glyphicon glyphicon-chevron-right"></span></span>
+                </div>
+              </div>
+            </div>  
+          </a>
+        </div>
+        {/volist}
+        {$page}
+        
+      </div>
+    </div>
+  </div>
+</div>
+{/block}
+{block name="popup"}
+  {__block__}
+{/block}

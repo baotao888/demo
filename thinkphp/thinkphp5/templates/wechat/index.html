@@ -1,0 +1,33 @@
+{extend name="$base" /}
+{block name="content"}
+  {include file="$banner"}
+  <img src="{$Think.config.img_domain}/apply-process-small.png" class="apply-process"/>
+  <div class="main-delimiter"></div>
+  <div class="form-search">
+    <form action="/wechat/job/search">
+      <div class="input-group">
+        <input type="text" class="form-control" name="key" placeholder="请输入关键字，如：仁宝">
+        <span class="input-group-btn">
+          <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search"></span>搜索</button>
+        </span>
+      </div>
+    </form>
+  </div>
+  <div class="main-statistics">
+    <div class="signup">
+      <span class="text">今日免费报名人数</span>
+      <span class="label">
+        {volist name='$signcount' id='ls'}
+          {$ls}
+        {/volist}
+      </span>
+    </div>
+  </div>
+  <div class="container main-list">
+    <ul class="list-group">
+      {include file="$list_item"}
+    </ul>
+  </div>
+  <div class="container main-more"><a href="/wechat/job/search">查看更多</a></div>
+  <div class="main-delimiter d2"></div>
+{/block}

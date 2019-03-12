@@ -1,0 +1,30 @@
+{volist name='com' id='user'}
+  <li class="list-group-item list-group-item-style">
+    <div class="row job">
+      <div class="col-xs-3 image"><a href="/wechat/job/detail?id={$user.id}"><img class="thumb" src="{$user.cover}"/>{if true}<span class="seal"></span>{/if}</a></div>
+      <div class="col-xs-9 txtinfo">
+        <a href="/wechat/job/detail?id={$user.id}">
+          <h4 class="jobname">
+            <span class="title">{$user.job_name}</span>
+          </h4>
+          <div class="desc"><span class="glyphicon glyphicon-user"></span>岗位说明：{$user.condition_short}</div>
+           <div class="subsidy">
+             {if $user.cash_back!=''}<div class="tooltip" role="tooltip"><div class="glyphicon glyphicon-bookmark">&nbsp;{$user.cash_back}</div></div>{/if}
+          </div>
+          <div class="clearfix signup">
+            <span class="pull-left salary salaryadd"><strong>{$user.salary_floor} - {$user.salary_ceil}</strong> 元/月</span>
+          </div>
+
+        </a>
+        <div class="pull-absolute">
+          <div class="count"><b>{$user.renshu.deliveries}</b>人已报名</div>
+          {if $user.status==1}
+          <a href="/wechat/signup/{$user.id}" class="btn-small-signup">免费报名</a>
+          {else if $user.status==99}
+          <a class="btn-small-signup">暂停报名</a>
+          {/if}
+        </div>
+      </div>
+    </div>
+  </li>
+{/volist}
